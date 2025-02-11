@@ -13,6 +13,11 @@
 10. John Doe, age 43, is a professor at the same university as Davey. Growing up in Philadelphia John always had a passion for helping and teaching others. He channeled this passion at the University of Pennsylvania to get a bachelor’s degree and later a master’s degree in Mathematics to become a teacher. Now that John has been teaching for over 10 years he has seen the stress and frustration registration season brings for students and is looking for a way to help his students.
 11. Jane Doe, age 41, is a high school teacher at Lake Norman Charter who loves her job. Born and raised in Charlotte, Jane moved to Pennsylvania to pursue her dream of becoming a teacher. Since she had always loved writing, Jane obtained a bachelor’s degree in English to share her love of writing with kids. Naturally, as the wife of John Doe and fellow teacher, Jane has heard all about the struggles incoming and current students face during course registration time and has been looking for solutions to better prepare her students for college life.
 12. Billy Bob, age 19, is also a student at the University of North Carolina at Charlotte. Growing up in Kansas City, Billy has always dreamed of going to college. While Billy does not know what his major will be so far he has been enjoying his college life but dislikes the registration process. As of now, Billy is looking for a way to have everything he needs for registration in one place for easy access.
+13.Sarah is a student at UNCC who is looking for courses for the upcoming semester. She opens the course selection app to help her narrow down her options. She enters her preferred time slots and classes, and the app displays a list of courses that match. This makes it easy for Sarah to quickly choose her classes without worrying about overlapping schedules.
+14. James is a student who is unsure which professor to pick for his history class. He wants to make sure he picks a professor that isn’t tough on grading. Using the app, James reads through reviews and ratings from other students on the professors teaching the class. After comparing, James chooses the professor with the best reviews.
+15. Emma is trying to find a course that fits into her schedule, but she doesn't know which sections are open. She uses the app to enter her needed course and time, and the app instantly shows which sections are available and whether there is a waitlist. Shecan also see other course options that fit her schedule, reducing the stress of finding a class. She gets a spot in the course she wanted and feels relieved.
+16. Ryan has already decided which courses he wants to take but wants to register as quickly as possible. He uses the app to double-check course meeting times and professor information before proceeding to register. The app allows him to complete his registration with a few clicks, making the process fast and efficient. He finishes registering without any issues.
+
 # User Stories
 1. As a Student, I want to be able to see who is a good professor and who is not.
 2. As a Student, I want to leave feedback on professors for classes I just took.
@@ -26,6 +31,11 @@
 10. As a professor, I want to help my students relax during registration time by finding unique tools that will help them like RateMyProfessor.
 11. As a teacher, I want to better prepare my students for college life by sharing with them simple applications that show critical information like professor ratings and course reviews to students.
 12. As a student, I want to be able to see how good a professor is in relation to the course I will be taking.
+13. As a student, I want to be able to search for courses by time slots so that I can find classes that fit my schedule.
+14. As a student, I want detailed information about professors including number ratings and also student testimonials.
+15. As a professor, I want to be able to read reviews left by students and have the ability to appeal poor ratings.
+16. As a university advisor, I want to be able to give recommendations based on reviews and ratings.
+
 # Feature List
 1. Rating System: Positive/Negative Ratings
 2. Report/Removal System: To remove bad reviews
@@ -35,3 +45,5 @@
 6. Display list of sections/professor with rating
 7. A unique UI that displays the professor rating in relation to the course the user has selected
 8. A simple dropdown menu that will cleanly show every available course a professor has taught and information about the course.
+9. Rating confidence score: a number that indicates how reliable a score is. More reviews and moderation/approval of submitted reviews will boost this score. For example, a professor with a ⅕ rating but only 1 student review will have a low confidence score.
+
