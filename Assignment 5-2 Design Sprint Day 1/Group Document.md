@@ -1,3 +1,5 @@
+# Group Members: Alexander Prechtel, Matthew Carter-Barkman, Christian Bego, Diana Barreiro, Trace Capel
+
 # Scenarios
 1. Bob is a graduate student in university. He knows what classes he needs and wants to take but doesn't know who to take those classes with. He would like to compare the professors to determine which will be the right fit for him. After meeting with his advisor, they tell him how to view the reviews for professors and see the positive and negative reviews. Bob was unaware of this feature at first and now utilizes it for class registration. Bob uses the rating system to pick the best professor for him.
 2. Timmy is a graduate student in university. He just finished taking four classes and wants to speak about the pros and cons of each professor he took. Timmy after completion of the classes gets an email asking to rate his experience and give feedback about the professors and classes he took. Timmy uses the rating system to give his thoughts on the professors he took.
