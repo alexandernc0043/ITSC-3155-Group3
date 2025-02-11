@@ -13,9 +13,9 @@
 3. As a professor, I want to be able to view feedback given on me to improve my teaching.
 4. As a professor, I need to be able to remove false feedback given to me by a student.
 5. As a student researching classes, I want to compare professor reviews for a specific class, so that I can choose the professor who I think fits better with my preferences.
-6. As a student unsure about a course choice, I want to read student reviews, so that I can make an informed decision on the best class to take for my degree requirements.
-7. As a student trying to compare between sections of a class, I want to quickly compare professor ratings, so that I can select the section that best fits my learning preferences.
-8. As a student looking for courses in my major, I want to browse a list of classes that are similar and may match my major, so that I can choose classes that are easy and I need to graduate.
+6. As a student, I want to read student reviews, so that I can make an informed decision on the best class to take for my degree requirements.
+7. As a student, I want to quickly compare professor ratings, so that I can select the section that best fits my learning preferences.
+8. As a student, I want to browse a list of classes that are similar and may match my major, so that I can choose classes that are easy and I need to graduate.
 # Feature List
 1. Rating System: Positive/Negative Ratings
 2. Report/Removal System: To remove bad reviews

@@ -16,16 +16,16 @@ After analyzing the data she thinks it's too hard for her and decides to see an 
 
 # User stories
 ## Scenario 1
-As a student researching classes, I want to compare professor reviews for a specific class, so that I can choose the professor who I think fits better with my preferences.
+As a student, I want to compare professor reviews for a specific class, so that I can choose the professor who I think fits better with my preferences.
 
 ## Scenario 2
-As a student unsure about a course choice, I want to read student reviews, so that I can make an informed decision on the best class to take for my degree requirements.
+As a student, I want to read student reviews, so that I can make an informed decision on the best class to take for my degree requirements.
 
 ## Scenario 3
-As a student trying to compare between sections of a class, I want to quickly compare professor ratings, so that I can select the section that best fits my learning preferences.
+As a student, I want to quickly compare professor ratings, so that I can select the section that best fits my learning preferences.
 
 ## Scenario 4
-As a student looking for courses in my major, I want to browse a list of classes that are similar and may match my major, so that I can choose classes that are easy and I need to graduate.
+As a student, I want to browse a list of classes that are similar and may match my major, so that I can choose classes that are easy and I need to graduate.
 
 # Features list
 1. Search classes
