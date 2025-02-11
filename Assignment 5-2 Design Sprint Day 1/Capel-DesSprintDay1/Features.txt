@@ -1,0 +1,3 @@
+Feature List:
+Sort by rating- allows users to sort a list of classes by the professor rating of each class
+Rating confidence score- a number that indicates how reliable a score is. More reviews and moderation/approval of submitted reviews will boost this score. For example, a professor with a ⅕ rating but only 1 student review will have a low confidence score.
