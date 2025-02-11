@@ -1,0 +1,5 @@
+User Stories:
+As a student, I want to be able to search for courses by time slots so that I can find classes that fit my schedule.
+As a student, I want detailed information about professors including number ratings and also student testimonials.
+As a professor, I want to be able to read reviews left by students and have the ability to appeal poor ratings.
+As a university advisor, I want to be able to give recommendations based on reviews and ratings.
