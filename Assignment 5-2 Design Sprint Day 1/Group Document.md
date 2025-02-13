@@ -17,6 +17,10 @@
 14. James is a student who is unsure which professor to pick for his history class. He wants to make sure he picks a professor that isn’t tough on grading. Using the app, James reads through reviews and ratings from other students on the professors teaching the class. After comparing, James chooses the professor with the best reviews.
 15. Emma is trying to find a course that fits into her schedule, but she doesn't know which sections are open. She uses the app to enter her needed course and time, and the app instantly shows which sections are available and whether there is a waitlist. Shecan also see other course options that fit her schedule, reducing the stress of finding a class. She gets a spot in the course she wanted and feels relieved.
 16. Ryan has already decided which courses he wants to take but wants to register as quickly as possible. He uses the app to double-check course meeting times and professor information before proceeding to register. The app allows him to complete his registration with a few clicks, making the process fast and efficient. He finishes registering without any issues.
+17. Jim Joe, who is 21 yrs old, is a student at the University of North Carolina at Chapelhill. Born and raised in Raleigh, Jim grew up learning about programming and was madly infatuated with computers. Jim Joe is attending UNCC with the intention of earning a bachelor's degree in Computer Science. Though he is currently a Junior, Jim does not like the overall registration process for his courses and wishes there was an easier way to get the information and reviews he needs for his overall decision on the classes he may take.
+18. Cathy Simmons is a 35 yr old Professor at UNC at Greensboro, and have been teaching Biology for over 7 years. Cathy graduated from NC State with a Masters in Science, and since then has committed to helping her students achieve the same goal. What bothers Cathy however, is the lack of feedback about her classes that she can read and learn from. The university does not host a feedback platform, and Cathy is unable to figure out a site that hosts real reviews from her students.
+19. Sam Stone is a worker at The Office of the Registrar for UNCC, and has been getting messages from students passed on from his higher-ups. To manage resources, however, Sam and his team decides the best course of action, is to find a service already available, which helps students find their course schedule and ratings of the professors from the viewed class.
+20. Daniel, a 27-year-old graduate from UNCW, is returning back to UNCW for his Masters in Software Development. Because of his 4-year hiatus from anything school-related, Daniel is rather confused about how the registration process works or how to find the best classes where the professor matches his learning style. Daniel loves simplicity, and after meeting with his advisor to start planning his courses, he was left frustrated with this ideal. Daniel wants to have a program or site available, that neatly lays out the information of classes and professors in a view that's easy to follow, and quick for a student to decide their section for a course.
 
 # User Stories
 1. As a Student, I want to be able to see who is a good professor and who is not.
@@ -35,6 +39,10 @@
 14. As a student, I want detailed information about professors including number ratings and also student testimonials.
 15. As a professor, I want to be able to read reviews left by students and have the ability to appeal poor ratings.
 16. As a university advisor, I want to be able to give recommendations based on reviews and ratings.
+17. As a student, I want to have an easier time registering for courses by having critical information available to me.
+18. As a professor, I want to be able to know ways to improve my classes, based on reviews from my students in my class
+19. As an Office of Registrar employee, I want a service or client that is readily available to use our API and accurately display class information and reviews
+20. As a returning student, I want to have a neat, simplistic registration design, that makes my registration process easy and fast
 
 # Feature List
 1. Rating System: Positive/Negative Ratings
@@ -46,4 +54,8 @@
 7. A unique UI that displays the professor rating in relation to the course the user has selected
 8. A simple dropdown menu that will cleanly show every available course a professor has taught and information about the course.
 9. Rating confidence score: a number that indicates how reliable a score is. More reviews and moderation/approval of submitted reviews will boost this score. For example, a professor with a ⅕ rating but only 1 student review will have a low confidence score.
+10. Clean and simplistic UI, making things easy to find
+11. Shows the most favored and most critical reviews, all verified and real for professors to view
+12. Provides course information for students, allowing them to have reviews and course information all in one place
+13. Works with API's to provide a faster, easy to use, and more accurate search of courses
 
