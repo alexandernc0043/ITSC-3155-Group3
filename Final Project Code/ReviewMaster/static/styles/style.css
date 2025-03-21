@@ -15,7 +15,8 @@
 
 .header {
     padding: 1.5rem;
-    background-color: #548FEA;
+    background-color: #204071;
+    color: white;
 }
 
 .header > .container {
@@ -28,20 +29,14 @@
     display: flex;
     gap: 2rem;
     align-items: center;
+    flex-basis: 15%;
 }
 
 .header__logo > img {
-    width: 40%;
-}
-
-.header__logo > h1 {
-    font-weight: 700;
-    font-size: 2rem;
-    color: var(--color-light);
+    width: 100%;
 }
 
 .header__search > label {
-    background-color: var(--color-dark-medium);
     padding: 1.3rem 1rem;
     display: flex;
     align-items: center;
@@ -50,7 +45,7 @@
 }
 
 .header__search svg {
-    fill: var(--color-gray);
+    fill: white;
     width: 2rem;
     height: 2rem;
     margin-left: 1rem;
@@ -61,7 +56,7 @@
     background: transparent;
     border: none;
     outline: none;
-    color: var(--color-light);
+    color: white;
 }
 
 @media screen and (max-width: 800px) {
@@ -97,7 +92,7 @@
     align-items: center;
     font-weight: 500;
     text-decoration: none;
-    color: var(--color-gray);
+    color: white;
 }
 
 .header__menu img {
@@ -109,7 +104,6 @@
 }
 
 .header__menu span {
-    color: var(--color-main);
     font-weight: 500;
     font-size: 1.4rem;
     display: block;
@@ -118,7 +112,6 @@
 .header__menu svg {
     width: 1.6rem;
     height: 1.6rem;
-    fill: var(--color-dark-light);
 }
 
 .dropdown-button {
@@ -126,8 +119,4 @@
     border: 0;
     outline: 0;
     cursor: pointer;
-}
-
-.dropdown-button:hover svg {
-    fill: var(--color-main);
 }
