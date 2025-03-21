@@ -11,7 +11,7 @@ class Department(models.Model):
 
 
 class CourseNumber(models.Model):
-    number = models.CharField(max_length=4)  # EX: 1110, 2214
+    number = models.IntegerField()  # EX: 1110, 2214
 
     def __str__(self):
         return self.number
@@ -24,11 +24,15 @@ class Section(models.Model):
         return self.section_number
 
 
+
 class Course(models.Model):
     course_name = models.CharField(max_length=200)
     dept = models.ForeignKey(Department, null=True, on_delete=models.SET_NULL) # NOT SURE IF SET NULL IS GOOD HERE
     number = models.ForeignKey(CourseNumber, null=True, on_delete=models.SET_NULL)
     section_number = models.ForeignKey(Section, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['dept','number']
 
     def __str__(self):
         return f'{self.course_name} -- {self.dept}-{self.number}-{self.section_number}'
@@ -41,3 +45,4 @@ class Professor(models.Model):
 
     def __str__(self):
         return self.name
+

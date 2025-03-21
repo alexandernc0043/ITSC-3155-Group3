@@ -1,5 +1,38 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<p>Hello world 2</p>
+
+    <form action="{% url 'courses' %}" method="GET">
+        <label for="dept">Department:</label>
+        <select id="dept" name="q">
+            {% if query %}
+                <option>{{ query }}</option>
+                {% for dept in departments %}
+                    {% if dept.name != query %}
+                    <option>{{ dept.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <option>Select</option>
+                {% for dept in departments %}
+                    <option>{{ dept.name }}</option>
+                {% endfor %}
+            {% endif %}
+
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    {% if query %}
+        <label for="courseNumber">Course Number:</label>
+        <select id="courseNumber">
+            {% for course in courses %}
+                <option>{{ course.number.number }}</option>
+            {% endfor %}
+        </select>
+    {% endif %}
+
+
+
+
+
 {% endblock content %}

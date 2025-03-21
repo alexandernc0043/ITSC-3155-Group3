@@ -4,12 +4,19 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+
+from base.models import Department, Course
+
+
 def home(request):
     return render(request, 'base/home.html')
+
 
 def logoutuser(request):
     logout(request)
     return redirect('home')
+
+
 def loginuser(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -17,19 +24,19 @@ def loginuser(request):
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
         try:
-            user = User.objects.get(username=username) # try and find that user object
+            user = User.objects.get(username=username)  # try and find that user object
         except:
             messages.error(request, 'User does not exist')
 
-        user = authenticate(request, username=username, password=password) # authenticate the user
+        user = authenticate(request, username=username, password=password)  # authenticate the user
 
         if user is not None:
-            login(request, user) # Logins in user
-            next_page = request.GET.get('next') # if the url has a next Param
-            if next_page: # checks if next
-                return redirect(next_page) # redirects them to next page (used if login_required a thing)
+            login(request, user)  # Logins in user
+            next_page = request.GET.get('next')  # if the url has a next Param
+            if next_page:  # checks if next
+                return redirect(next_page)  # redirects them to next page (used if login_required a thing)
             else:
-                return redirect('home') # else it brings them home
+                return redirect('home')  # else it brings them home
         else:
             messages.error(request, 'Username or password does not exist')
     return render(request, 'base/login_register.html')
@@ -54,10 +61,20 @@ def registeruser(request):
             messages.error(request, 'An error has occurred during registration')
     return render(request, 'base/login_register.html', context=context)
 
+
 @login_required(login_url='/login/')
 def pick_courses(request):
-    context = {}
+    query = request.GET.get('q')
+    if query:
+        courses = Course.objects.filter(dept__name__icontains=query)
+    else:
+        courses = Course.objects.all()
+    context = {
+        'departments': Department.objects.all(),
+        'courses': courses,
+        'query': query
+    }
     return render(request, 'base/courses.html', context)
 
-#def review(request, pk):
+# def review(request, pk):
 #    return render(request, 'base/review.html')
