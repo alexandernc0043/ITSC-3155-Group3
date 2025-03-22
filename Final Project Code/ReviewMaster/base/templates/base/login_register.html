@@ -1,28 +1,33 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    {% if page == 'register' %}
-        <h1>Register Page</h1>
-        <form method="POST" action="">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Register</button>
-        </form>
-        <p>Already signed up? <a href="{% url 'login' %}">Login!</a></p>
-    {% else %}
-        <h1>Login Page</h1>
-        <form method="POST" action="">
-            {% csrf_token %}
-            <label>Username:
-                <input type="text" placeholder="Username" name="username">
-            </label>
-            <label>Password:
-                <input type="password" placeholder="Password" name="password">
-            </label>
-            <button type="submit">Login</button>
-        </form>
-        <p>Not signed up? <a href="{% url 'register' %}">Register!</a></p>
-    {% endif %}
-
-
+    <main>
+        <div class="box">
+            {% if page == 'register' %}
+                <h1>Register now</h1>
+                    <form method="POST" action="" class="register-form">
+                        {% csrf_token %}
+                        <label for="username">{{ form.username.label }}:</label>
+                        {{ form.username }} 
+                        <label for="password">{{ form.password1.label }}:</label>
+                        {{ form.password1 }} 
+                        <label for="password-confirmation">{{ form.password2.label }}:</label>
+                        {{ form.password2 }}
+                        <input type="submit" value="Register" class="primary-button">
+                    </form>
+                    <p>Already signed up? <a href="{% url 'login' %}">Login!</a></p>
+            {% else %}
+                <h1>Login</h1>
+                    <form method="POST" action="" class="login-form">
+                        {% csrf_token %}
+                        <label for="username">Username:</label>
+                        <input type="text" placeholder="Username" name="username">
+                        <label for="password">Password:</label>
+                        <input type="password" placeholder="Password" name="password">
+                        <input type="submit" value="Login" class="primary-button">
+                    </form>
+                    <p>Not signed up? <a href="{% url 'register' %}">Register!</a></p>
+            {% endif %}
+        </div>
+    </main>
 {% endblock content %}

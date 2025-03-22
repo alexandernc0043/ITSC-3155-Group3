@@ -1,9 +1,17 @@
 {% extends 'main.html' %}
-
+{% load static %}
 
 {% block content %}
-    <main>
-        <p>Hello World!</p>
-        <a href="{% url 'courses' %}">Pick your classes</a>
+    <main class="home">
+        <section>
+            <article>
+                <h1>Welcome!</h1>
+                <p>Looking for the best professor? Start searching now!</p>
+                <form class="main__search" method="GET" action="{% url 'home' %}">
+                    <input name="q" placeholder="Search classes..." />
+                </form>
+            </article>
+        </section>
     </main>
+    <script src="{% static 'scripts/main.js' %}"></script>
 {% endblock content %}
