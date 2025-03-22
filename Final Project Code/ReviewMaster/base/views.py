@@ -65,14 +65,26 @@ def registeruser(request):
 @login_required(login_url='/login/')
 def pick_courses(request):
     query = request.GET.get('q')
-    if query:
-        courses = Course.objects.filter(dept__name__icontains=query)
+    department = ''
+    course_number = ''
+
+    if '-' in query:
+        split = query.split('-')
+        department = split[0]
+        course_number = split[1]
+    if department and course_number:
+        courses = Course.objects.filter(dept__name__icontains=department, number__number__icontains=course_number)
+    elif department:
+        courses = Course.objects.filter(dept__name__icontains=department)
     else:
         courses = Course.objects.all()
+
     context = {
         'departments': Department.objects.all(),
         'courses': courses,
-        'query': query
+        'query': query,
+        'department': department,
+        'course_number': course_number
     }
     return render(request, 'base/courses.html', context)
 

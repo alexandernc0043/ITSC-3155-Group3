@@ -9,7 +9,7 @@
                 <option>{{ query }}</option>
                 {% for dept in departments %}
                     {% if dept.name != query %}
-                    <option>{{ dept.name }}</option>
+                        <option>{{ dept.name }}</option>
                     {% endif %}
                 {% endfor %}
             {% else %}
@@ -20,16 +20,18 @@
             {% endif %}
 
         </select>
+
+        {% if query %}
+            <label for="courseNumber">Course Number:</label>
+            <select id="courseNumber" name="c">
+                {% for course in courses %}
+                    <option>{{ course.number.number }}</option>
+                {% endfor %}
+            </select>
+        {% endif %}
         <button type="submit">Submit</button>
     </form>
-    {% if query %}
-        <label for="courseNumber">Course Number:</label>
-        <select id="courseNumber">
-            {% for course in courses %}
-                <option>{{ course.number.number }}</option>
-            {% endfor %}
-        </select>
-    {% endif %}
+
 
 
 
