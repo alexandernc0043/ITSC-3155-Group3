@@ -3,15 +3,18 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+
 def home(request):
     return render(request, 'base/home.html')
 
-def logoutuser(request):
+def logoutUser(request):
     logout(request)
     return redirect('home')
-def loginuser(request):
+
+def loginUser(request):
     if request.user.is_authenticated:
         return redirect('home')
+    
     if request.method == "POST":
         username = request.POST.get('username').lower()
         password = request.POST.get('password')
@@ -27,10 +30,10 @@ def loginuser(request):
             return redirect('home')
         else:
             messages.error(request, 'Username or password does not exist')
+
     return render(request, 'base/login_register.html')
 
-
-def registeruser(request):
+def registerUser(request):
     page = 'register'
     form = UserCreationForm()
     context = {
@@ -47,8 +50,8 @@ def registeruser(request):
             return redirect('home')
         else:
             messages.error(request, 'An error has occurred during registration')
-    return render(request, 'base/login_register.html', context=context)
 
+    return render(request, 'base/login_register.html', context)
 
 #def review(request, pk):
 #    return render(request, 'base/review.html')
