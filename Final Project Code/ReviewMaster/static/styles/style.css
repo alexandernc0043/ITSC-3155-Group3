@@ -26,6 +26,15 @@ h1 {
     margin-bottom: 0.67em;
 }
 
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
 /*==============================
 =>  Header Section
 ================================*/
@@ -280,4 +289,27 @@ input[type="password"]:disabled, input[type="password"][readonly] {
 .login-form input.primary-button, .register-form input.primary-button {
     margin: 1rem auto .75rem auto;
     display: block;
+}
+
+/*==============================
+=>  Footer Section
+================================*/
+footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 1rem 2rem 3rem 2rem;
+}
+
+footer section {
+    width: 23%;
+}
+
+footer section h4 {
+    margin-bottom: 1.33rem;
+}
+
+footer section ul {
+    list-style-type: none;
+    padding: 0;
 }
