@@ -63,26 +63,41 @@ a:hover {
 }
 
 .header__search > label {
-    padding: 1.3rem 1rem;
+    /* padding: 1.3rem 1rem; */
     display: flex;
     align-items: center;
-    gap: 1rem;
-    border-radius: 4px;
+    /* gap: 1rem; */
+    /* border-radius: 4px; */
+    /* background-color: white; */
+
+    /* Changes to make search bar more visible*/
+    border: 1px solid white;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50px;
+
 }
 
 .header__search svg {
-    fill: white;
+    /* fill: white; */
     width: 2rem;
     height: 2rem;
     margin-left: 1rem;
+
+    /* Changes to make search bar more visible */
+    fill: black;
+    margin-right: 1rem;
 }
 
 .header__search input {
     width: 30rem;
     background: transparent;
     border: none;
-    color: white;
+    /* color: white; */
     padding: 0;
+
+    /* Changes to make search bar more visible*/
+    color: black;
 }
 
 @media screen and (max-width: 800px) {
