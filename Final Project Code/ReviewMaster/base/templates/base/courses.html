@@ -4,8 +4,8 @@
 
     {% for course in courses %}
         <div>
-        {{ course }}
-            <a href="{% url '' course%}"></a>
+            {{ course }}
+            <a href="{% url 'add-course' course %}">Add Course</a>
         </div>
     {% endfor %}
 

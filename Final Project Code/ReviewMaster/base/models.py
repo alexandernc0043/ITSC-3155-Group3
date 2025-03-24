@@ -30,4 +30,4 @@ class Course(models.Model):
         ordering = ['dept', 'number']
 
     def __str__(self):
-        return f'{self.course_name} -- {self.dept}-{self.number}'
+        return f'{self.dept}-{self.number}'

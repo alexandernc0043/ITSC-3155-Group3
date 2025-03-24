@@ -12,7 +12,13 @@ def home(request):
     return render(request, 'base/home.html')
 
 def addCourse(request, pk):
-    if request.method == 'POST':
+    dept = pk.split('-')[0]
+    courseNumber = pk.split('-')[1]
+    context = {
+        'course': Course.objects.filter(dept__name__icontains=dept, dept__course__number=courseNumber),
+        'pk': pk
+    }
+    return render(request,'base/addCourse.html', context)
 
 
 def logoutuser(request):
