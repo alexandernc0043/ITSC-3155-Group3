@@ -48,6 +48,9 @@ a:hover {
 .header > .container {
     display: flex;
     gap: 9.5rem;
+    /* Changes to center search bar */
+    align-items: center;
+    justify-items: center;
 }
 
 .header__logo,
@@ -73,9 +76,11 @@ a:hover {
     /* Changes to make search bar more visible*/
     border: 1px solid white;
     background-color: white;
-    padding: 1rem;
+    padding: .3rem;
     border-radius: 50px;
-
+    height: 60%;
+    
+    
 }
 
 .header__search svg {
