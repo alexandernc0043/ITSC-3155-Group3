@@ -171,6 +171,7 @@ a:hover {
 
 .dropdown-button svg, .dropdown-menu a svg {
     fill: white;
+    width: 1.25em;
 }
 
 .dropdown-menu.show {
@@ -338,6 +339,14 @@ input[type="password"]:disabled, input[type="password"][readonly] {
 .login-form input.primary-button, .register-form input.primary-button {
     margin: 1rem auto .75rem auto;
     display: block;
+}
+
+.help-text ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: -1rem;
+    margin-bottom: .5rem;
+    color: #333;
 }
 
 /*==============================
