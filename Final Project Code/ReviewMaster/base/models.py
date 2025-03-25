@@ -21,13 +21,13 @@ class Professor(models.Model):
 
 class Course(models.Model):
     course_name = models.CharField(max_length=200)
-    dept = models.ForeignKey(Department, null=True, on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
-    number = models.IntegerField(null=False)
-    students = models.ManyToManyField(User, related_name='students', blank=True)
-    professor = models.ManyToManyField(Professor, related_name='professors', blank=True)
+    course_dept = models.ForeignKey(Department, null=True, on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
+    course_number = models.IntegerField(null=False)
+    course_students = models.ManyToManyField(User, related_name='students', blank=True)
+    course_professors = models.ManyToManyField(Professor, related_name='professors', blank=True)
 
     class Meta:
-        ordering = ['dept', 'number']
+        ordering = ['course_dept', 'course_number']
 
     def __str__(self):
-        return f'{self.dept}-{self.number}'
+        return f'{self.course_dept}-{self.course_number}'

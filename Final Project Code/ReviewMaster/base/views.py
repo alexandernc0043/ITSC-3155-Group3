@@ -15,7 +15,7 @@ def addCourse(request, pk):
     dept = pk.split('-')[0]
     courseNumber = pk.split('-')[1]
     context = {
-        'course': Course.objects.filter(dept__name__icontains=dept, dept__course__number=courseNumber),
+        'course': Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get(),
         'pk': pk
     }
     return render(request,'base/addCourse.html', context)
