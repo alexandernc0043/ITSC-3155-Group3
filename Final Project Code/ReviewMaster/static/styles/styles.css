@@ -150,6 +150,51 @@ a:hover {
     cursor: pointer;
 }
 
+.dropdown-menu {
+    z-index: 111;
+    position: absolute;
+    top: 5rem;
+    right: 0.5rem;
+    background: var(--primary-color);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-menu a {
+    padding: 1rem;
+    display: flex;
+    gap: .5rem;
+    font-weight: 500;
+}
+
+.dropdown-button svg, .dropdown-menu a svg {
+    fill: white;
+}
+
+.dropdown-menu.show {
+    display: block;
+    width: 100%;
+}
+
+.mobile-menu {
+    margin-bottom: 3rem;
+}
+
+.mobile-menuItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .mobile-menu {
+    display: none;
+    }
+}
+
 /*==============================
 =>  Home Section
 ================================*/

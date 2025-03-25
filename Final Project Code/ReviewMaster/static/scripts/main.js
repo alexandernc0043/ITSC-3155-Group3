@@ -1,6 +1,15 @@
-const homeClass = document.getElementsByClassName("home");
-const loginClass = document.getElementsByClassName("login");
+const homeClass = document.querySelector(".home");
+const loginClass = document.querySelector(".login");
 
-if (homeClass.length > 0 || loginClass.length > 0) {
+if (homeClass || loginClass) {
     document.getElementsByClassName("header__search")[0].style.display = "none";
+}
+
+const dropdownMenu = document.querySelector(".dropdown-menu");
+const dropdownButton = document.querySelector(".dropdown-button");
+
+if (dropdownButton) {
+  dropdownButton.addEventListener("click", () => {
+    dropdownMenu.classList.toggle("show");
+  });
 }
