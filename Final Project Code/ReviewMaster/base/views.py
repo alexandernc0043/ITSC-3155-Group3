@@ -17,6 +17,7 @@ def addCourse(request, pk):
     course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()
     if request.method == 'POST':
         course.course_students.add(request.user)
+        course.save()
         return redirect('courses')
     context = {
         'course': course,

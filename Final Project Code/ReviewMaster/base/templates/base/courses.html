@@ -4,7 +4,7 @@
 
     {% for course in courses %}
         <div>
-            {{ course }}
+            "{{ course.course_name }}" | {{ course }}
             <a href="{% url 'add-course' course %}">Add Course</a>
         </div>
     {% endfor %}
