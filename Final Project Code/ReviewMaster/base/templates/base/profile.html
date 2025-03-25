@@ -1,9 +1,21 @@
-{% extends 'main.html' %}
-{% load static %}
-
+{% extends 'main.html' %} {% load static %} 
 {% block content %}
+<!-- Name of User -->
+<div class="profile-page">
+  <h2>{{ user.username }} Profile Page</h2>
+  <p>Email: {{ user.email }}</p>
+  <div class="userReviews">
+    <p>User Reviews</p>
 
-<h2>Profile</h2>
+  </div>
+  <div class="courses">
+    <p>User courses</p>
+    
+  </div>
+</div>
 
+<!-- Info About User -->
+<!-- Reviews made by user -->
+<!-- courses taken by user -->
 
 {% endblock content %}
