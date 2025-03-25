@@ -11,6 +11,10 @@ from base.models import Department, Course
 def home(request):
     return render(request, 'base/home.html')
 
+@login_required
+def profile(request):
+    return render(request, 'base/profile.html')
+
 def addCourse(request, pk):
     dept = pk.split('-')[0]
     courseNumber = pk.split('-')[1]
@@ -25,11 +29,9 @@ def addCourse(request, pk):
     }
     return render(request,'base/addCourse.html', context)
 
-
 def logoutuser(request):
     logout(request)
     return redirect('home')
-
 
 def loginuser(request):
     if request.user.is_authenticated:
@@ -55,7 +57,6 @@ def loginuser(request):
             messages.error(request, 'Username or password does not exist')
     return render(request, 'base/login_register.html')
 
-
 def registeruser(request):
     page = 'register'
     form = UserCreationForm()
@@ -74,6 +75,7 @@ def registeruser(request):
         else:
             messages.error(request, 'An error has occurred during registration')
     return render(request, 'base/login_register.html', context=context)
+
 
 
 @login_required(login_url='/login/')
