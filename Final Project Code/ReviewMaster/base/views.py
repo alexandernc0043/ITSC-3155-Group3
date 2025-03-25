@@ -11,9 +11,14 @@ from base.models import Department, Course
 def home(request):
     return render(request, 'base/home.html')
 
-@login_required
-def profile(request):
-    return render(request, 'base/profile.html')
+@login_required(login_url='login')
+def profile(request, pk):
+    user = User.objects.get(username=pk)
+    context = {
+        'courses': user.students.all(),
+        'user': user
+    }
+    return render(request, 'base/profile.html', context)
 
 def addCourse(request, pk):
     dept = pk.split('-')[0] # gets department
