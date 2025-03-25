@@ -8,12 +8,13 @@
                 <h1>Register now</h1>
                     <form method="POST" action="" class="register-form">
                         {% csrf_token %}
-                        <label for="username">{{ form.username.label }}:</label>
-                        {{ form.username }} 
-                        <label for="password">{{ form.password1.label }}:</label>
-                        {{ form.password1 }} 
-                        <label for="password-confirmation">{{ form.password2.label }}:</label>
-                        {{ form.password2 }}
+                        {{ form.as_p }}
+{#                        <label for="username">{{ form.username.label }}:</label>#}
+{#                        {{ form.username }} #}
+{#                        <label for="password">{{ form.password1.label }}:</label>#}
+{#                        {{ form.password }}#}
+{#                        <label for="password-confirmation">{{ form.password2.label }}:</label>#}
+{#                        {{ form.password }}#}
                         <input type="submit" value="Register" class="primary-button">
                     </form>
                     <p>Already signed up? <a href="{% url 'login' %}">Login!</a></p>
