@@ -68,6 +68,9 @@ def registeruser(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            # if form.password1 != form.password2:
+            #     messages.error(request, 'Passwords do not match!')
+            # else:
             user.save()
             login(request, user)
             return redirect('home')
