@@ -10,11 +10,10 @@
                         {% csrf_token %}
                         <label for="username">{{ form.username.label }}:</label>
                         {{ form.username }}
+                        <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
                         <label for="password">{{ form.password1.label }}:</label>
                         {{ form.password1 }}
-                        <div class="help-text">
-                            {{ form.password1.help_text }}
-                        </div>
+                        <span class="help-text">Password can't be only numeric and should have at least 8 alphanumeric characters with a special character or at least 10 characters with no numbers.</span>
                         <label for="password-confirmation">{{ form.password2.label }}:</label>
                         {{ form.password2 }}
                         <input type="submit" value="Register" class="primary-button">

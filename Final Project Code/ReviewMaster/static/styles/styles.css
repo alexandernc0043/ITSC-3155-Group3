@@ -192,8 +192,35 @@ a:hover {
 
 @media screen and (min-width: 500px) {
     .mobile-menu {
-    display: none;
+        display: none;
     }
+}
+
+/*==============================
+=>  Alert/Error message Section
+================================*/
+.error-message {
+    background-color: #ba2d3d;
+    color: #fff;
+    padding: 1.25rem;
+}
+
+.error-message ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline;
+}
+
+.error-message li {
+    display: inline;
+}
+
+.error-message li::after {
+    content: ", ";
+}
+
+.error-message li:last-child::after {
+    content: "";
 }
 
 /*==============================
@@ -341,12 +368,12 @@ input[type="password"]:disabled, input[type="password"][readonly] {
     display: block;
 }
 
-.help-text ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: -1rem;
+.help-text {
+    margin-top: -.75rem;
     margin-bottom: .5rem;
-    color: #333;
+    color: #555;
+    font-size: 0.75rem;
+    display: block;
 }
 
 /*==============================

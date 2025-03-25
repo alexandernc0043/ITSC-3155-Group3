@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+import re
 
 from base.models import Department, Course
 
@@ -56,26 +57,41 @@ def loginuser(request):
     return render(request, 'base/login_register.html')
 
 
-def registeruser(request):
+def registerUser(request):
     page = 'register'
     form = UserCreationForm()
-    context = {
-        'form': form,
-        'page': page
-    }
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
-            # if form.password1 != form.password2:
-            #     messages.error(request, 'Passwords do not match!')
-            # else:
             user.save()
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error has occurred during registration')
+            password1 = request.POST.get('password1')
+            password2 = request.POST.get('password2')
+            username = request.POST.get('username')
+            pattern = r"^\w*(@|-|\.|\+|_)*\w*$" # Regex to check that username only contains certain valid characters
+            if not re.match(pattern, username):
+                messages.error(request, 'Username contains invalid characters')
+            elif User.objects.filter(username=username).exists():
+                messages.error(request, 'Username is already taken')
+
+            if len(password1) < 8:
+                messages.error(request, 'Password is too short')
+            elif password1.isdigit():
+                messages.error(request, 'Password must contain at least one letter')
+            elif password1 != password2:
+                messages.error(request, 'Passwords do not match')
+            else:
+                messages.error(request, 'An error has occurred during registration, please try again later')
+                
+    context = {
+        'form': form,
+        'page': page,
+        'username': request.POST.get('username')
+    }
     return render(request, 'base/login_register.html', context=context)
 
 
