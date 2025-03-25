@@ -43,11 +43,15 @@ a:hover {
     padding: 1.5rem;
     background-color: var(--primary-color);
     color: white;
+    
 }
 
 .header > .container {
     display: flex;
     gap: 9.5rem;
+    /* Changes to center search bar */
+    align-items: center;
+    justify-items: center;
 }
 
 .header__logo,
@@ -63,26 +67,41 @@ a:hover {
 }
 
 .header__search > label {
-    padding: 1.3rem 1rem;
+    /* padding: 1.3rem 1rem; */
     display: flex;
     align-items: center;
     gap: 1rem;
-    border-radius: 4px;
+    /* border-radius: 4px; */
+    /* background-color: white; */
+
+    /* Changes to make search bar more visible*/
+    border: 1px solid white;
+    background-color: white;
+    padding: .2rem;
+    border-radius: 50px;
+    height: 60%;
+
 }
 
 .header__search svg {
-    fill: white;
+    /* fill: white; */
     width: 2rem;
     height: 2rem;
     margin-left: 1rem;
+
+    /* Changes to make search bar more visible */
+    fill: black;
 }
 
 .header__search input {
     width: 30rem;
     background: transparent;
     border: none;
-    color: white;
+    /* color: white; */
     padding: 0;
+
+    /* Changes to make search bar more visible*/
+    color: black;
 }
 
 @media screen and (max-width: 800px) {
