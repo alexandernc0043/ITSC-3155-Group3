@@ -14,8 +14,12 @@ def home(request):
 def addCourse(request, pk):
     dept = pk.split('-')[0]
     courseNumber = pk.split('-')[1]
+    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()
+    if request.method == 'POST':
+        course.course_students.add(request.user)
+        return redirect('courses')
     context = {
-        'course': Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get(),
+        'course': course,
         'pk': pk
     }
     return render(request,'base/addCourse.html', context)
@@ -73,6 +77,8 @@ def registeruser(request):
 
 @login_required(login_url='/login/')
 def pick_courses(request):
+
+
     courses = Course.objects.all()
 
     context = {
