@@ -33,7 +33,8 @@ def editProfile(request, pk):
             return redirect('profile', pk=user.username)
     context = {
         'userForm':userForm,
-        'user': user
+        'user': user,
+        'courses': user.students.all(),
     }
 
 
@@ -73,7 +74,7 @@ def addCourse(request, pk):
         'course': course,
         'pk': pk
     }
-    return render(request, 'base/addCourse.html', context)
+    return render(request, 'base/addRemoveCourse.html', context)
 
 
 def logoutuser(request):

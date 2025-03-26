@@ -1,17 +1,23 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h2>Edit Your Profile</h2>
+    <h2>Edit Your Profile</h2>
 
-<form class="userForm" action="" method="POST">
+    <form class="userForm" action="" method="POST">
 
-    {% csrf_token %}
-    {% for value in userForm %}
-        
-        {{value}}
+        {% csrf_token %}
+        {% for value in userForm %}
+            {{ value }}
+        {% endfor %}
+
+        <button type="submit">Save</button>
+    </form>
+    <h2>Edit Courses</h2>
+    {% for course in courses %}
+        <div>
+            <p>{{ course }}</p>
+            <a href="{% url 'remove-course' course %}">Remove</a>
+        </div>
     {% endfor %}
-    
-    <button type="submit">Save</button>
-</form>
 
 {% endblock content %}
