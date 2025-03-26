@@ -1,20 +1,20 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 
-<h2>{{ user.username }}'s Profile Page</h2>
+    <h1>{{ user.username }}'s Profile Page</h1>
 
-<p>Courses</p>
-{% for course in courses %}
-<p>{{ course }}</p>
-{% endfor %}
+    <h2>Courses</h2>
+    {% for course in courses %}
+        <p>{{ course }}</p>
+    {% endfor %}
 
-<!-- Only shows the user's reviews -->
-{% if request.user == user %}
-<p>Your Reviews</p>
-<!-- Put all reviews that user has made here -->
-<!-- Add way to remove reviews -->
+    <!-- Only shows the user's reviews -->
+    {% if request.user == user %}
+        <h2>Your Reviews</h2>
+        <!-- Put all reviews that user has made here -->
+        <!-- Add way to remove reviews -->
 
-<!-- Edit Profile Info -->
-<a href="{% url 'edit-profile' user %}">Edit</a>
-{% endif %} 
+        <!-- Edit Profile Info -->
+        <a href="{% url 'edit-profile' user %}">Edit</a>
+    {% endif %}
 
 {% endblock content %}
