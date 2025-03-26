@@ -4,4 +4,4 @@ Added Review page: Allow users to leave a rating and review on selected professo
 Added Browse professors page: Users can see all professors and their ratings, as well as detailed reviews from different students. 
 Other stuff: Now only logged in users can pick classes, leave reviews, and browse professors. 
 Ratings don’t sum average/change based on new reviews.
-Classes don’t show what the professor teaches them. 
+Classes don’t show what professor teaches them. 
