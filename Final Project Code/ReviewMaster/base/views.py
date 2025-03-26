@@ -136,9 +136,7 @@ def professor_list(request):
         return render(request, 'base/professor_list.html', context )
 
 
-from django.shortcuts import render
-from django.http import Http404
-from .models import Professor, Review
+
 
 def professor_reviews(request, professor_name):
     
