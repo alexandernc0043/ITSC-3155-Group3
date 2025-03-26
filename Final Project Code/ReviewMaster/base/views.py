@@ -24,9 +24,9 @@ def profile(request, pk):
 @login_required(login_url='login')
 def editProfile(request, pk):
     if request.method == 'POST':
+        value = True
         
-    context = []
-    return render(request, 'base/editProfile.html', context)
+    return render(request, 'base/editProfile.html')
 
 def addCourse(request, pk):
     dept = pk.split('-')[0] # gets department
