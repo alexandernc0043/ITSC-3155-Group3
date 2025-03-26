@@ -20,6 +20,13 @@ def profile(request, pk):
     }
     return render(request, 'base/profile.html', context)
 
+@login_required(login_url='login')
+def editProfile(request, pk):
+    if request.method == 'POST':
+        
+    context = []
+    return render(request, 'base/editProfile.html', context)
+
 def addCourse(request, pk):
     dept = pk.split('-')[0] # gets department
     courseNumber = pk.split('-')[1] # gets course number
