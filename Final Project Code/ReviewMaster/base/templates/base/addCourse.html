@@ -4,7 +4,7 @@
     <form action="" method="post">
 
     {% csrf_token %}
-        <p>Do you want to add "{{ course.course_name }} | {{ course }}"</p>
+        <p>Do you want to add "{{ course.course_name }} "</p>
         <button type="submit">Confirm</button>
         <a href="{% url 'courses' %}">Go Back</a>
     </form>

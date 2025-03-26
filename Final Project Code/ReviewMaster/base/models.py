@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+
 class Department(models.Model):
     name = models.CharField(max_length=4)  # EX: ITSC, MATH, ITIS, etc
 
@@ -11,8 +13,12 @@ class Department(models.Model):
 
 class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
-    rating = models.CharField(max_length=5)  # Will be Star Symbols / Emojis
+    rating = models.CharField(max_length=3)  
+    
+    
 
+
+   
     def __str__(self):
         return self.name  # Calling Professor will return name
 
@@ -32,3 +38,15 @@ class Course(models.Model):
 
     def __str__(self):
         return f'{self.course_dept}-{self.course_number}'  # Calling will return DEPT-####
+
+
+class Review(models.Model):
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    review = models.TextField(null=True, blank=True)
+    def __str__(self):
+        return f'Review by {self.student.username} for {self.professor.name}'
+
+
+

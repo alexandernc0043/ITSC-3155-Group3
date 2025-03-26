@@ -2,10 +2,21 @@
 
 {% block content %}
     <h1>Review Page</h1>
-    <form>
+    <form method = "POST" action="{% url 'submit_review' %}">
         {% csrf_token %}
-        <input placeholder="Professor name">
-        <textarea name="review body" rows="5" cols="50" placeholder="Write your review here..."></textarea>
-        <input type="button" value="submit">
+        
+        <select name = "professor">
+        {% for professor in professors %}
+        <option value="{{ professor.id }}">{{professor.name}}</option>
+        {% endfor %}
+        </select> 
+
+
+        <input type ="number" placeholder="/5" min="0" max="5" name = "rating">
+
+        <textarea rows="5" cols="50" placeholder="Write your review here..." name = "review"></textarea>
+        
+        
+        <input type="submit" value="submit">
     </form>
 {% endblock content %}

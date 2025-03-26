@@ -7,8 +7,13 @@
     <section class="explore">
         <h4>Explore</h4>
         <ul>
-            <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'courses' %}">Pick Classes</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'courses' %}">Pick Classes</a></li>
+                <li><a href="{% url 'review' %}">Review A Professor</a></li>
+                <li><a href="{% url 'professor-list' %}">Browse Professors</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
         </ul>
     </section>
     <section class="resources">

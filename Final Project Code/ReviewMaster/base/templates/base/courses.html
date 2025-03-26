@@ -4,7 +4,9 @@
 
     {% for course in courses %}
         <div>
-            "{{ course.course_name }}" | {{ course }}
+            "{{ course.course_name }}" | {{ course }} | {% for professor in course.course_professors.all %}
+            <p>1</p>
+        {% endfor %}
             <a href="{% url 'add-course' course %}">Add Course</a>
         </div>
     {% endfor %}
