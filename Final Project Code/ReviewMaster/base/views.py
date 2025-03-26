@@ -13,13 +13,13 @@ def home(request):
     return render(request, 'base/home.html')
 
 def addCourse(request, pk):
-    dept = pk.split('-')[0]
-    courseNumber = pk.split('-')[1]
-    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()
+    dept = pk.split('-')[0] # gets department
+    courseNumber = pk.split('-')[1] # gets course number
+    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get() # filters courses
     if request.method == 'POST':
-        course.course_students.add(request.user)
-        course.save()
-        return redirect('courses')
+        course.course_students.add(request.user) # add student to course
+        course.save() # save
+        return redirect('courses') # redirect back to courses
     context = {
         'course': course,
         'pk': pk
@@ -61,7 +61,7 @@ def registerUser(request):
     page = 'register'
     form = UserCreationForm()
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserCreationForm(request.POST) # form for registration
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -99,7 +99,7 @@ def registerUser(request):
 def pick_courses(request):
 
 
-    courses = Course.objects.all()
+    courses = Course.objects.all() # get all courses, will be filtered in the future
 
     context = {
         'departments': Department.objects.all(),
