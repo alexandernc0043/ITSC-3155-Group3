@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
+from .forms import UserForm
 
 from base.models import Department, Course
 
@@ -23,10 +24,20 @@ def profile(request, pk):
 
 @login_required(login_url='login')
 def editProfile(request, pk):
+    user = User.objects.get(username=pk)
+    userForm = UserForm(instance=user)
     if request.method == 'POST':
-        value = True
-        
-    return render(request, 'base/editProfile.html')
+        userForm = UserForm(request.POST, instance=user)
+        if userForm.is_valid():
+            userForm.save()
+            return redirect('profile', pk=user.username)
+    context = {
+        'userForm':userForm,
+        'user': user
+    }
+
+
+    return render(request, 'base/editProfile.html', context)
 
 def addCourse(request, pk):
     dept = pk.split('-')[0] # gets department

@@ -1,11 +1,16 @@
 {% extends 'main.html' %}
 
 {% block content %}
+<h2>Edit Your Profile</h2>
 
-<form action="" method="POST">
+<form class="userForm" action="" method="POST">
 
     {% csrf_token %}
-    <input type="text" value="{{user.username}}">
+    {% for value in userForm %}
+        
+        {{value}}
+    {% endfor %}
+    
     <button type="submit">Save</button>
 </form>
 

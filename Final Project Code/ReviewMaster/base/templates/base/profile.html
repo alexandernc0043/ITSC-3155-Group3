@@ -14,5 +14,7 @@
 <!-- Add way to remove reviews -->
 
 <!-- Edit Profile Info -->
-<a href="{% url 'edit-profile' %}">Edit</a>
-{% endif %} {% endblock content %}
+<a href="{% url 'edit-profile' user %}">Edit</a>
+{% endif %} 
+
+{% endblock content %}
