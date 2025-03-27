@@ -1,4 +1,4 @@
 .DS_Store
 .idea
 .vscode
-/Final Project Code/ReviewMaster/base/__pycache__
+__pycache__/*.pyc
