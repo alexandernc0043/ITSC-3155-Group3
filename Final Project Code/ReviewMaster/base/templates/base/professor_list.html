@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2>Professors:</h2>
+
+<br>
+
+{% for professor in professors %}
+    <div>
+        <p><strong>{{ professor.name }}</strong></p>
+        <p>Rating: {{ professor.rating }} / 5</p>
+        <a href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
+    </div>
+    <hr>
+{% endfor %}
+
+{% endblock content %}

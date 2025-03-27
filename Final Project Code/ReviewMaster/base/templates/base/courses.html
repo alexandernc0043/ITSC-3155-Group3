@@ -1,16 +1,38 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-    {% for course in courses %}
-        <div>
-            "{{ course.name }}" | {{ course }}
-            {% if request.user in course.students.all  %}
-                <a href="{% url 'remove-course' course %}">Remove Course</a>
-            {% else %}
-                <a href="{% url 'add-course' course %}">Add Course</a>
-            {% endif %}
-        </div>
-    {% endfor %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Course ID</th>
+            <th>Professor</th>
+            <th>Rating</th>
+            <th>Section Number</th>
+            <th>Action</th>
+        </tr>
+        {% for course in courses %}
+            <tr>
+                <th>{{ course.name }}</th>
+                <th>{{ course }}</th>
+                <th>{{ course.professor }}</th>
+                <th>{{ course.professor.rating }}</th>
+                <th>{{ course.section_number }}</th>
+                <th>
+                    {% if request.user in course.students.all %}
+                        <a href="{% url 'remove-course' course %}">Remove Course</a>
+                    {% else %}
+                        <a href="{% url 'add-course' course %}">Add Course</a>
+                    {% endif %}
+                </th>
+            </tr>
+        {% endfor %}
+    </table>
+{#    {% for course in courses %}#}
+{#        <div>#}
+{#            Name: "{{ course.name }}" | Course ID: {{ course }} | Professor: {{ course.professor }} |#}
+{#            Rating: {{ course.professor.rating }} | Section Number: {{ course.section_number }}#}
+{##}
+{#        </div>#}
+{#    {% endfor %}#}
 
 {% endblock content %}

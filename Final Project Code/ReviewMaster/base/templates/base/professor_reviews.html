@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h2>Showing reviews for: {{ professor.name }}</h2>
+
+<br>
+
+{% for review in reviews %}
+    <div>
+        <p><strong>Student:</strong> {{ review.student }}</p>
+        <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+        <p><strong>Review:</strong> "{{ review.review }}"</p>
+    </div>
+    <hr>
+{% endfor %}
+
+{% endblock content %}
