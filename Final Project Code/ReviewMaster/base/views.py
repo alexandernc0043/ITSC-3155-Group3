@@ -57,7 +57,7 @@ def loginuser(request):
     return render(request, 'base/login_register.html')
 
 
-def registerUser(request):
+def register_user(request):
     page = 'register'
     form = UserCreationForm()
     if request.method == 'POST':
@@ -69,6 +69,7 @@ def registerUser(request):
             login(request, user)
             return redirect('home')
         else:
+            # Error handling for registration
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
             username = request.POST.get('username')
