@@ -12,9 +12,9 @@ def home(request):
 
 def update_course(request, pk, action):
     split = pk.split('-')
-    dept = split[0]  # gets department
-    course_number = split('-')[1]  # gets course number
-    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses
+    dept = split[0]
+    course_number = split[1]
+    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses to only get ones the user is in
     if request.method == 'POST':
         if action == 'remove':
             course.students.remove(request.user)
@@ -30,18 +30,15 @@ def update_course(request, pk, action):
     return render(request, 'base/addRemoveCourse.html', context)
 
 def remove_course(request, pk):
-    return updateCourse(request, pk, 'remove')
+    return update_course(request, pk, 'remove')
 
 def add_course(request, pk):
-    return updateCourse(request, pk, 'add')
+    return update_course(request, pk, 'add')
 
-def logout_user(request):
 def logout_user(request):
     logout(request)
     return redirect('home')
 
-
-def login_user(request):
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -66,8 +63,6 @@ def login_user(request):
             messages.error(request, 'Username or password incorrect')
     return render(request, 'base/login_register.html')
 
-
-def register_user(request):
 def register_user(request):
     page = 'register'
     form = UserCreationForm()
@@ -107,7 +102,6 @@ def register_user(request):
         'username': request.POST.get('username') # Keeps username in form even if there's an error
     }
     return render(request, 'base/login_register.html', context=context)
-
 
 @login_required(login_url='/login/')
 def pick_courses(request):
