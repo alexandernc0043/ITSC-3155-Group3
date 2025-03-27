@@ -7,6 +7,8 @@ urlpatterns = [
     path('register/', views.register_user, name='register'),
     path('logout/', views.logoutuser, name='logout'),
     path('pick-courses/',views.pick_courses, name='courses'),
-    path('add-course/<str:pk>',views.addCourse, name='add-course')
+    path('add-course/<str:pk>',views.addCourse, name='add-course'),
+    path('remove-course/<str:pk>',views.removeCourse, name='remove-course')
+
    # path('review/<str:pk>/', views.review, name='review')
 ]

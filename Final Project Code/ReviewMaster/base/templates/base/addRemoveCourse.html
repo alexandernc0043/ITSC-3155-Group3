@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <form action="" method="post">
+
+        {% csrf_token %}
+        {% if remove %}
+            <p>Do you want to remove "{{ course.course_name }} | {{ course }}"</p>
+        {% else %}
+            <p>Do you want to add "{{ course.course_name }} | {{ course }}"</p>
+        {% endif %}
+        <button type="submit">Confirm</button>
+        <a href="{% url 'courses' %}">Go Back</a>
+    </form>
+
+{% endblock content %}
