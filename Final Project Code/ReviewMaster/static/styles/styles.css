@@ -311,12 +311,7 @@ input[type="password"]:disabled, input[type="password"][readonly] {
 }
 
 /* Profile Page */
-.profile-page {
-    /* display: inline-flex;
-    align-content: center;
-    justify-content: center; */
-    background-color: red;
-}
+
 
 /*==============================
 =>  Footer Section

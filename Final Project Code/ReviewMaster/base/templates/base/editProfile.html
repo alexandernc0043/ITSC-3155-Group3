@@ -1,23 +1,26 @@
 {% extends 'main.html' %} {% block content %}
 <h2>Edit Your Profile</h2>
 
-<form class="userForm" action="" method="POST">
-  {% csrf_token %} {% for value in userForm %} {{ value }} {% endfor %}
+<div>
+  <form class="userForm" action="" method="POST">
+    {% csrf_token %} 
+    <div>
+        <p>Username: {{userForm.username}}</p>
+        <!-- put user password here -->
+    </div>
+    
+    <button type="submit">Save</button>
+  </form>
+</div>
 
-  <button type="submit">Save</button>
-</form>
 <h2>Edit Courses</h2>
 {% if courses.count == 0 %}
-<p>No Courses</p>
-{% else %}
-{% for course in courses %}
+<p>No Courses Added</p>
+{% else %} {% for course in courses %}
 
 <div>
   <p>{{ course }}</p>
   <a href="{% url 'remove-course' course %}">Remove</a>
 </div>
 
-{% endfor %} 
-{% endif %} 
-
-{% endblock content %}
+{% endfor %} {% endif %} {% endblock content %}
