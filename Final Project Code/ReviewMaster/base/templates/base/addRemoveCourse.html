@@ -10,7 +10,9 @@
             <p>Do you want to add "{{ course.course_name }} | {{ course }}"</p>
         {% endif %}
         <button type="submit">Confirm</button>
-        <a href="{% url 'courses' %}">Go Back</a>
+        <!-- Goes back to previous page stored in meta, works here but will not work in views -->
+        <a href="{{request.META.HTTP_REFERER}}">Go Back</a> 
+
     </form>
 
 {% endblock content %}

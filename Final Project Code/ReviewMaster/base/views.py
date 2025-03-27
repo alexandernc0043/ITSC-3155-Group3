@@ -4,9 +4,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from .forms import UserForm
+from .forms import UserForm, PasswordChange
+from django.contrib.auth import update_session_auth_hash
 
 from base.models import Department, Course
+
 
 
 def home(request):
@@ -26,17 +28,25 @@ def profile(request, pk):
 def editProfile(request, pk):
     user = User.objects.get(username=pk)
     userForm = UserForm(instance=user)
+    password = PasswordChange(user)
+
     if request.method == 'POST':
         userForm = UserForm(request.POST, instance=user)
-        if userForm.is_valid():
+        password = PasswordChange(user, request.POST)
+
+        #Checks form validationm, updates user with new information 
+        if userForm.is_valid() and password.is_valid():
             userForm.save()
+            password.save()
+            update_session_auth_hash(request, password.user) #Prevents automatic user logout
             return redirect('profile', pk=user.username)
+        
     context = {
-        'userForm':userForm,
+        'userForm': userForm,
+        'password': password,
         'user': user,
         'courses': user.students.all(),
     }
-
 
     return render(request, 'base/editProfile.html', context)
 
@@ -57,6 +67,7 @@ def removeCourse(request, pk):
     if request.method == 'POST':
         course.course_students.remove(request.user)
         course.save()
+        # Redirect to previous url not working with usual HTTP_REFERER, probably manually store path for redirection
         return redirect('courses')
     return render(request, 'base/addRemoveCourse.html', context)
 
