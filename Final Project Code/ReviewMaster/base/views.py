@@ -17,14 +17,17 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 import re
 
+
 def home(request):
     return render(request, 'base/home.html')
+
 
 def update_course(request, pk, action):
     split = pk.split('-')
     dept = split[0]
     course_number = split[1]
-    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses to only get ones the user is in
+    course = Course.objects.filter(department__name=dept,
+                                   number=course_number).get()  # filters courses to only get ones the user is in
     if request.method == 'POST':
         if action == 'remove':
             course.students.remove(request.user)
@@ -32,22 +35,26 @@ def update_course(request, pk, action):
             course.students.add(request.user)
         course.save()
         return redirect('courses')
-    
+
     context = {
         'course': course,
         'remove': action == 'remove'
     }
     return render(request, 'base/addRemoveCourse.html', context)
 
+
 def remove_course(request, pk):
     return update_course(request, pk, 'remove')
+
 
 def add_course(request, pk):
     return update_course(request, pk, 'add')
 
+
 def logout_user(request):
     logout(request)
     return redirect('home')
+
 
 def login_user(request):
     if request.user.is_authenticated:
@@ -73,6 +80,7 @@ def login_user(request):
             messages.error(request, 'Username or password incorrect')
     return render(request, 'base/login_register.html')
 
+
 def register_user(request):
     page = 'register'
     form = UserCreationForm()
@@ -89,7 +97,7 @@ def register_user(request):
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
             username = request.POST.get('username')
-            pattern = r"^\w*(@|-|\.|\+|_)*\w*$" # Regex to check that username only contains certain valid characters
+            pattern = r"^\w*(@|-|\.|\+|_)*\w*$"  # Regex to check that username only contains certain valid characters
             # Username validation
             if not re.match(pattern, username):
                 messages.error(request, 'Username contains invalid characters')
@@ -105,20 +113,21 @@ def register_user(request):
                 messages.error(request, 'Passwords do not match')
             else:
                 messages.error(request, 'An error has occurred during registration, please try again later')
-                
+
     context = {
         'form': form,
         'page': page,
-        'username': request.POST.get('username') # Keeps username in form even if there's an error
+        'username': request.POST.get('username')  # Keeps username in form even if there's an error
     }
     return render(request, 'base/login_register.html', context=context)
+
 
 @login_required(login_url='/login/')
 def pick_courses(request):
     # # Prefetch related professors for each course to optimize database queries
     # courses = Course.objects.prefetch_related('course_professors').all()
 
-    courses = Course.objects.all() # get all courses, will be filtered in the future
+    courses = Course.objects.all()  # get all courses, will be filtered in the future
     context = {
         'departments': Department.objects.all(),
         'courses': courses,
@@ -151,37 +160,26 @@ def submit_review(request):
 
         review = Review(professor=professor, student=user, rating=rating, review=review)
         review.save()
-        
-        return HttpResponse("Review submitted successfully!")
+        messages.success(request, 'Review successfully submitted!')
+
     else:
-        return HttpResponse("Invalid request method", status=400)
-    
+        messages.error(request, 'An error has occurred, please try again!')
+    return redirect('review')
+
 
 
 def professor_list(request):
-        professors = Professor.objects.all()
-
-        context = {
+    professors = Professor.objects.all()
+    context = {
         'professors': professors
     }
-    
-        
-        return render(request, 'base/professor_list.html', context )
 
-
+    return render(request, 'base/professor_list.html', context)
 
 
 def professor_reviews(request, professor_name):
-    
     professors = Professor.objects.filter(name=professor_name)
-    
-   
-    
-    
     professor = professors.first()
-    
-    
     reviews = Review.objects.filter(professor=professor)
 
     return render(request, 'base/professor_reviews.html', {'professor': professor, 'reviews': reviews})
-
