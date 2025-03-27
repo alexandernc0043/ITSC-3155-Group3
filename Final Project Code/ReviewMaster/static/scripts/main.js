@@ -1,23 +1,17 @@
-const homeClass = document.getElementsByClassName("home");
-const loginClass = document.getElementsByClassName("login");
-const dropdownButton = document.getElementsByClassName('dropdown-button')[0]
-const dropdownMenu = document.getElementsByClassName('dropdown-menu')[0]
+const homeClass = document.querySelector(".home");
+const loginClass = document.querySelector(".login");
 
-dropdownMenu.style.display = 'none';
-dropdownButton.addEventListener('click', () => {
-    if (dropdownMenu.style.display === 'none') {
-        dropdownMenu.style.display = 'block';
-        dropdownButton.style.transform = 'rotateX(180deg)';
-    } else {
-        dropdownMenu.style.display = 'none';
-        dropdownButton.style.transform = 'rotateX(0deg)';
-    }
-});
-
-if (homeClass.length > 0) {
+if (homeClass || loginClass) {
     document.getElementsByClassName("header__search")[0].style.display = "none";
 }
 
-if (loginClass.length > 0) {
-    document.getElementsByClassName("header__search")[0].style.display = "none";
+const dropdownMenu = document.querySelector(".dropdown-menu");
+const dropdownButton = document.querySelector(".dropdown-button");
+
+if (dropdownButton) {
+  dropdownButton.addEventListener("click", () => {
+    dropdownMenu.classList.toggle("show");
+    dropdownButton.style.transform = dropdownMenu.classList.contains("show") ? 'rotate(180deg)' : 'rotate(0deg)';
+    dropdownButton.style.paddingTop = dropdownMenu.classList.contains("show") ? '0' : '.25rem';
+  });
 }
