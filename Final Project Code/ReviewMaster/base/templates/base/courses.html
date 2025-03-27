@@ -4,12 +4,13 @@
 
     {% for course in courses %}
         <div>
-            "{{ course.course_name }}" | {{ course }} | {% for professor in course.course_professors.all %}
-            <p>1</p>
-        {% endfor %}
-            <a href="{% url 'add-course' course %}">Add Course</a>
+            "{{ course.course_name }}" | {{ course }}
+            {% if request.user in course.course_students.all  %}
+                <a href="{% url 'remove-course' course %}">Remove Course</a>
+            {% else %}
+                <a href="{% url 'add-course' course %}">Add Course</a>
+            {% endif %}
         </div>
     {% endfor %}
-
 
 {% endblock content %}

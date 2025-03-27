@@ -12,6 +12,7 @@ urlpatterns = [
     path('submit-review/', views.submit_review, name='submit_review'),
     path('professor-list/', views.professor_list, name = "professor-list"),
     path('professor-reviews/<str:professor_name>/', views.professor_reviews, name='professor-reviews'),
-    
+    path('remove-course/<str:pk>',views.removeCourse, name='remove-course')
 
+   # path('review/<str:pk>/', views.review, name='review')
 ]
