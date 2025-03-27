@@ -12,26 +12,27 @@ from base.models import Department, Course, Professor, Review
 def home(request):
     return render(request, 'base/home.html')
 
-def removeCourse(request, pk):
-    dept = pk.split('-')[0]  # gets department
-    courseNumber = pk.split('-')[1]  # gets course number
-    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()  # filters courses
+def remove_course(request, pk):
+    split = pk.split('-')
+    dept = split[0]
+    course_number = split[1]
+    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses to only get ones the user is in
     context = {
         'remove': True,
         'course': course
     }
     if request.method == 'POST':
-        course.course_students.remove(request.user)
+        course.students.remove(request.user)
         course.save()
         return redirect('courses')
     return render(request, 'base/addRemoveCourse.html', context)
 
-def addCourse(request, pk):
+def add_course(request, pk):
     dept = pk.split('-')[0]  # gets department
-    courseNumber = pk.split('-')[1]  # gets course number
-    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()  # filters courses
+    course_number = pk.split('-')[1]  # gets course number
+    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses to only get ones the user is in
     if request.method == 'POST':
-        course.course_students.add(request.user)  # add student to course
+        course.students.add(request.user)  # add student to course
         course.save()  # save
         return redirect('courses')  # redirect back to courses
     context = {
@@ -41,12 +42,12 @@ def addCourse(request, pk):
     return render(request, 'base/addRemoveCourse.html', context)
 
 
-def logoutuser(request):
+def logout_user(request):
     logout(request)
     return redirect('home')
 
 
-def loginuser(request):
+def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
@@ -71,7 +72,7 @@ def loginuser(request):
     return render(request, 'base/login_register.html')
 
 
-def registeruser(request):
+def register_user(request):
     page = 'register'
     form = UserCreationForm()
     context = {
