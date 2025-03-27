@@ -19,12 +19,12 @@ class Professor(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200)  # Ex: Software Engineering
-    department = models.ForeignKey(Department, null=True, on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
+    department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
     number = models.IntegerField(null=False)  # Ex: 3155
     students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
     professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, null=True)  # The professor who teach the course
-    section_number = models.IntegerField()  # EX: 100
-    credit_hours = models.IntegerField()  # EX: 3
+    section_number = models.IntegerField() # EX: 100
+    credit_hours = models.IntegerField() # EX: 3
 
     class Meta:
         ordering = ['department', 'number', 'section_number']  # Order by department, number, and section number.

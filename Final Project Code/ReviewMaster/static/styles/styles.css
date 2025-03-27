@@ -1,6 +1,12 @@
 :root {
     --primary-color: #204071;
     --secondary-color: #1c4b82;
+    --light-color: #FFFFFF;
+    --error-color: #BA2D3D;
+    --light-dark: #495057;
+    --star-color: #FFB900;
+    --star-color-hover: gold;
+    --star-color-active: #EA0;
 }
 
 * {
@@ -38,20 +44,16 @@ a:hover {
 /*==============================
 =>  Header Section
 ================================*/
-
 .header {
-    padding: 1.5rem;
+    padding: 1rem 3rem;
     background-color: var(--primary-color);
-    color: white;
-    
+    color: var(--light-color);
 }
 
 .header > .container {
     display: flex;
     gap: 9.5rem;
-    /* Changes to center search bar */
     align-items: center;
-    justify-items: center;
 }
 
 .header__logo,
@@ -67,62 +69,48 @@ a:hover {
 }
 
 .header__search > label {
-    /* padding: 1.3rem 1rem; */
     display: flex;
     align-items: center;
     gap: 1rem;
-    /* border-radius: 4px; */
-    /* background-color: white; */
-
-    /* Changes to make search bar more visible*/
-    border: 1px solid white;
-    background-color: white;
-    padding: .2rem;
+    background-color: var(--light-color);
+    padding: .5rem;
+    padding-left: 0;
     border-radius: 50px;
-    height: 60%;
 
 }
 
 .header__search svg {
-    /* fill: white; */
-    width: 2rem;
+    width: 1.25rem;
     height: 2rem;
-    margin-left: 1rem;
-
-    /* Changes to make search bar more visible */
-    fill: black;
+    margin-left: .75rem;
 }
 
 .header__search input {
-    width: 30rem;
+    width: 20rem;
     background: transparent;
     border: none;
-    /* color: white; */
     padding: 0;
-
-    /* Changes to make search bar more visible*/
-    color: black;
 }
 
 @media screen and (max-width: 800px) {
     .header__search input {
-    width: 20rem;
+        width: 20rem;
     }
 
     .header > .container {
-    gap: 3rem;
+        gap: 3rem;
     }
 }
 
 @media screen and (max-width: 700px) {
     .header__logo h1 {
-    display: none;
+        display: none;
     }
 }
 
 @media screen and (max-width: 500px) {
     .header__search {
-    display: none;
+        display: none;
     }
 }
 
@@ -137,7 +125,7 @@ a:hover {
     align-items: center;
     font-weight: 500;
     text-decoration: none;
-    color: white;
+    color: var(--light-color);
 }
 
 .header__menu img {
@@ -164,6 +152,81 @@ a:hover {
     border: 0;
     outline: 0;
     cursor: pointer;
+    padding-top: .25rem;
+    transition: transform .3s;
+}
+
+.dropdown-menu {
+    z-index: 111;
+    position: absolute;
+    top: 5rem;
+    right: 0.5rem;
+    background: var(--primary-color);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    display: none;
+}
+
+.dropdown-menu a {
+    padding: 1rem;
+    display: flex;
+    gap: .5rem;
+    font-weight: 500;
+}
+
+.dropdown-button svg, .dropdown-menu a svg {
+    fill: var(--light-color);
+    width: 1.25em;
+}
+
+.dropdown-menu.show {
+    display: block;
+    width: 100%;
+}
+
+.mobile-menu {
+    margin-bottom: 3rem;
+}
+
+.mobile-menuItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+/*==============================
+=>  Alert/Error message Section
+================================*/
+.error-message {
+    background-color: var(--error-color);
+    color: var(--light-color);
+    padding: 1.25rem;
+}
+
+.error-message ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline;
+}
+
+.error-message li {
+    display: inline;
+}
+
+.error-message li::after {
+    content: ", ";
+}
+
+.error-message li:last-child::after {
+    content: "";
 }
 
 /*==============================
@@ -180,13 +243,14 @@ a:hover {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    color: var(--light-color);
     text-align: center;
 }
 
 .home h1 {
     font-size: 4rem;
     font-weight: bold;
+    margin-bottom: 0;
 }
 
 .home p {
@@ -215,22 +279,15 @@ input[type="text"], input[type="password"] {
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
+    color: var(--light-dark);
     background-clip: padding-box;
     border: 1px solid var(--primary-color);
     border-radius: 0.5rem;
-    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-    -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out; 
 }
 
 @media screen and (prefers-reduced-motion: reduce) {
     input[type="text"], input[type="password"] {
-        -webkit-transition: none;
-        -o-transition: none;
         transition: none; 
     } 
 }
@@ -241,55 +298,98 @@ input[type="text"]::-ms-expand, input[type="password"]::-ms-expand {
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
-    color: #495057;
-    background-color: #fff;
+    color: var(--light-dark);
     border-color: var(--primary-color);
     outline: 0;
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.25);
     box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.25); 
 }
 
 input[type="text"]:disabled, input[type="text"][readonly], 
 input[type="password"]:disabled, input[type="password"][readonly] {
-    background-color: #e9ecef;
+    background-color: #E9ECEF;
     opacity: 1; 
 }
 
-.primary-button {
+.primary-button, .secondary-button {
     width: fit-content;
     padding: .7rem .9rem;
     border-radius: .5rem;
-    border: 1px solid var(--primary-color);
-    background-color: var(--primary-color);
-    color: white;
     font-size: 1rem;
+    color: var(--light-color);
 }
 
 .primary-button:hover, .secondary-button:hover {
     cursor: pointer;
+    background-color: var(--light-color);
+}
+
+.primary-button {
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-color);
 }
 
 .primary-button:hover {
     border: 1px solid var(--primary-color);
-    background-color: white;
     color: var(--primary-color);
 }
 
 .secondary-button {
-    width: fit-content;
-    padding: .7rem .9rem;
-    border-radius: .5rem;
-    font-size: 1rem;
     border: 1px solid var(--secondary-color);
     background-color: var(--secondary-color);
-    color: white;
     margin-right: 1rem;
 }
 
 .secondary-button:hover {
     border: 1px solid var(--secondary-color);
-    background-color: white;
     color: var(--secondary-color);
+}
+
+/*==============================
+=>  Rating Component
+=>  https://jsfiddle.net/ashuslove/zLm4f/6/
+================================*/
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: fit-content;
+}
+
+.rating:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+    clip: rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 200%;
+    line-height: 1.2;
+    color: #DDD;
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: var(--star-color);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: var(--star-color-hover);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: var(--star-color-active);
 }
 
 /*==============================
@@ -307,6 +407,14 @@ input[type="password"]:disabled, input[type="password"][readonly] {
 
 .login-form input.primary-button, .register-form input.primary-button {
     margin: 1rem auto .75rem auto;
+    display: block;
+}
+
+.help-text {
+    margin-top: -.75rem;
+    margin-bottom: .5rem;
+    color: var(--light-dark);
+    font-size: 0.75rem;
     display: block;
 }
 

@@ -10,14 +10,22 @@
 <body>
     {% include 'navbar.html' %}
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
+        <div class="error-message">
+            {% if messages.count > 1 %}
+                Errors found:
+            {% else %}
+                Error found:
+            {% endif %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endif %}
     {% block content %}
     {% endblock content %}
+    <script src="{% static 'scripts/main.js' %}"></script>
     {% include 'footer.html' %}
 </body>
 </html>
