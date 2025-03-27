@@ -11,6 +11,7 @@ const dropdownButton = document.querySelector(".dropdown-button");
 if (dropdownButton) {
   dropdownButton.addEventListener("click", () => {
     dropdownMenu.classList.toggle("show");
-    dropdownButton.style.transform = dropdownMenu.classList.contains("show") ? 'rotateX(180deg)' : 'rotateX(0deg)';
+    dropdownButton.style.transform = dropdownMenu.classList.contains("show") ? 'rotate(180deg)' : 'rotate(0deg)';
+    dropdownButton.style.paddingTop = dropdownMenu.classList.contains("show") ? '0' : '.25rem';
   });
 }

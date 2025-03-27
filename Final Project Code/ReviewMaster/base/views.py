@@ -1,52 +1,45 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
-import re
-
 from base.models import Department, Course
-
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+import re
 
 def home(request):
     return render(request, 'base/home.html')
 
-def removeCourse(request, pk):
+def update_course(request, pk, action):
     dept = pk.split('-')[0]  # gets department
     courseNumber = pk.split('-')[1]  # gets course number
     course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()  # filters courses
-    context = {
-        'remove': True,
-        'course': course
-    }
     if request.method == 'POST':
-        course.course_students.remove(request.user)
+        if action == 'remove':
+            course.course_students.remove(request.user)
+        elif action == 'add':
+            course.course_students.add(request.user)
         course.save()
         return redirect('courses')
-    return render(request, 'base/addRemoveCourse.html', context)
-
-def addCourse(request, pk):
-    dept = pk.split('-')[0] # gets department
-    courseNumber = pk.split('-')[1] # gets course number
-    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get() # filters courses
-    if request.method == 'POST':
-        course.course_students.add(request.user) # add student to course
-        course.save() # save
-        return redirect('courses') # redirect back to courses
+    
     context = {
         'course': course,
-        'pk': pk
+        'remove': action == 'remove'
     }
     return render(request, 'base/addRemoveCourse.html', context)
 
+def remove_course(request, pk):
+    return updateCourse(request, pk, 'remove')
 
-def logoutuser(request):
+def add_course(request, pk):
+    return updateCourse(request, pk, 'add')
+
+def logout_user(request):
     logout(request)
     return redirect('home')
 
 
-def loginuser(request):
+def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')
     if request.method == "POST":
@@ -55,7 +48,7 @@ def loginuser(request):
         try:
             user = User.objects.get(username=username)  # try and find that user object
         except:
-            messages.error(request, 'User does not exist')
+            messages.error(request, 'Username or password incorrect')
 
         user = authenticate(request, username=username, password=password)  # authenticate the user
 
@@ -67,7 +60,7 @@ def loginuser(request):
             else:
                 return redirect('home')  # else it brings them home
         else:
-            messages.error(request, 'Username or password does not exist')
+            messages.error(request, 'Username or password incorrect')
     return render(request, 'base/login_register.html')
 
 
@@ -88,11 +81,13 @@ def register_user(request):
             password2 = request.POST.get('password2')
             username = request.POST.get('username')
             pattern = r"^\w*(@|-|\.|\+|_)*\w*$" # Regex to check that username only contains certain valid characters
+            # Username validation
             if not re.match(pattern, username):
                 messages.error(request, 'Username contains invalid characters')
             elif User.objects.filter(username=username).exists():
                 messages.error(request, 'Username is already taken')
 
+            # Password validation
             if len(password1) < 8:
                 messages.error(request, 'Password is too short')
             elif password1.isdigit():
@@ -105,7 +100,7 @@ def register_user(request):
     context = {
         'form': form,
         'page': page,
-        'username': request.POST.get('username')
+        'username': request.POST.get('username') # Keeps username in form even if there's an error
     }
     return render(request, 'base/login_register.html', context=context)
 
