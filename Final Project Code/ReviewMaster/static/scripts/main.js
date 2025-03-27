@@ -15,3 +15,16 @@ if (dropdownButton) {
     dropdownButton.style.paddingTop = dropdownMenu.classList.contains("show") ? '0' : '.25rem';
   });
 }
+
+const alertMessages = document.querySelector(".alert-messages");
+
+if (alertMessages) {
+    const liElement = alertMessages.getElementsByTagName("li");
+    const classList = liElement[0].classList;
+    if (classList.contains("error")) {
+        alertMessages.classList.add("error");
+    }
+    else if (classList.contains("success")) {
+        alertMessages.classList.add("success");
+    }
+}

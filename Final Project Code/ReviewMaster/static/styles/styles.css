@@ -3,6 +3,7 @@
     --secondary-color: #1c4b82;
     --light-color: #FFFFFF;
     --error-color: #BA2D3D;
+    --success-color: #31D190;
     --light-dark: #495057;
     --star-color: #FFB900;
     --star-color-hover: gold;
@@ -205,27 +206,35 @@ a:hover {
 /*==============================
 =>  Alert/Error message Section
 ================================*/
-.error-message {
+.error.alert-messages {
     background-color: var(--error-color);
     color: var(--light-color);
+}
+
+.success.alert-messages {
+    background-color: var(--success-color);
+    /*color: var(--light-dark);*/
+}
+
+.alert-messages {
     padding: 1.25rem;
 }
 
-.error-message ul {
+.alert-messages ul {
     list-style-type: none;
     padding: 0;
     display: inline;
 }
 
-.error-message li {
+.alert-messages li {
     display: inline;
 }
 
-.error-message li::after {
+.alert-messages li::after {
     content: ", ";
 }
 
-.error-message li:last-child::after {
+.alert-messages li:last-child::after {
     content: "";
 }
 

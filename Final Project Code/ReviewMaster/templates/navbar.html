@@ -20,11 +20,11 @@
             {% if request.user.is_authenticated %}
                 <div class="header__user">
                     <a href="{% url 'home' %}">
-                    <div class="avatar avatar--medium active">
-                        <img src="{% static 'images/avatar.svg' %}" />
-                        <!--<img src="{{ request.user.avatar.url }}" />-->
-                    </div>
-                    <p>{{ request.user.username }}</p>
+                        <div class="avatar avatar--medium active">
+                            <img src="{% static 'images/avatar.svg' %}" />
+                            <!--<img src="{{ request.user.avatar.url }}" />-->
+                        </div>
+                        <p>{{ request.user.username }}</p>
                     </a>
                     <button class="dropdown-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">

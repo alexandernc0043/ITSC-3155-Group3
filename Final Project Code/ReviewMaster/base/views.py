@@ -31,8 +31,10 @@ def update_course(request, pk, action):
     if request.method == 'POST':
         if action == 'remove':
             course.students.remove(request.user)
+            messages.success(request, 'Course removed successfully!')
         elif action == 'add':
             course.students.add(request.user)
+            messages.success(request, 'Course added successfully!')
         course.save()
         return redirect('courses')
 
