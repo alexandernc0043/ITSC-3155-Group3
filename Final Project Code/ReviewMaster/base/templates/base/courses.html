@@ -4,8 +4,8 @@
 
     {% for course in courses %}
         <div>
-            "{{ course.course_name }}" | {{ course }}
-            {% if request.user in course.course_students.all  %}
+            "{{ course.name }}" | {{ course }}
+            {% if request.user in course.students.all  %}
                 <a href="{% url 'remove-course' course %}">Remove Course</a>
             {% else %}
                 <a href="{% url 'add-course' course %}">Add Course</a>

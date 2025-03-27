@@ -11,14 +11,15 @@ def home(request):
     return render(request, 'base/home.html')
 
 def update_course(request, pk, action):
-    dept = pk.split('-')[0]  # gets department
-    courseNumber = pk.split('-')[1]  # gets course number
-    course = Course.objects.filter(course_dept__name__icontains=dept, course_number=courseNumber).get()  # filters courses
+    split = pk.split('-')
+    dept = split[0]  # gets department
+    course_number = split('-')[1]  # gets course number
+    course = Course.objects.filter(department__name=dept, number=course_number).get()  # filters courses
     if request.method == 'POST':
         if action == 'remove':
-            course.course_students.remove(request.user)
+            course.students.remove(request.user)
         elif action == 'add':
-            course.course_students.add(request.user)
+            course.students.add(request.user)
         course.save()
         return redirect('courses')
     
@@ -35,10 +36,12 @@ def add_course(request, pk):
     return updateCourse(request, pk, 'add')
 
 def logout_user(request):
+def logout_user(request):
     logout(request)
     return redirect('home')
 
 
+def login_user(request):
 def login_user(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -64,6 +67,7 @@ def login_user(request):
     return render(request, 'base/login_register.html')
 
 
+def register_user(request):
 def register_user(request):
     page = 'register'
     form = UserCreationForm()

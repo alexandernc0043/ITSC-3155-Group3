@@ -5,9 +5,9 @@
 
         {% csrf_token %}
         {% if remove %}
-            <p>Do you want to remove "{{ course.course_name }} | {{ course }}"</p>
+            <p>Do you want to remove "{{ course.name }} | {{ course }}"</p>
         {% else %}
-            <p>Do you want to add "{{ course.course_name }} | {{ course }}"</p>
+            <p>Do you want to add "{{ course.name }} | {{ course }}"</p>
         {% endif %}
         <button type="submit">Confirm</button>
         <a href="{% url 'courses' %}">Go Back</a>

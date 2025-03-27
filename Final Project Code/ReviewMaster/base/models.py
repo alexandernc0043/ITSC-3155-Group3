@@ -18,17 +18,16 @@ class Professor(models.Model):
 
 
 class Course(models.Model):
-    course_name = models.CharField(max_length=200)  # Ex: Software Engineering
-    course_dept = models.ForeignKey(Department, null=True,
-                                    on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
-    course_number = models.IntegerField(null=False)  # Ex: 3155
-    course_students = models.ManyToManyField(User, related_name='students',
-                                             blank=True)  # The students who are taking the course
-    course_professors = models.ManyToManyField(Professor, related_name='professors',
-                                               blank=True)  # The professors who teach the course
+    name = models.CharField(max_length=200)  # Ex: Software Engineering
+    department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
+    number = models.IntegerField(null=False)  # Ex: 3155
+    students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
+    professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, null=True)  # The professor who teach the course
+    section_number = models.IntegerField() # EX: 100
+    credit_hours = models.IntegerField() # EX: 3
 
     class Meta:
-        ordering = ['course_dept', 'course_number']  # Order by department and number
+        ordering = ['department', 'number', 'section_number']  # Order by department, number, and section number.
 
     def __str__(self):
-        return f'{self.course_dept}-{self.course_number}'  # Calling will return DEPT-####
+        return f'{self.department}-{self.number}-{self.section_number}'  # Calling will return DEPT-####-###
