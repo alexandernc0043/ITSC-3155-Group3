@@ -308,38 +308,41 @@ a:hover {
 /*==============================
 =>  Input/Button Section
 ================================*/
-input {
+input, select {
     width: 100%;
     padding: 1rem;
     outline: none;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], select, textarea {
+    padding: 0.375rem 0.75rem;
     margin-top: .5rem;
     display: block;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
     font-size: 1rem;
-    line-height: 1.5;
     color: var(--light-dark);
-    background-clip: padding-box;
     border: 1px solid var(--primary-color);
     border-radius: 0.5rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+input[type="text"], input[type="password"], select {
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+    background-color: var(--light-color);
+}
+
 @media screen and (prefers-reduced-motion: reduce) {
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], select, textarea {
         transition: none; 
     } 
 }
 
-input[type="text"]::-ms-expand, input[type="password"]::-ms-expand {
+input[type="text"]::-ms-expand, input[type="password"]::-ms-expand, select::-ms-expand {
     background-color: transparent;
     border: 0; 
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
     color: var(--light-dark);
     border-color: var(--primary-color);
     outline: 0;
@@ -347,7 +350,9 @@ input[type="text"]:focus, input[type="password"]:focus {
 }
 
 input[type="text"]:disabled, input[type="text"][readonly], 
-input[type="password"]:disabled, input[type="password"][readonly] {
+input[type="password"]:disabled, input[type="password"][readonly],
+select:disabled, select[readonly],
+textarea:disabled, textarea[readonly] {
     background-color: #E9ECEF;
     opacity: 1; 
 }
@@ -395,6 +400,7 @@ input[type="password"]:disabled, input[type="password"][readonly] {
     flex-direction: row-reverse;
     justify-content: flex-end;
     width: fit-content;
+    margin-bottom: 1rem;
 }
 
 .rating:not(:checked) > input {
@@ -435,21 +441,29 @@ input[type="password"]:disabled, input[type="password"][readonly] {
 }
 
 /*==============================
-=>  Login/Register Section
+=>  Form Section
 ================================*/
-.login-form, .register-form {
+.form {
     width: 30%;
     margin: 0 auto;
     text-align: left;
 }
 
-.login-form input, .register-form input {
+.review.form {
+    width: 70%;
+}
+
+.form input, .form select, .form textarea {
     margin-bottom: 1rem;
 }
 
-.login-form input.primary-button, .register-form input.primary-button {
+.form input.primary-button {
     margin: 1rem auto .75rem auto;
     display: block;
+}
+
+.form textarea {
+    width: 100%;
 }
 
 .help-text {
