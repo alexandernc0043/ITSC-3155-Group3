@@ -4,10 +4,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django.db.models import Q
-from django.shortcuts import render, redirect
-import re
 from .forms import UserForm, PasswordChange
 from django.contrib.auth import update_session_auth_hash
 
@@ -148,73 +144,16 @@ def registeruser(request):
             messages.error(request, 'An error has occurred during registration')  # if form not valid return error
     return render(request, 'base/login_register.html', context=context)
 
+
+@login_required(login_url='/login/')
 def pick_courses(request):
-    # # Prefetch related professors for each course to optimize database queries
-    # courses = Course.objects.prefetch_related('course_professors').all()
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-    if q != '':
-        courses = Course.objects.filter(
-            Q(name__icontains=q) |
-            Q(department__name__icontains=q) |
-            Q(number__icontains=q) |
-            Q(professor__name__icontains=q)
-        )
-    else:
-        courses = Course.objects.all()  # get all courses, will be filtered in the future
-        
+    courses = Course.objects.all()  # get all courses, will be filtered in the future
+
     context = {
         'departments': Department.objects.all(),
         'courses': courses,
-        'q': q
     }
     return render(request, 'base/courses.html', context)
 
-
-@login_required
-def review(request):
-    professors = Professor.objects.all()
-
-    context = {
-        'professors': professors
-    }
-    return render(request, 'base/review.html', context)
-
-
-@login_required
-def submit_review(request):
-    if request.method == 'POST':
-        user = request.user
-
-        professor_id = request.POST.get("professor")
-        professor = Professor.objects.get(id=professor_id)
-
-        rating = request.POST.get("rating")
-
-        review = request.POST.get("review")
-
-        review = Review(professor=professor, student=user, rating=rating, review=review)
-        review.save()
-        messages.success(request, 'Review successfully submitted!')
-
-    else:
-        messages.error(request, 'An error has occurred, please try again!')
-    return redirect('review')
-
-
-
-def professor_list(request):
-    professors = Professor.objects.all()
-    context = {
-        'professors': professors,
-        'reviews': Review.objects.filter()
-    }
-
-    return render(request, 'base/professor_list.html', context)
-
-
-def professor_reviews(request, professor_name):
-    professors = Professor.objects.filter(name=professor_name)
-    professor = professors.first()
-    reviews = Review.objects.filter(professor=professor)
-
-    return render(request, 'base/professor_reviews.html', {'professor': professor, 'reviews': reviews})
+# def review(request, pk):
+#    return render(request, 'base/review.html')
