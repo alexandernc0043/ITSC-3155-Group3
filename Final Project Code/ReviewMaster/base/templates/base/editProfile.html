@@ -1,0 +1,42 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+<h2>Edit Your Profile</h2>
+<!-- Allows user to edit their profile through userForm -->
+<div>
+  <form class="form" action="" method="POST">
+    {% csrf_token %} 
+    {{userForm}}
+    <p>Would you like to change your password?</p>
+    <select id="select" onchange="showPasswordForm()">
+      <option value="option1">No</option>
+      <option value="option2">Yes</option>
+    </select>
+    <div id="container" style="display: none">
+      {{passwordForm}}
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'profile' request.user %}">Go Back</a>
+</div>
+
+<div>
+  <h2>Your Reviews:</h2>
+  <!-- Put review edit functionality here -->
+</div>
+
+<div>
+  <h2>Edit Courses</h2>
+  {% if courses.count == 0 %}
+  <p>No Courses Added</p>
+  {% else %} {% for course in courses %}
+
+  <div>
+    <p>{{ course }}</p>
+    <a href="{% url 'remove-course' course %}">Remove</a>
+  </div>
+
+  {% endfor %} {% endif %}
+</div>
+
+<script src="{% static 'scripts/main.js' %}"></script>
+{% endblock content %}

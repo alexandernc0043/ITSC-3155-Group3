@@ -1,0 +1,20 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+    <h1>{{ user.username }}'s Profile Page</h1>
+
+    <h2>Courses</h2>
+    {% for course in courses %}
+        <p>{{ course }}</p>
+    {% endfor %}
+
+    <!-- Only shows the user's reviews -->
+    {% if request.user == user %}
+        <h2>Your Reviews</h2>
+        <!-- Put all reviews that user has made here -->
+        <!-- Add way to remove reviews -->
+
+        <!-- Edit Profile Info -->
+        <a href="{% url 'edit-profile' user %}">Edit</a>
+    {% endif %}
+
+{% endblock content %}

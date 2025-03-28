@@ -49,3 +49,22 @@ input.addEventListener("input", (e) => {
     removeInput.classList.remove("show");
   }
 });
+
+
+function showPasswordForm() {
+  var choice = document.getElementById("select");
+  const container = document.getElementById("container");
+  var choices = document.querySelectorAll("#id_old_password, #id_new_password1, #id_new_password2");
+
+  if (choice.selectedIndex == 0) {
+    container.style.display = "none";
+    choices.forEach((field) => {
+      field.removeAttribute("required");
+    });
+  } else {
+    container.style.display = "block";
+    choices.forEach((field) => {
+      field.setAttribute("required", "");
+    });
+  }
+}
