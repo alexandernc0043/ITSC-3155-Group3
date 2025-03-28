@@ -1,18 +1,24 @@
 {% extends 'main.html' %}
 
 {% block content %}
+    <a href="{% url 'professor-list' %}">Go Back?</a>
+    <h2>Showing reviews for: {{ professor.name }} | Rating: {{ professor.rating }}</h2>
 
-<h2>Showing reviews for: {{ professor.name }}</h2>
+    <br>
+    {% if reviews.count == 0 %}
+        <div>
+            <p>No Reviews found...</p>
+        </div>
+    {% else %}
+        {% for review in reviews %}
+            <div>
+                <p><strong>Student:</strong> {{ review.student }}</p>
+                <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+                <p><strong>Review:</strong> "{{ review.review }}"</p>
+            </div>
+            <hr>
+        {% endfor %}
+    {% endif %}
 
-<br>
-
-{% for review in reviews %}
-    <div>
-        <p><strong>Student:</strong> {{ review.student }}</p>
-        <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
-        <p><strong>Review:</strong> "{{ review.review }}"</p>
-    </div>
-    <hr>
-{% endfor %}
 
 {% endblock content %}

@@ -11,8 +11,14 @@ class Department(models.Model):
 
 class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
-    rating = models.CharField(max_length=3)
 
+    def rating(self):
+        total = 0
+        for review in self.review_set.all():
+            total += review.rating
+        if total == 0: # If no ratings we return 0
+            return 'N/A'
+        return f'{round(total / self.review_set.all().count(), 1)} / 5' # Rounds to tens place.
     def __str__(self):
         return self.name  # Calling Professor will return name
 
