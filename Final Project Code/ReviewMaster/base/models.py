@@ -1,6 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# updates professor rating at given id. simple for now
+def updateRatingAvg(professor_id):
+    professor = Professor.objects.get(id=professor_id) # gets professor at database with given id
+    
+    reviews = Review.objects.filter(professor_id=professor_id) # reviews (query set) of professor
+
+    sum = 0
+    for review in reviews:
+        sum += review.rating
+
+    avg = sum / len(reviews)
+
+    professor.rating = avg
+    professor.save()
 
 class Department(models.Model):
     name = models.CharField(max_length=4)  # EX: ITSC, MATH, ITIS, etc
