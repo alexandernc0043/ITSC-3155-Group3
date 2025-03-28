@@ -1,32 +1,54 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Course ID</th>
-            <th>Professor</th>
-            <th>Rating</th>
-            <th>Section Number</th>
-            <th>Action</th>
-        </tr>
-        {% for course in courses %}
-            <tr>
-                <th>{{ course.name }}</th>
-                <th>{{ course }}</th>
-                <th>{{ course.professor }}</th>
-                <th>{{ course.professor.rating }}</th>
-                <th>{{ course.section_number }}</th>
-                <th>
-                    {% if request.user in course.students.all %}
-                        <a href="{% url 'remove-course' course %}">Remove Course</a>
-                    {% else %}
-                        <a href="{% url 'add-course' course %}">Add Course</a>
+    <main>
+        <h1>Courses</h1>
+        <div class="mobile-menu">
+            <form action="{% url 'home' %}" method="GET" class="header__search">
+                <label>
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <title>search</title>
+                        <path d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"></path>
+                    </svg>
+                    <input name="q" {% if q is not None %} value="{{ q }}" {% endif %} placeholder="Search classes..." />
+                </label>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Course ID</th>
+                    <th>Professor</th>
+                    <th>Rating</th>
+                    <th>Section Number</th>
+                    {% if request.user.is_authenticated %}
+                        <th>Action</th>
                     {% endif %}
-                </th>
-            </tr>
-        {% endfor %}
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course }}</td>
+                        <td>{{ course.professor }}</td>
+                        <td>{{ course.professor.rating }}</td>
+                        <td>{{ course.section_number }}</td>
+                        {% if request.user.is_authenticated %}
+                            <td>
+                                {% if request.user in course.students.all %}
+                                    <a href="{% url 'remove-course' course %}">Remove Course</a>
+                                {% else %}
+                                    <a href="{% url 'add-course' course %}">Add Course</a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
 {#    {% for course in courses %}#}
 {#        <div>#}
 {#            Name: "{{ course.name }}" | Course ID: {{ course }} | Professor: {{ course.professor }} |#}
