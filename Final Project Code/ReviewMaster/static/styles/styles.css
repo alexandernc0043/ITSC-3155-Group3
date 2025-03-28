@@ -219,25 +219,8 @@ a:hover {
     width: 100%;
 }
 
-.mobile-menu {
-    margin-bottom: 3rem;
-}
-
-.mobile-menuItems {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-
-@media screen and (min-width: 600px) {
-    .mobile-menu {
-        display: none;
-    }
-}
-
 /*==============================
-=>  Alert/Error message Section
+=>  Alert message Section
 ================================*/
 .error.alert-messages {
     background-color: var(--error-color);
@@ -337,24 +320,11 @@ input[type="text"], input[type="password"], select {
     } 
 }
 
-input[type="text"]::-ms-expand, input[type="password"]::-ms-expand, select::-ms-expand {
-    background-color: transparent;
-    border: 0; 
-}
-
 input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
     color: var(--light-dark);
     border-color: var(--primary-color);
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.25); 
-}
-
-input[type="text"]:disabled, input[type="text"][readonly], 
-input[type="password"]:disabled, input[type="password"][readonly],
-select:disabled, select[readonly],
-textarea:disabled, textarea[readonly] {
-    background-color: #E9ECEF;
-    opacity: 1; 
 }
 
 .primary-button, .secondary-button {
@@ -393,7 +363,6 @@ textarea:disabled, textarea[readonly] {
 
 /*==============================
 =>  Rating Component
-=>  https://jsfiddle.net/ashuslove/zLm4f/6/
 ================================*/
 .rating {
     display: flex;
