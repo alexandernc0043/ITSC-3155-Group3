@@ -38,11 +38,11 @@ if (input.value) {
 
 removeInput.addEventListener("click", () => {
   input.value = '';
+  input.focus();
   removeInput.classList.remove("show");
 });
 
 input.addEventListener("input", (e) => {
-  e.preventDefault();
   if (e.target.value && !input.classList.contains("show")) {
     removeInput.classList.add("show");
   } else if (!e.target.value && input.classList.contains("show")) {
