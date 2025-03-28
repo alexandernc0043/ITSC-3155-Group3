@@ -162,6 +162,7 @@ def submit_review(request):
         review = Review(professor=professor, student=user, rating=rating, review=review)
         review.save()
         messages.success(request, 'Review successfully submitted!')
+        updateRatingAvg(professor_id) #update professor rating average
 
     else:
         messages.error(request, 'An error has occurred, please try again!')
