@@ -172,7 +172,8 @@ def submit_review(request):
 def professor_list(request):
     professors = Professor.objects.all()
     context = {
-        'professors': professors
+        'professors': professors,
+        'reviews': Review.objects.filter()
     }
 
     return render(request, 'base/professor_list.html', context)

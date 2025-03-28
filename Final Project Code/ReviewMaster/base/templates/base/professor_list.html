@@ -9,7 +9,7 @@
 {% for professor in professors %}
     <div>
         <p><strong>{{ professor.name }}</strong></p>
-        <p>Rating: {{ professor.rating }} / 5</p>
+        <p>Rating: {{ professor.rating  }}</p>
         <a href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
     </div>
     <hr>
