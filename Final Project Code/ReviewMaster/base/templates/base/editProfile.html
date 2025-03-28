@@ -1,13 +1,24 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} {% load static %} {% block content %}
 <h2>Edit Your Profile</h2>
 <!-- Allows user to edit their profile through userForm -->
 <div>
   <form class="form" action="" method="POST">
-    {% csrf_token %} {{userForm}} {{password}}
+    {% csrf_token %} 
+    {{userForm}}
+    <p>Would you like to change your password?</p>
+    <select id="select" onchange="showForm()">
+      <option value="option1">No</option>
+      <option value="option2">Yes</option>
+    </select>
+    <div id="container">
+      {{passwordForm}}
+    </div>
 
     <button type="submit">Save</button>
   </form>
+  <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
 </div>
+
 <div>
   <h2>Your Reviews:</h2>
   <!-- Put review edit functionality here -->
@@ -27,4 +38,5 @@
   {% endfor %} {% endif %}
 </div>
 
+<script src="{% static 'scripts/main.js' %}"></script>
 {% endblock content %}

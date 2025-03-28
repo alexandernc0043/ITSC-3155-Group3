@@ -28,22 +28,26 @@ def profile(request, pk):
 def editProfile(request, pk):
     user = User.objects.get(username=pk)
     userForm = UserForm(instance=user)
-    password = PasswordChange(user)
+    passwordForm = PasswordChange(user)
 
     if request.method == 'POST':
         userForm = UserForm(request.POST, instance=user)
-        password = PasswordChange(user, request.POST)
+        passwordForm = PasswordChange(user, request.POST)
 
         #Checks form validationm, updates user with new information 
-        if userForm.is_valid() and password.is_valid():
+        if userForm.has_changed() and userForm.is_valid() and passwordForm.has_changed() == False:
             userForm.save()
-            password.save()
-            update_session_auth_hash(request, password.user) #Prevents automatic user logout
+            return redirect('profile', pk=user.username)
+        elif passwordForm.has_changed() and passwordForm.is_valid():
+            passwordForm.save()
+            update_session_auth_hash(request, passwordForm.user) #Prevents automatic user logout
+            return redirect('profile', pk=user.username)
+        else:
             return redirect('profile', pk=user.username)
         
     context = {
         'userForm': userForm,
-        'password': password,
+        'passwordForm': passwordForm,
         'user': user,
         'courses': user.students.all(),
     }
