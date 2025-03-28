@@ -1,4 +1,4 @@
-from base.models import Department, Course, Professor, Review
+from base.models import Department, Course, Professor, Review, update_rating_avg
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -162,7 +162,7 @@ def submit_review(request):
         review = Review(professor=professor, student=user, rating=rating, review=review)
         review.save()
         messages.success(request, 'Review successfully submitted!')
-        updateRatingAvg(professor_id) #update professor rating average
+        update_rating_avg(professor_id) #update professor rating average
 
     else:
         messages.error(request, 'An error has occurred, please try again!')
