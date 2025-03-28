@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # updates professor rating at given id. simple for now
-def updateRatingAvg(professor_id):
+def update_rating_avg(professor_id):
     professor = Professor.objects.get(id=professor_id) # gets professor at database with given id
     
     reviews = Review.objects.filter(professor_id=professor_id) # reviews (query set) of professor
