@@ -1,7 +1,7 @@
 const homeClass = document.getElementsByClassName("home");
 const loginClass = document.getElementsByClassName("login");
 
-if (homeClass.length > 0) {
+if (homeClass || loginClass) {
   document.getElementsByClassName("header__search")[0].style.display = "none";
 }
 
@@ -30,3 +30,35 @@ function showForm() {
 }
 
 window.onload = showForm();
+
+if (alertMessages) {
+  const liElement = alertMessages.getElementsByTagName("li");
+  const classList = liElement[0].classList;
+  if (classList.contains("error")) {
+    alertMessages.classList.add("error");
+  }
+  else if (classList.contains("success")) {
+    alertMessages.classList.add("success");
+  }
+}
+
+const input = document.querySelector(".header__search input");
+const removeInput = document.querySelector(".clear-input-button");
+
+if (input.value) {
+  removeInput.classList.add("show");
+}
+
+removeInput.addEventListener("click", () => {
+  input.value = '';
+  input.focus();
+  removeInput.classList.remove("show");
+});
+
+input.addEventListener("input", (e) => {
+  if (e.target.value && !input.classList.contains("show")) {
+    removeInput.classList.add("show");
+  } else if (!e.target.value && input.classList.contains("show")) {
+    removeInput.classList.remove("show");
+  }
+});
