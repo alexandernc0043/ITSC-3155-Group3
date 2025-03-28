@@ -219,6 +219,17 @@ a:hover {
     width: 100%;
 }
 
+.mobile-menu {
+    margin-bottom: 3rem;
+}
+ 
+
+@media screen and (min-width: 600px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
 /*==============================
 =>  Alert message Section
 ================================*/
@@ -413,13 +424,13 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 =>  Form Section
 ================================*/
 .form {
-    width: 30%;
+    width: 70%;
     margin: 0 auto;
     text-align: left;
 }
 
-.review.form {
-    width: 70%;
+.user.form {
+    width: 30%;
 }
 
 .form input, .form select, .form textarea {
@@ -444,6 +455,23 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 }
 
 /*==============================
+=>  Table Section
+================================*/
+table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--light-grey);
+}
+
+/*==============================
 =>  Footer Section
 ================================*/
 footer {
@@ -464,21 +492,4 @@ footer section h4 {
 footer section ul {
     list-style-type: none;
     padding: 0;
-}
-
-/*==============================
-=>  Table Section
-================================*/
-table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 1rem;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 1rem;
-    text-align: left;
-    vertical-align: bottom;
-    border-bottom: 2px solid var(--light-grey);
 }

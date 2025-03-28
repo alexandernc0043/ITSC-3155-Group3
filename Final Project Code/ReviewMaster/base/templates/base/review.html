@@ -3,7 +3,7 @@
 {% block content %}
     <main>
         <h1>Review Page</h1>
-        <form method = "POST" class="review form" action="{% url 'submit_review' %}">
+        <form method = "POST" class="form" action="{% url 'submit_review' %}">
             {% csrf_token %}
             <label for="professor">Select a professor:</label>
             <select name="professor" id="professor">
