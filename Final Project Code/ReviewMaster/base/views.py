@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.shortcuts import render, redirect
 import re
 
@@ -113,16 +114,24 @@ def register_user(request):
     }
     return render(request, 'base/login_register.html', context=context)
 
-
-@login_required(login_url='/login/')
 def pick_courses(request):
     # # Prefetch related professors for each course to optimize database queries
     # courses = Course.objects.prefetch_related('course_professors').all()
-
-    courses = Course.objects.all()  # get all courses, will be filtered in the future
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    if q != '':
+        courses = Course.objects.filter(
+            Q(name__icontains=q) |
+            Q(department__name__icontains=q) |
+            Q(number__icontains=q) |
+            Q(professor__name__icontains=q)
+        )
+    else:
+        courses = Course.objects.all()  # get all courses, will be filtered in the future
+        
     context = {
         'departments': Department.objects.all(),
         'courses': courses,
+        'q': q
     }
 
     return render(request, 'base/courses.html', context)
