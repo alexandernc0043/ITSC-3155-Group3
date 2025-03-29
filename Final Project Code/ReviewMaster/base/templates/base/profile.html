@@ -11,19 +11,18 @@
 {% if request.user == user %}
 
 <!-- Shows every review user has made -->
-<h2>Your Reviews</h2>
-{% for review in reviews %}
-    {% if review.student == user %}
-    <p>Professer: {{review.professor}}</p>
-    <p>Created by: {{review.student}}</p>
-    <p>Rating: {{review.rating}}</p>
-    <p>Review: {{review.review}}</p>
-    <hr>
-    {% endif %}
-{% endfor %}
+<div>
+  <h2>Your Reviews</h2>
+  {% for review in reviews %} {% if review.student == user %}
+  <p>Professer: {{review.professor}}</p>
+  <p>Created by: {{review.student}}</p>
+  <p>Rating: {{review.rating}}</p>
+  <p>Review: {{review.review}}</p>
+  <hr />
+  {% endif %} {% endfor %}
+</div>
 
 <!-- Edit Profile Info -->
 <a href="{% url 'edit-profile' user %}">Edit Profile</a>
 
-{% endif %}
- {% endblock content %}
+{% endif %} {% endblock content %}

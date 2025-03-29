@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from base.forms import UserForm, PasswordChange
 from django.contrib.auth import update_session_auth_hash
 
-from base.models import  Review
+from base.models import Review
 
 @login_required(login_url='login')
 def profile(request, pk):
@@ -42,6 +42,11 @@ def edit_profile(request, pk):
         'passwordForm': passwordForm,
         'user': user,
         'courses': user.students.all(),
+        'reviews': Review.objects.all()
     }
 
     return render(request, 'base/editProfile.html', context)
+
+# @login_required(login_url='login')
+# def editReview():
+#     review = Review.objects.all()
