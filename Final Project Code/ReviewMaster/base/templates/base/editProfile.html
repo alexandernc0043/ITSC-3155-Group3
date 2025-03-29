@@ -1,17 +1,32 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
+
 <h2>Edit Your Profile</h2>
-<!-- Allows user to edit their profile through userForm -->
+<!-- Allows user to edit their profile through userForm and passwordForm -->
 <div>
   <form class="form" action="" method="POST">
     {% csrf_token %} 
-    {{userForm}}
-    <p>Would you like to change your password?</p>
-    <select id="select" onchange="showPasswordForm()">
-      <option value="option1">No</option>
-      <option value="option2">Yes</option>
-    </select>
-    <div id="container" style="display: none">
-      {{passwordForm}}
+    <label for="username">{{userForm.username.label}}:</label>
+      {{userForm.username}}
+      <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
+      {{userForm.username.errors}}
+
+    <label for="option">Would you like to change your password?</label>
+    {{passwordForm.option}}
+
+    <div id="container">
+      <label for="old_password">{{passwordForm.old_password.label}}:</label>
+      {{passwordForm.old_password}}
+      <span class="help-text">Enter your old password</span>
+      {{passwordForm.old_password.errors}}
+
+      <label for="new_password1">{{ passwordForm.new_password1.label}}:</label>
+      {{passwordForm.new_password1}}
+      <span class="help-text">{{passwordForm.new_password1.help_text}}</span>
+
+      <label for="new_password2">{{ passwordForm.new_password2.label}}:</label>
+      {{passwordForm.new_password2}}
+      <span class="help-text">{{passwordForm.new_password2.help_text}}</span>
+      {{passwordForm.new_password2.errors}}
     </div>
 
     <button type="submit">Save</button>
@@ -38,5 +53,9 @@
   {% endfor %} {% endif %}
 </div>
 
-<script src="{% static 'scripts/main.js' %}"></script>
+<script
+  src="{% static 'scripts/main.js' %}"
+  onload="showPasswordForm()"
+></script>
+
 {% endblock content %}
