@@ -4,7 +4,7 @@
     --light-color: #FFFFFF;
     --error-color: #BA2D3D;
     --success-color: #31D190;
-    --light-dark: #495057;
+    --dark-gray: #495057;
     --light-grey: #DEE2E6;
     --star-color: #FFB900;
     --star-color-hover: gold;
@@ -240,7 +240,7 @@ a:hover {
 
 .success.alert-messages {
     background-color: var(--success-color);
-    /*color: var(--light-dark);*/
+    /*color: var(--dark-gray);*/
 }
 
 .alert-messages {
@@ -313,7 +313,7 @@ input[type="text"], input[type="password"], select, textarea {
     margin-top: .5rem;
     display: block;
     font-size: 1rem;
-    color: var(--light-dark);
+    color: var(--dark-gray);
     border: 1px solid var(--primary-color);
     border-radius: 0.5rem;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -332,7 +332,7 @@ input[type="text"], input[type="password"], select {
 }
 
 input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
-    color: var(--light-dark);
+    color: var(--dark-gray);
     border-color: var(--primary-color);
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(121, 113, 234, 0.25); 
@@ -449,7 +449,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 .help-text {
     margin-top: -.75rem;
     margin-bottom: .5rem;
-    color: var(--light-dark);
+    color: var(--dark-gray);
     font-size: 0.75rem;
     display: block;
 }
