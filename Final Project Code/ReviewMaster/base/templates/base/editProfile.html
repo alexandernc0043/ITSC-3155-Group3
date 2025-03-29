@@ -1,0 +1,73 @@
+{% extends 'main.html' %} {% load static %} {% block content %}
+
+<h2>Edit Your Profile</h2>
+<!-- Allows user to edit their profile through userForm and passwordForm -->
+ <!-- Addition? add reset form button using js !confirm, have pop up message -->
+<div>
+  <form class="form" action="" method="POST">
+    {% csrf_token %}
+    <label for="username">{{userForm.username.label}}:</label>
+    {{userForm.username}}
+    <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
+    {{userForm.username.errors}}
+
+    <label for="option">Would you like to change your password?</label>
+    {{passwordForm.option}}
+
+    <div id="container">
+      <label for="old_password">{{passwordForm.old_password.label}}:</label>
+      {{passwordForm.old_password}}
+      <span class="help-text">Enter your old password</span>
+      {{passwordForm.old_password.errors}}
+
+      <label for="new_password1">{{ passwordForm.new_password1.label}}:</label>
+      {{passwordForm.new_password1}}
+      <span class="help-text">{{passwordForm.new_password1.help_text}}</span>
+
+      <label for="new_password2">{{ passwordForm.new_password2.label}}:</label>
+      {{passwordForm.new_password2}}
+      <span class="help-text">{{passwordForm.new_password2.help_text}}</span>
+      {{passwordForm.new_password2.errors}}
+    </div>
+
+    <button type="submit">Save</button>
+  </form>
+  <a href="{% url 'profile' request.user %}">Go Back</a>
+</div>
+
+<div>
+  <h2>Edit Your Reviews:</h2>
+  <!-- Put review edit functionality here -->
+  <!--1. display all reviews made by user -->
+  <!-- 2. next to it add an edit button -->
+  <!-- 3. redirect to another url/page where edit will occur -->
+  <!--3.Do it all on one page, maybe hide it like password form  -->
+
+  {% for review in reviews %}
+  {% if review.student == user %}
+    <p>{{review}}</p>
+    <a href="#">Edit Review</a>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<div>
+  <h2>Edit Courses</h2>
+  {% if courses.count == 0 %}
+  <p>No Courses Added</p>
+  {% else %} {% for course in courses %}
+
+  <div>
+    <p>{{ course }}</p>
+    <a href="{% url 'remove-course' course %}">Remove</a>
+  </div>
+
+  {% endfor %} {% endif %}
+</div>
+
+<script
+  src="{% static 'scripts/main.js' %}"
+  onload="showPasswordForm()"
+></script>
+
+{% endblock content %}

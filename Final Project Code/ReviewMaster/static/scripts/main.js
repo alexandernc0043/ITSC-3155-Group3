@@ -11,8 +11,12 @@ const dropdownButton = document.querySelector(".dropdown-button");
 if (dropdownButton) {
   dropdownButton.addEventListener("click", () => {
     dropdownMenu.classList.toggle("show");
-    dropdownButton.style.transform = dropdownMenu.classList.contains("show") ? 'rotate(180deg)' : 'rotate(0deg)';
-    dropdownButton.style.paddingTop = dropdownMenu.classList.contains("show") ? '0' : '.25rem';
+    dropdownButton.style.transform = dropdownMenu.classList.contains("show")
+      ? "rotate(180deg)"
+      : "rotate(0deg)";
+    dropdownButton.style.paddingTop = dropdownMenu.classList.contains("show")
+      ? "0"
+      : ".25rem";
   });
 }
 
@@ -23,8 +27,7 @@ if (alertMessages) {
   const classList = liElement[0].classList;
   if (classList.contains("error")) {
     alertMessages.classList.add("error");
-  }
-  else if (classList.contains("success")) {
+  } else if (classList.contains("success")) {
     alertMessages.classList.add("success");
   }
 }
@@ -37,7 +40,7 @@ if (input.value) {
 }
 
 removeInput.addEventListener("click", () => {
-  input.value = '';
+  input.value = "";
   input.focus();
   removeInput.classList.remove("show");
 });
@@ -49,3 +52,28 @@ input.addEventListener("input", (e) => {
     removeInput.classList.remove("show");
   }
 });
+
+// Shows/Hides password form depending on user option
+var option = document.getElementById("id_option");
+
+function showPasswordForm() {
+  const container = document.getElementById("container");
+  var fields = document.querySelectorAll(
+    "#id_old_password, #id_new_password1, #id_new_password2"
+  );
+
+  if (option.value === "no") {
+    container.style.display = "none";
+    fields.forEach((field) => {
+      field.removeAttribute("required");
+    });
+  } else {
+    container.style.display = "block";
+    fields.forEach((field) => {
+      field.setAttribute("required", "");
+      field.value = "";
+    });
+  }
+}
+
+option.addEventListener("change", showPasswordForm);
