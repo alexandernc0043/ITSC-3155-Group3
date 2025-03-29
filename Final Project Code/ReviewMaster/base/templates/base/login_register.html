@@ -6,7 +6,7 @@
         <div class="box">
             {% if page == 'register' %}
                 <h1>Register now</h1>
-                    <form method="POST" action="" class="form">
+                    <form method="POST" action="" class="user form">
                         {% csrf_token %}
                         <label for="username">{{ form.username.label }}:</label>
                         {{ form.username }}
@@ -21,7 +21,7 @@
                     <p>Already signed up? <a href="{% url 'login' %}">Login!</a></p>
             {% else %}
                 <h1>Login</h1>
-                    <form method="POST" action="" class="form">
+                    <form method="POST" action="" class="user form">
                         {% csrf_token %}
                         <label for="username">Username:</label>
                         <input type="text" placeholder="Username" name="username">
