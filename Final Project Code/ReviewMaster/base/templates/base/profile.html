@@ -7,9 +7,7 @@
 
 		<h2>Courses</h2>
 		{% if courses %}
-			{% for course in courses %}
-				<p>{{ course }}</p>
-			{% endfor %}
+			{% include 'base/courses_component.html' %}
 		{% else %}
 			<p>No courses added.</p>
 		{% endif %}
