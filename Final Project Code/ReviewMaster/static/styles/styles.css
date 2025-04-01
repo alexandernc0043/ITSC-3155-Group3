@@ -1,9 +1,9 @@
 :root {
     --primary-color: #204071;
-    --secondary-color: #1c4b82;
+    --secondary-color: #2A9D8F;
     --light-color: #FFFFFF;
     --error-color: #BA2D3D;
-    --success-color: #31D190;
+    --success-color: #2A9D8F;
     --dark-gray: #495057;
     --light-grey: #DEE2E6;
     --star-color: #FFB900;
@@ -34,6 +34,10 @@ h1 {
     margin-bottom: 0.67em;
 }
 
+h2 {
+    margin-top: 0.83em;
+}
+
 a {
     color: var(--primary-color);
     text-decoration: none;
@@ -41,6 +45,17 @@ a {
 
 a:hover {
     color: var(--secondary-color);
+}
+
+.button-title {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.button-title h2 {
+    margin-top: 0;
+    padding: .5rem 0;
 }
 
 /*==============================
@@ -240,28 +255,28 @@ a:hover {
 
 .success.alert-messages {
     background-color: var(--success-color);
-    /*color: var(--dark-gray);*/
+    color: var(--light-color);
 }
 
 .alert-messages {
     padding: 1.25rem;
 }
 
-.alert-messages ul {
+.alert-messages ul, ul.errorlist {
     list-style-type: none;
     padding: 0;
     display: inline;
 }
 
-.alert-messages li {
+.alert-messages li, ul.errorlist li {
     display: inline;
 }
 
-.alert-messages li::after {
+.alert-messages li::after, ul.errorlist li::after {
     content: ", ";
 }
 
-.alert-messages li:last-child::after {
+.alert-messages li:last-child::after, ul.errorlist li:last-child::after {
     content: "";
 }
 
@@ -297,6 +312,44 @@ a:hover {
     border-radius: 2rem;
     font-weight: 500;
     margin-top: 1rem;
+}
+
+/*==============================
+=>  Profile Section
+================================*/
+a.profile {
+    display: flex;
+    margin-top: 1rem;
+    align-items: center;
+    gap: .25rem;
+}
+
+a.profile svg {
+    fill: var(--primary-color);
+}
+
+.placeholder-password {
+    display: block;
+    margin: 1rem 0;
+}
+
+div.password-profile {
+    display: none;
+}
+
+div.password-profile ~ button {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+div.password-profile ~ button ~ button {
+    display: block;
+}
+
+ul.errorlist {
+    color: var(--error-color);
+    display: block;
+    margin-bottom: 1rem;
 }
 
 /*==============================
@@ -348,7 +401,7 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 
 .primary-button:hover, .secondary-button:hover {
     cursor: pointer;
-    background-color: var(--light-color);
+    background-color: transparent;
 }
 
 .primary-button {
@@ -370,6 +423,18 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 .secondary-button:hover {
     border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
+}
+
+.svg-button {
+    border-radius: 100%;
+    background-color: var(--primary-color);
+    padding: .4rem .5rem .3rem .5rem;
+}
+
+.svg-button svg {
+    fill: var(--light-color);
+    width: 1rem;
+    height: 1rem;
 }
 
 /*==============================
@@ -427,6 +492,11 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
     width: 70%;
     margin: 0 auto;
     text-align: left;
+    gap: 1rem;
+}
+
+.form-left {
+    margin: 1rem 0;
 }
 
 .user.form {
@@ -469,6 +539,17 @@ table th, table td {
     text-align: left;
     vertical-align: bottom;
     border-bottom: 2px solid var(--light-grey);
+}
+
+/*==============================
+=>  Card Section
+================================*/
+.card {
+    padding: 1rem;
+    margin: 1rem 0;
+    box-shadow: 1px 1px 5px 3px rgba(32, 64, 113, .15);
+    border-radius: .5rem;
+    border: 1px solid rgba(32, 64, 113, .3);
 }
 
 /*==============================

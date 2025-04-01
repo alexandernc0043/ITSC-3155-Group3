@@ -9,6 +9,8 @@ def update_course(request, pk, action):
     course_number = split[1]
     course = Course.objects.filter(department__name=dept,
                                    number=course_number).get()  # filters courses to only get ones the user is in
+    session_data = request.session.get('referer', {}) # Gets referal page if exists
+    
     if request.method == 'POST':
         if action == 'remove':
             course.students.remove(request.user)
@@ -17,7 +19,10 @@ def update_course(request, pk, action):
             course.students.add(request.user)
             messages.success(request, 'Course added successfully!')
         course.save()
-        return redirect('courses')
+        return redirect(session_data)
+    
+    # Add request referer to cookie so on post goes back to the referal page.
+    request.session['referer'] = request.META.get('HTTP_REFERER')
 
     context = {
         'course': course,

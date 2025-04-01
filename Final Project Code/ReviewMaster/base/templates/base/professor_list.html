@@ -1,18 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-<h2>Professors:</h2>
-
-<br>
-
-{% for professor in professors %}
-    <div>
-        <p><strong>{{ professor.name }}</strong></p>
-        <p>Rating: {{ professor.rating  }}</p>
-        <a href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
-    </div>
-    <hr>
-{% endfor %}
-
+    <main>
+        <h2>Professors:</h2>
+        {% for professor in professors %}
+        <div class="card">
+            <p><strong>{{ professor.name }}</strong></p>
+            <p>Rating: {{ professor.rating  }}</p>
+            <a href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
+        </div>
+        {% endfor %}
+    </main>
 {% endblock content %}

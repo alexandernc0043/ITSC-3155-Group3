@@ -1,16 +1,18 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <form action="" method="post">
-
-        {% csrf_token %}
-        {% if remove %}
-            <p>Do you want to remove "{{ course.name }} | {{ course }}"</p>
-        {% else %}
-            <p>Do you want to add "{{ course.name }} | {{ course }}"</p>
-        {% endif %}
-        <button type="submit">Confirm</button>
-        <a href="{% url 'courses' %}">Go Back</a>
-    </form>
-
+    <main>
+        <form action="" method="post" class="form box">
+            {% csrf_token %}
+            {% if remove %}
+                <p>Do you want to remove "{{ course.name }} | {{ course }}"?</p>
+            {% else %}
+                <p>Do you want to add "{{ course.name }} | {{ course }}"?</p>
+            {% endif %}
+            <div class="action-buttons">
+                <button class="primary-button" type="submit">Confirm</button>
+                <a class="secondary-button" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+            </div>
+        </form>
+    </main>
 {% endblock content %}
