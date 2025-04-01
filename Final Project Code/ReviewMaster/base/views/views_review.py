@@ -2,6 +2,7 @@ from base.models import Professor, Review
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+import datetime
 
 @login_required
 def review(request):
@@ -25,7 +26,9 @@ def submit_review(request):
 
         review = request.POST.get("review")
 
-        review = Review(professor=professor, student=user, rating=rating, review=review)
+        time = datetime.datetime.now()
+
+        review = Review(professor=professor, student=user, rating=rating, review=review, time=time)
         review.save()
         messages.success(request, 'Review successfully submitted!')
 

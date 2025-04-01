@@ -1,28 +1,174 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .reviews-container {
+        display: flex;
+        flex-wrap: wrap;
+        
+
+        
+    }
+
+    .review {
+        background-color: var(--secondary-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin:20px;
+    }
+
+    .review-body{
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 2;
+    }
+
+    .star-rating {
+        font-size: 1.5rem;
+        color: var(--star-color);
+    }
+
+    .star-rating .empty {
+        color: #ddd;  
+    }
+
+    .star-rating .full {
+        color: var(--star-color);
+    }
+
+    .date {
+             
+    bottom: 10px;               
+    right: 10px;                
+    font-size: 0.8rem;         
+    color: #888;               
+    font-style: italic;        
+}
+    
+    h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: var(--primary-color);
+    }
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+
+    .course-list, .review-list {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    .course-list p, .review-list p {
+        font-size: 1.2rem;
+        padding: 10px;
+        background-color: var(--secondary-color);
+        border-radius: 8px;
+        
+    }
+
+    
+
+    .review-list p {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    .review-header {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    .profile-actions {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .profile-actions a {
+        display: inline-block;
+        font-size: 1.2rem;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 20px;
+        border-radius: 5px;
+
+    }
+
+    
+
+    hr {
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+    }
+</style>
 
 <h1>{{ user.username }}'s Profile Page</h1>
 
-<h2>Courses</h2>
-{% for course in courses %}
-<p>{{ course }}</p>
-{% endfor %}
-
-<!-- Only shows to account owner -->
-{% if request.user == user %}
-
-<!-- Shows every review user has made -->
-<div>
-  <h2>Your Reviews</h2>
-  {% for review in reviews %} {% if review.student == user %}
-  <p>Professer: {{review.professor}}</p>
-  <p>Created by: {{review.student}}</p>
-  <p>Rating: {{review.rating}}</p>
-  <p>Review: {{review.review}}</p>
-  <hr />
-  {% endif %} {% endfor %}
+<h2>Courses:</h2>
+<div class="course-list">
+    {% for course in courses %}
+        <p>{{ course }}</p>
+    {% endfor %}
 </div>
 
-<!-- Edit Profile Info -->
-<a href="{% url 'edit-profile' user %}">Edit Profile</a>
+<h2>Reviews:</h2>
+{% if request.user == user %}
+    <div class="reviews-container">  
+        {% for review in reviews %}
+            <div class="review">
+                <p>
+                    <span class="star-rating">
+                        {% if review.rating >= 1 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
 
-{% endif %} {% endblock content %}
+                        {% if review.rating >= 2 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 3 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 4 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 5 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+                    </span>
+                </p>
+
+                <p class ="review-body">{{ review.review }}</p>
+                <p class="date"><strong></strong> {{ review.time }}</p>
+                <p><strong>Student:</strong> {{ review.student }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="profile-actions">
+        <a href="{% url 'edit-profile' user %}">Edit Profile</a>
+    </div>
+{% endif %}
+
+{% endblock content %}

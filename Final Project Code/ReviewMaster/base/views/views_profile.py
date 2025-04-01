@@ -12,7 +12,7 @@ def profile(request, pk):
     context = {
         'courses': user.students.all(),
         'user': user,
-        'reviews' : Review.objects.all()
+        'reviews' : user.review_set.all()
     }
     return render(request, 'base/profile.html', context)
 
@@ -42,7 +42,7 @@ def edit_profile(request, pk):
         'passwordForm': passwordForm,
         'user': user,
         'courses': user.students.all(),
-        'reviews': Review.objects.all()
+        'reviews': user.review_set.all()
     }
 
     return render(request, 'base/editProfile.html', context)

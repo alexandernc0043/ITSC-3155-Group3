@@ -44,6 +44,7 @@ class Review(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
     review = models.TextField(null=True, blank=True)
+    time = models.DateTimeField(null=True)
 
     def __str__(self):
         return f'Review by {self.student.username} for {self.professor.name}'

@@ -1,24 +1,121 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
-    <a href="{% url 'professor-list' %}">Go Back?</a>
-    <h2>Showing reviews for: {{ professor.name }} | Rating: {{ professor.rating }}</h2>
 
-    <br>
-    {% if reviews.count == 0 %}
-        <div>
-            <p>No Reviews found...</p>
-        </div>
-    {% else %}
+<style>
+    .title {
+    text-align: center;           
+    justify-content: center;       
+    border-radius: 10px;          
+    background-color: var(--primary-color); 
+    color: white;                 
+    padding: 20px;                 
+    width: fit-content;            
+    margin: 20px auto;             
+    border: 2px solid var(--primary-color);  
+}
+
+    .reviews-container {
+        display: flex;
+        flex-wrap: wrap;
+        
+
+        
+    }
+
+    .review {
+        background-color: var(--secondary-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin:20px;
+    }
+
+    .review-body{
+        font-size: 1.2rem;
+        font-weight: 500;
+        line-height: 2;
+    }
+
+    .star-rating {
+        font-size: 1.5rem;
+        color: var(--star-color);
+    }
+
+    .star-rating .empty {
+        color: #ddd;  
+    }
+
+    .star-rating .full {
+        color: var(--star-color);
+    }
+
+    .date {
+             
+    bottom: 10px;               
+    right: 10px;                
+    font-size: 0.8rem;         
+    color: #888;               
+    font-style: italic;        
+}
+
+</style>
+
+<a href="{% url 'professor-list' %}">Go Back?</a>
+
+<h2 class="title">{{ professor.name }} | Rating: {{ professor.rating }}</h2>
+
+<br>
+
+{% if reviews.count == 0 %}
+    <div>
+        <p>No Reviews found...</p>
+    </div>
+{% else %}
+    <div class="reviews-container">  
         {% for review in reviews %}
-            <div>
-                <p><strong>Student:</strong> {{ review.student }}</p>
-                <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
-                <p><strong>Review:</strong> "{{ review.review }}"</p>
-            </div>
-            <hr>
-        {% endfor %}
-    {% endif %}
+            <div class="review">
+                <p>
+                    <span class="star-rating">
+                        {% if review.rating >= 1 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
 
+                        {% if review.rating >= 2 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 3 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 4 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+
+                        {% if review.rating >= 5 %}
+                            <span class="full">★</span>
+                        {% else %}
+                            <span class="empty">★</span>
+                        {% endif %}
+                    </span>
+                </p>
+
+                <p class ="review-body">{{ review.review }}</p>
+                <p class="date"><strong></strong> {{ review.time }}</p>
+                <p><strong>Student:</strong> {{ review.student }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 {% endblock content %}

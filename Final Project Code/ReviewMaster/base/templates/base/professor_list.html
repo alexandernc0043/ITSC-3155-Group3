@@ -2,17 +2,78 @@
 
 {% block content %}
 
+<style>
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+    }
+
+    .professor-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .professor-item {
+        background-color: var(--secondary-color);
+        border-radius: 10px;
+        padding: 20px;
+        width: 280px;
+        text-align: center;
+        box-sizing: border-box;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    
+
+    .professor-name {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .professor-rating {
+        margin: 10px 0;
+        color: var(--text-color);
+        font-size: 1.1rem;
+    }
+
+    .view-reviews-link {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 1.1rem;
+        color: black;
+        opacity: 60%;
+        padding: 8px;
+        border: 2px solid var(--primary-color);
+        border-radius: 5px;
+        
+    }
+
+    
+
+    hr {
+        width: 100%;
+        border-top: 1px solid #ddd;
+        margin: 20px 0;
+    }
+</style>
+
 <h2>Professors:</h2>
 
-<br>
-
-{% for professor in professors %}
-    <div>
-        <p><strong>{{ professor.name }}</strong></p>
-        <p>Rating: {{ professor.rating  }}</p>
-        <a href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
-    </div>
-    <hr>
-{% endfor %}
+<div class="professor-list">
+    {% for professor in professors %}
+        <div class="professor-item">
+            <p class="professor-name">{{ professor.name }}</p>
+            <p class="professor-rating">Rating: {{ professor.rating }}</p>
+            <a class="view-reviews-link" href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock content %}
