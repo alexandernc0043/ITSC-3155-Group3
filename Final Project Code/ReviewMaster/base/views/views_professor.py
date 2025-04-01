@@ -1,6 +1,5 @@
 from base.models import Professor, Review
-from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
 def professor_list(request):
     professors = Professor.objects.all()

@@ -22,6 +22,7 @@ if (dropdownButton) {
 
 const alertMessages = document.querySelector(".alert-messages");
 
+// Applies correct class depending on the alert elements.
 if (alertMessages) {
   const liElement = alertMessages.getElementsByTagName("li");
   const classList = liElement[0].classList;
@@ -35,16 +36,19 @@ if (alertMessages) {
 const input = document.querySelector(".header__search input");
 const removeInput = document.querySelector(".clear-input-button");
 
+// Show remove button if loaded with input.
 if (input.value) {
   removeInput.classList.add("show");
 }
 
+// Remove input on search bar if button clicked.
 removeInput.addEventListener("click", () => {
   input.value = "";
   input.focus();
   removeInput.classList.remove("show");
 });
 
+// Shows remove button on search bar based on input.
 input.addEventListener("input", (e) => {
   if (e.target.value && !input.classList.contains("show")) {
     removeInput.classList.add("show");
@@ -52,28 +56,3 @@ input.addEventListener("input", (e) => {
     removeInput.classList.remove("show");
   }
 });
-
-// Shows/Hides password form depending on user option
-var option = document.getElementById("id_option");
-
-function showPasswordForm() {
-  const container = document.getElementById("container");
-  var fields = document.querySelectorAll(
-    "#id_old_password, #id_new_password1, #id_new_password2"
-  );
-
-  if (option.value === "no") {
-    container.style.display = "none";
-    fields.forEach((field) => {
-      field.removeAttribute("required");
-    });
-  } else {
-    container.style.display = "block";
-    fields.forEach((field) => {
-      field.setAttribute("required", "");
-      field.value = "";
-    });
-  }
-}
-
-option.addEventListener("change", showPasswordForm);

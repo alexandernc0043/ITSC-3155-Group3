@@ -10,8 +10,7 @@ class UserForm(ModelForm):
         fields = ["username"]
 
 class PasswordChange(PasswordChangeForm):
-    option = forms.ChoiceField(choices=[('no', 'No'), ('yes', 'Yes')])
     class Meta:
         model = User
-        fields = ["option", "old_password", "new_password1", "new_password2"]
+        fields = ["old_password", "new_password1", "new_password2"]
     

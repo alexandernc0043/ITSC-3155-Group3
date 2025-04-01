@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib import messages
-import re
+from ..utils import checkUsername, checkPassword
+
 def logout_user(request):
     logout(request)
     return redirect('home')
@@ -47,25 +48,19 @@ def register_user(request):
             return redirect('home')
         else:
             # Error handling for registration
+            username = request.POST.get('username')
+            # Username validation
+            username_error_message = checkUsername(username, False)
+            if username_error_message != '':
+                messages.error(request, username_error_message)
+
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
-            username = request.POST.get('username')
-            pattern = r"^\w*(@|-|\.|\+|_)*\w*$"  # Regex to check that username only contains certain valid characters
-            # Username validation
-            if not re.match(pattern, username):
-                messages.error(request, 'Username contains invalid characters')
-            elif User.objects.filter(username=username).exists():
-                messages.error(request, 'Username is already taken')
-
             # Password validation
-            if len(password1) < 8:
-                messages.error(request, 'Password is too short')
-            elif password1.isdigit():
-                messages.error(request, 'Password must contain at least one letter')
-            elif password1 != password2:
-                messages.error(request, 'Passwords do not match')
-            else:
-                messages.error(request, 'An error has occurred during registration, please try again later')
+            password_error_message = checkPassword(password1, password2)
+            if password_error_message != '':
+                messages.error(request, password_error_message)
+            
 
     context = {
         'form': form,
