@@ -19,9 +19,9 @@
                 <tr>
                     <th>Name</th>
                     <th>Course ID</th>
+                    <th>Section Number</th>
                     <th>Professor</th>
                     <th>Rating</th>
-                    <th>Section Number</th>
                     {% if request.user.is_authenticated %}
                         <th>Action</th>
                     {% endif %}
@@ -32,9 +32,9 @@
                     <tr>
                         <td>{{ course.name }}</td>
                         <td>{{ course }}</td>
-                        <td>{{ course.professor }}</td>
-                        <td>{{ course.professor.rating }}</td>
                         <td>{{ course.section_number }}</td>
+                        <td>{{ course.professor }}</td>
+                        <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
                         {% if request.user.is_authenticated %}
                             <td>
                                 {% if request.user in course.students.all %}

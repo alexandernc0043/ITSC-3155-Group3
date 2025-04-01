@@ -18,9 +18,14 @@
         {% else %}
             {% for review in reviews %}
                 <div class="card">
-                    <p><strong>Student:</strong> {{ review.student }}</p>
-                    <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
-                    <p><strong>Review:</strong> "{{ review.review }}"</p>
+                    <div class="review-title">
+                        {{ review.student }}
+                        <div class="container-rating"><span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span></div>
+                    </div>
+                    <div>
+                        <strong>Review:</strong>
+                        <div>{{ review.review }}</div>
+                    </div>
                 </div>
             {% endfor %}
         {% endif %}
