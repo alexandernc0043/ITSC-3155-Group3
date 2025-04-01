@@ -1,10 +1,10 @@
 {% extends 'main.html' %}
+ 
+ {% load static %}
+ 
+ {% block content %}
 
-{% load static %}
-
-{% block content %}
-
-<style>
+ <style>
     .title {
     text-align: center;           
     justify-content: center;       
@@ -112,16 +112,10 @@
 
                 <p class ="review-body">{{ review.review }}</p>
                 <p class="date"><strong></strong> {{ review.time }}</p>
-                <p><strong>Student:</strong> {{ review.student }}</p>
+                <p><strong>Student:</strong> <a href="{% url 'profile' review.student%}">{{ review.student }}</a></p>
             </div>
-        {% else %}
-            {% for review in reviews %}
-                <div class="card">
-                    <p><strong>Student:</strong> <a href="{% url 'profile' review.student%}">{{ review.student }}</a></p>
-                    <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
-                    <p><strong>Review:</strong> "{{ review.review }}"</p>
-                </div>
             {% endfor %}
-        {% endif %}
-    </main>
-{% endblock content %}
+        </div>
+    {% endif %}
+    
+    {% endblock content %}
