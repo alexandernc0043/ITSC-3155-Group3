@@ -8,7 +8,6 @@ from ..utils import checkUsername, checkPassword
 
 from base.models import Review
 
-@login_required(login_url='login')
 def profile(request, pk):
     user = User.objects.get(username=pk)
     context = {

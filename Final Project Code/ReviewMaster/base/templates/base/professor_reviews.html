@@ -114,8 +114,14 @@
                 <p class="date"><strong></strong> {{ review.time }}</p>
                 <p><strong>Student:</strong> {{ review.student }}</p>
             </div>
-        {% endfor %}
-    </div>
-{% endif %}
-
+        {% else %}
+            {% for review in reviews %}
+                <div class="card">
+                    <p><strong>Student:</strong> <a href="{% url 'profile' review.student%}">{{ review.student }}</a></p>
+                    <p><strong>Rating:</strong> {{ review.rating }} / 5</p>
+                    <p><strong>Review:</strong> "{{ review.review }}"</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </main>
 {% endblock content %}
