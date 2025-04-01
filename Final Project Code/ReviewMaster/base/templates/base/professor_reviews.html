@@ -3,13 +3,14 @@
 {% block content %}
     <main>
         <div class="button-title">
-            <a href="{% url 'professor-list' %}" class="svg-button">
+            <a href="{{ request.META.HTTP_REFERER }}" class="svg-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
+                    Go back
                     <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                     <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
                 </svg>
             </a>
-            <h2>Showing reviews for: {{ professor.name }} | Rating: {{ professor.rating }}</h2>
+            <h2>{{ professor.name }} | Rating: {{ professor.rating }}</h2>
         </div>
         {% if reviews.count == 0 %}
             <div>
@@ -19,7 +20,7 @@
             {% for review in reviews %}
                 <div class="card">
                     <div class="review-title">
-                        {{ review.student }}
+                        <a href="{% url 'profile' review.student %}">{{ review.student }}</a>
                         <div class="container-rating"><span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span></div>
                     </div>
                     <div>

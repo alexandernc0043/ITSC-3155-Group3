@@ -8,7 +8,6 @@ from ..utils import checkUsername, checkPassword
 
 from base.models import Review
 
-@login_required(login_url='login')
 def profile(request, pk):
     user = User.objects.get(username=pk)
     context = {
@@ -63,7 +62,7 @@ def edit_profile(request, pk):
         'option': option
     }
 
-    return render(request, 'base/editProfile.html', context)
+    return render(request, 'base/edit_profile.html', context)
 
 # @login_required(login_url='login')
 # def editReview():

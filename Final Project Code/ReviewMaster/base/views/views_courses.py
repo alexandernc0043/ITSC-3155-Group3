@@ -28,7 +28,7 @@ def update_course(request, pk, action):
         'course': course,
         'remove': action == 'remove'
     }
-    return render(request, 'base/addRemoveCourse.html', context)
+    return render(request, 'base/add_remove_course.html', context)
 
 
 def remove_course(request, pk):

@@ -317,15 +317,25 @@ a:hover {
 /*==============================
 =>  Profile Section
 ================================*/
-a.profile {
+.user-profile h1 {
+    margin-bottom: 0;
+}
+
+.user-profile .button-title {
+    align-items: baseline;
+}
+
+.user-profile a {
     display: flex;
-    margin-top: 1rem;
-    align-items: center;
     gap: .25rem;
 }
 
-a.profile svg {
+.user-profile a svg {
     fill: var(--primary-color);
+}
+
+.user-profile a:hover svg {
+    fill: var(--secondary-color);
 }
 
 .placeholder-password {
@@ -549,23 +559,53 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 }
 
 .star-rating-1 {
-    background-image: linear-gradient(to right, var(--star-color) 0%, var(--star-color) 20%, transparent 20%, transparent 100%);
+    background-image: linear-gradient(
+        to right,
+        var(--star-color) 0%,
+        var(--star-color) 20%,
+        transparent 20%,
+        transparent 100%
+    );
 }
 
 .star-rating-2 {
-    background-image: linear-gradient(to right, var(--star-color) 0%, var(--star-color) 40%, transparent 40%, transparent 100%);
+    background-image: linear-gradient(
+        to right,
+        var(--star-color) 0%, 
+        var(--star-color) 40%,
+        transparent 40%,
+        transparent 100%
+    );
 }
 
 .star-rating-3 {
-    background-image: linear-gradient(to right, var(--star-color) 0%, var(--star-color) 60%, transparent 60%, transparent 100%);
+    background-image: linear-gradient(
+        to right,
+        var(--star-color) 0%,
+        var(--star-color) 60%,
+        transparent 60%,
+        transparent 100%
+    );
 }
 
 .star-rating-4 {
-    background-image: linear-gradient(to right, var(--star-color) 0%, var(--star-color) 80%, transparent 80%, transparent 100%);
+    background-image: linear-gradient(
+        to right,
+        var(--star-color) 0%,
+        var(--star-color) 80%,
+        transparent 80%,
+        transparent 100%
+    );
 }
 
 .star-rating-5 {
-    background-image: linear-gradient(to right, var(--star-color) 0%, var(--star-color) 100%, transparent 100%, transparent 100%);
+    background-image: linear-gradient(
+        to right,
+        var(--star-color) 0%,
+        var(--star-color) 100%,
+        transparent 100%,
+        transparent 100%
+    );
 }
 
 /*==============================

@@ -14,40 +14,7 @@
                 </label>
             </form>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Course ID</th>
-                    <th>Section Number</th>
-                    <th>Professor</th>
-                    <th>Rating</th>
-                    {% if request.user.is_authenticated %}
-                        <th>Action</th>
-                    {% endif %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for course in courses %}
-                    <tr>
-                        <td>{{ course.name }}</td>
-                        <td>{{ course }}</td>
-                        <td>{{ course.section_number }}</td>
-                        <td>{{ course.professor }}</td>
-                        <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
-                        {% if request.user.is_authenticated %}
-                            <td>
-                                {% if request.user in course.students.all %}
-                                    <a href="{% url 'remove-course' course %}">Remove Course</a>
-                                {% else %}
-                                    <a href="{% url 'add-course' course %}">Add Course</a>
-                                {% endif %}
-                            </td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% include 'base/courses_component.html' %}
     </main>
 {#    {% for course in courses %}#}
 {#        <div>#}
