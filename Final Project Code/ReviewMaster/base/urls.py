@@ -1,10 +1,12 @@
 from django.urls import path
+##from . import views
 from .views.views_user import *
 from .views.views_misc import *
 from .views.views_courses import *
 from .views.views_review import *
 from .views.views_professor import *
 from .views.views_profile import *
+from .views.views_export import *
 
 
 urlpatterns = [
@@ -20,7 +22,7 @@ urlpatterns = [
     path('professor-reviews/<str:professor_name>/', professor_reviews, name='professor-reviews'),
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('profile/<str:pk>', profile, name='profile'),
-    path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile')
-
+    path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile'),
+    path('export-courses/<str:pk>', exportCourses, name='export-courses')
    # path('review/<str:pk>/', review, name='review')
 ]
