@@ -1,7 +1,7 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
 <main>
   <h1>Leave A Review</h1>
-  <!-- Correct form tag opening and closing -->
+ 
   <form method="POST" class="form" action="{% url 'submit_review' %}">
     {% csrf_token %}
 
