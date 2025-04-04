@@ -1,22 +1,19 @@
 <footer>
-    <section class="social-icons">
-    </section>
-    <section class="use-cases">
-        <h4>Use cases</h4>
-    </section>
-    <section class="explore">
-        <h4>Explore</h4>
-        <ul>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'courses' %}">Pick Classes</a></li>
-                <li><a href="{% url 'review' %}">Review A Professor</a></li>
-                <li><a href="{% url 'professor-list' %}">Browse Professors</a></li>
-            {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-            {% endif %}
-        </ul>
-    </section>
-    <section class="resources">
-        <h4>Resources</h4>
-    </section>
+  <section class="social-icons"></section>
+  <section class="use-cases">
+    <h4>Use cases</h4>
+  </section>
+  <section class="explore">
+    <h4>Explore</h4>
+    <ul>
+      {% if user.is_authenticated %}
+      <p>Logged in</p>
+      {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      {% endif %}
+    </ul>
+  </section>
+  <section class="resources">
+    <h4>Resources</h4>
+  </section>
 </footer>

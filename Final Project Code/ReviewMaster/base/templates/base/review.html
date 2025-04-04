@@ -1,27 +1,51 @@
-{% extends 'main.html' %}
+{% extends 'main.html' %} {% load static %} {% block content %}
+<main>
+  <h1>Leave A Review</h1>
+  <!-- Correct form tag opening and closing -->
+  <form method="POST" class="form" action="{% url 'submit_review' %}">
+    {% csrf_token %}
 
-{% block content %}
-    <main>
-        <h1>Review Page</h1>
-        <form method = "POST" class="form" action="{% url 'submit_review' %}">
-            {% csrf_token %}
-            <label for="professor">Select a professor:</label>
-            <select name="professor" id="professor">
-                {% for professor in professors %}
-                    <option value="{{ professor.id }}">{{professor.name}}</option>
-                {% endfor %}
-            </select>
-            <label for="rating">Rate your professor:</label>
-            <div class="rating">
-                <input type="radio" id="star5" name="rating" value="5" /><label for="star5">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4" /><label for="star4">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3" /><label for="star3">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2" /><label for="star2">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 star</label>
-            </div>
-            <label for="review">Write your review:</label>
-            <textarea rows="5" cols="50" placeholder="Write your review here..." name="review" id="review"></textarea>
-            <input type="submit" value="Submit" class="primary-button">
-        </form>
-    </main>
+    <label for="professor">Select a professor:</label>
+    <select name="professor" id="professor">
+      {% for professor in professors %}
+      <option value="{{ professor.id }}">{{ professor.name }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="rating">Rate your professor:</label>
+    <div class="rating">
+      <input type="radio" id="star5" name="rating" value="5" /><label
+        for="star5"
+        >5 stars</label
+      >
+      <input type="radio" id="star4" name="rating" value="4" /><label
+        for="star4"
+        >4 stars</label
+      >
+      <input type="radio" id="star3" name="rating" value="3" /><label
+        for="star3"
+        >3 stars</label
+      >
+      <input type="radio" id="star2" name="rating" value="2" /><label
+        for="star2"
+        >2 stars</label
+      >
+      <input type="radio" id="star1" name="rating" value="1" /><label
+        for="star1"
+        >1 star</label
+      >
+    </div>
+
+    <label for="review">Write your review:</label>
+    <textarea
+      rows="5"
+      cols="50"
+      placeholder="Write your review here..."
+      name="review"
+      id="review"
+    ></textarea>
+
+    <input type="submit" value="Submit" class="primary-button" />
+  </form>
+</main>
 {% endblock content %}

@@ -15,9 +15,11 @@ def review(request):
 
 @login_required
 def submit_review(request):
+    
     if request.method == 'POST':
+        
         user = request.user
-
+        
         professor_id = request.POST.get("professor")
         professor = Professor.objects.get(id=professor_id)
 
@@ -32,3 +34,46 @@ def submit_review(request):
     else:
         messages.error(request, 'An error has occurred, please try again!')
     return redirect('review')
+
+
+@login_required
+def edit_review(request, pk):
+    
+    user = request.user
+    user_reviews = Review.objects.filter(student=user)
+
+    if user_reviews.filter(pk=pk).exists():  
+        if request.method == 'POST':
+            old_review = Review.objects.get(id=pk)
+            new_review = request.POST.get("review")
+            new_rating = request.POST.get("rating")
+
+            if new_rating is None or new_rating == old_review.rating:
+                old_review.rating = old_review.rating
+                old_review.review = new_review
+                old_review.save()
+                messages.success(request, 'Review edited!')
+                return redirect('profile', request.user)
+            else:
+                old_review.rating = new_rating
+                old_review.review = new_review
+                old_review.save()
+                messages.success(request, 'Review edited!')
+                return redirect('profile', request.user)
+
+        else:
+            reviews = Review.objects.filter(id=pk)
+
+            context = {
+                'reviews': reviews
+            }
+
+            return render(request, 'base/editReview.html', context)
+    else:
+        
+        messages.error(request, 'Nah')
+        return redirect('profile', request.user)
+
+
+
+
