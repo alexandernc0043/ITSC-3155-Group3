@@ -6,10 +6,11 @@
 
 
 <h2>Here's all your added classes:</h2>
-{% for course in courses %}
-    {{course.name}}
-    <br>
-{% endfor %}
+{% if courses %}
+{% include 'base/courses_component.html' %} <!-- this will be changed to 'export_format.html'-->
+{% else %}
+<p>No courses added.</p>
+{% endif %}
 <br>
 
 

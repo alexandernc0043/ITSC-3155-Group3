@@ -4,7 +4,8 @@ from django.shortcuts import redirect, render
 def exportCourses(request, pk):
     student = User.objects.get(username=pk)
     course = []
-    course.append(Course.objects.values())
+    for i in Course.objects.all():
+        course.append(i)
 
     context = {
         'student' : student,

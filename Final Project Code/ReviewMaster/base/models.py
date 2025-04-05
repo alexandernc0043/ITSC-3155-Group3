@@ -54,9 +54,10 @@ class ClassScedule(models.Model):
     meeting_days = models.CharField(max_length=7, choices=days_week, default='Not Specified')
     courses = models.ManyToManyField(Course)
     meeting_time = models.CharField(max_length=100)
-    
+    room_number = models.IntegerField()
+
     def __str__(self):
-        return f'{Course.name}'
+        return f'{Course.name}' # this shows a weird name on the admin page, so I'll fix this 
     
 
 class Review(models.Model):
