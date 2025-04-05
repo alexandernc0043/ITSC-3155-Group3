@@ -25,6 +25,7 @@ class Professor(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200)  # Ex: Software Engineering
+    #days_of_week = models.ManyToManyField('Course', max_length=3, choices=meeting_days)
     department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
     number = models.IntegerField(null=False)  # Ex: 3155
     students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
@@ -38,6 +39,25 @@ class Course(models.Model):
     def __str__(self):
         return f'{self.department}-{self.number}-{self.section_number}'  # Calling will return DEPT-####-###
 
+
+class ClassScedule(models.Model):
+    days_week = [
+        ('MON', 'Monday'),
+        ('TUE', 'Tuesday'),
+        ('WED', 'Wednesday'),
+        ('THU', 'Thursday'),
+        ('FRI', 'Friday'),
+        ('SAT', 'Saturday'),
+        ('SUN', 'Sunday'),
+    ]
+
+    meeting_days = models.CharField(max_length=7, choices=days_week, default='Not Specified')
+    courses = models.ManyToManyField(Course)
+    meeting_time = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return f'{Course.name}'
+    
 
 class Review(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
