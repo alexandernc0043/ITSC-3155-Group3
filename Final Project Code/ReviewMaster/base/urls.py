@@ -23,6 +23,6 @@ urlpatterns = [
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('profile/<str:pk>', profile, name='profile'),
     path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile'),
-    path('export-courses/<str:pk>', exportCourses, name='export-courses')
+    path('export-courses/<str:pk>', export_courses, name='export-courses')
    # path('review/<str:pk>/', review, name='review')
 ]
