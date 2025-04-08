@@ -421,6 +421,17 @@ ul.errorlist {
 /*==============================
 =>  Reviews Section
 ================================*/
+.review-image {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-image img {
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+}
+
 .review-title {
   display: flex;
   align-items: center;

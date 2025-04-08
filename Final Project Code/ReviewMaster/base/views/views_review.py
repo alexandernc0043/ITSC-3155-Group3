@@ -42,7 +42,6 @@ def submit_review(request):
 
 @login_required
 def edit_review(request, pk):
-    
     user = request.user
     user_reviews = Review.objects.filter(student=user)
 
@@ -54,30 +53,21 @@ def edit_review(request, pk):
 
             if new_rating is None or new_rating == old_review.rating:
                 old_review.rating = old_review.rating
-                old_review.review = new_review
-                old_review.save()
-                messages.success(request, 'Review edited!')
-                return redirect('profile', request.user)
             else:
                 old_review.rating = new_rating
-                old_review.review = new_review
-                old_review.save()
-                messages.success(request, 'Review edited!')
-                return redirect('profile', request.user)
-
+            
+            old_review.review = new_review
+            old_review.save()
+            messages.success(request, 'Review edited!')
+            return redirect('profile', request.user)
         else:
-            reviews = Review.objects.filter(id=pk)
+            review = Review.objects.filter(id=pk).first()
 
             context = {
-                'reviews': reviews
+                'review': review
             }
 
-            return render(request, 'base/editReview.html', context)
+            return render(request, 'base/review.html', context)
     else:
-        
-        messages.error(request, 'Nah')
+        messages.error(request, 'This page does not exist!')
         return redirect('profile', request.user)
-
-
-
-
