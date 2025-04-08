@@ -43,6 +43,7 @@ class Review(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField()
+    course = models.ForeignKey(Course, related_name='course', on_delete=models.SET_NULL, null=True)
     review = models.TextField(null=True, blank=True)
 
     def __str__(self):

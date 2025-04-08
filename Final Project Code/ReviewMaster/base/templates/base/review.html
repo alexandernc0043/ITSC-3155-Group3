@@ -1,51 +1,97 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-<main>
-  <h1>Leave A Review</h1>
- 
-  <form method="POST" class="form" action="{% url 'submit_review' %}">
-    {% csrf_token %}
+    <main>
+        <h1>Leave A Review</h1>
 
-    <label for="professor">Select a professor:</label>
-    <select name="professor" id="professor">
-      {% for professor in professors %}
-      <option value="{{ professor.id }}">{{ professor.name }}</option>
-      {% endfor %}
-    </select>
+        <form method="POST" class="form" action="{% url 'submit_review' %}">
+            {% csrf_token %}
 
-    <label for="rating">Rate your professor:</label>
-    <div class="rating">
-      <input type="radio" id="star5" name="rating" value="5" /><label
-        for="star5"
-        >5 stars</label
-      >
-      <input type="radio" id="star4" name="rating" value="4" /><label
-        for="star4"
-        >4 stars</label
-      >
-      <input type="radio" id="star3" name="rating" value="3" /><label
-        for="star3"
-        >3 stars</label
-      >
-      <input type="radio" id="star2" name="rating" value="2" /><label
-        for="star2"
-        >2 stars</label
-      >
-      <input type="radio" id="star1" name="rating" value="1" /><label
-        for="star1"
-        >1 star</label
-      >
-    </div>
+            <label for="professor">Select a professor:</label>
+            <select name="professor" id="professor">
+                {% for professor in professors %}
+                    <option value="{{ professor.id }}">{{ professor.name }}</option>
+                {% endfor %}
+            </select>
+            <label for="course">Select the course</label>
+            <select name="course" id="course"></select>
 
-    <label for="review">Write your review:</label>
-    <textarea
-      rows="5"
-      cols="50"
-      placeholder="Write your review here..."
-      name="review"
-      id="review"
-    ></textarea>
+            <label for="rating">Rate your professor:</label>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5"/><label
+                    for="star5"
+            >5 stars</label
+            >
+                <input type="radio" id="star4" name="rating" value="4"/><label
+                    for="star4"
+            >4 stars</label
+            >
+                <input type="radio" id="star3" name="rating" value="3"/><label
+                    for="star3"
+            >3 stars</label
+            >
+                <input type="radio" id="star2" name="rating" value="2"/><label
+                    for="star2"
+            >2 stars</label
+            >
+                <input type="radio" id="star1" name="rating" value="1"/><label
+                    for="star1"
+            >1 star</label
+            >
+            </div>
 
-    <input type="submit" value="Submit" class="primary-button" />
-  </form>
-</main>
+            <label for="review">Write your review:</label>
+            <textarea
+                    rows="5"
+                    cols="50"
+                    placeholder="Write your review here..."
+                    name="review"
+                    id="review"
+            ></textarea>
+
+            <input type="submit" value="Submit" class="primary-button"/>
+        </form>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const courseSelect = document.getElementById('course');
+            const professorSelect = document.getElementById('professor');
+            const options = [
+                {% for course in courses %}
+                    {
+                        id: "{{ course.id }}",
+                        name: "{{ course.name }}",
+                        professor: "{{ course.professor.id }}"
+                    }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ];
+            const filterCourses = (selectedProfessor) => {
+                courseSelect.innerHTML = '';
+                options.forEach((opt) => {
+                    if (opt.professor === selectedProfessor) {
+                        const option = document.createElement('option');
+                        option.value = opt.id;
+                        option.textContent = opt.name;
+                        option.dataset.professor = opt.professor;
+                        courseSelect.append(option);
+                    }
+                });
+                // this basically like gives a default n/a option if the professor doesn't have any assigned classes
+                if (courseSelect.options.length === 0) {
+                    const option = document.createElement('option');
+                    option.text = 'No Courses';
+                    option.value = 'N/A';
+                    option.disabled = true;
+                    option.selected = true;
+                    courseSelect.append(option);
+                }
+            }
+            filterCourses(professorSelect.value);
+            professorSelect.addEventListener('change', () => {
+                filterCourses(professorSelect.value);
+                console.log(Array.from(courseSelect.options).map((val) => `${val.textContent}`));
+                console.log(Array.from(professorSelect.options).map((val) => `${val.textContent}`))
+            });
+        });
+
+
+    </script>
 {% endblock content %}

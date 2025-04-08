@@ -22,16 +22,19 @@
                 <div class="card">
                     <div class="review-title">
                         <a href="{% url 'profile' review.student %}">{{ review.student }}</a>
-                        <div class="container-rating"><span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span></div>
+                        <div class="container-rating">
+                            <span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span>
+                        </div>
+                        Course: {% if review.course %} {{ review.course.name }} {% else %} N/A {% endif %}
                     </div>
                     <div>{% if review.student == user %}
                         <strong>Review:</strong>
                         <div>{{ review.review }}</div>
                         <td><a href="{% url 'edit_review' review.id %}">Edit</a></td>
-                        {% else %}
+                    {% else %}
                         <strong>Review:</strong>
                         <div>{{ review.review }}</div>
-                        {% endif %}
+                    {% endif %}
                     </div>
                 </div>
             {% endfor %}

@@ -1,4 +1,6 @@
-from base.models import Professor, Review
+from django.contrib.auth.models import User
+
+from base.models import Professor, Review, Course
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -6,9 +8,9 @@ from django.shortcuts import render, redirect
 @login_required
 def review(request):
     professors = Professor.objects.all()
-
     context = {
-        'professors': professors
+        'professors': professors,
+        'courses': Course.objects.all()
     }
     return render(request, 'base/review.html', context)
 
@@ -25,9 +27,11 @@ def submit_review(request):
 
         rating = request.POST.get("rating")
 
+        course = Course.objects.get(id=request.POST.get('course'))
+
         review = request.POST.get("review")
 
-        review = Review(professor=professor, student=user, rating=rating, review=review)
+        review = Review(professor=professor, student=user, rating=rating, review=review, course=course)
         review.save()
         messages.success(request, 'Review successfully submitted!')
 
