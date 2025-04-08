@@ -1,5 +1,4 @@
 <footer>
-  <section class="social-icons"></section>
   <section class="use-cases">
     <h4>Use cases</h4>
   </section>
@@ -7,9 +6,9 @@
     <h4>Explore</h4>
     <ul>
       {% if user.is_authenticated %}
-      <p>Logged in</p>
+        <p>Logged in</p>
       {% else %}
-      <li><a href="{% url 'login' %}">Login</a></li>
+        <li><a href="{% url 'login' %}">Login</a></li>
       {% endif %}
     </ul>
   </section>
