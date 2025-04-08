@@ -11,7 +11,7 @@ class Department(models.Model):
 
 class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
-
+    avatar = models.ImageField(null=True, default='avatar.svg')
     def rating(self):
         total = 0
         for review in self.review_set.all():

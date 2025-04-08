@@ -11,6 +11,7 @@
                 </svg>
             </a>
             <h2>{{ professor.name }} | Rating: {{ professor.rating }}</h2>
+            <img src="{{ professor.avatar.url }}" alt="" width="">
         </div>
         {% if reviews.count == 0 %}
             <div>
