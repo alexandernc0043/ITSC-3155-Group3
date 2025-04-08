@@ -438,6 +438,15 @@ ul.errorlist {
   gap: 0.5rem;
 }
 
+.review-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-actions {
+  margin-top: .5rem;
+}
+
 /*==============================
 =>  Input/Button Section
 ================================*/
@@ -523,6 +532,22 @@ textarea:focus {
 .secondary-button:hover {
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
+}
+
+.icon-button {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  border-radius: 2rem;
+  padding: .5rem 1rem;
+}
+
+.icon-button svg {
+  fill: var(--light-color);
+}
+
+.icon-button:hover svg {
+  fill: var(--primary-color);
 }
 
 .svg-button {
@@ -712,7 +737,7 @@ table td {
 =>  Card Section
 ================================*/
 .card {
-  padding: 1rem;
+  padding: 1rem 2rem;
   margin: 1rem 0;
   border-radius: 1px solid var(--primary-color);
   border-radius: 0.5rem;

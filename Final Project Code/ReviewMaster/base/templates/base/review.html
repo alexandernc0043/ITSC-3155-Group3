@@ -1,82 +1,57 @@
 {% extends 'main.html' %} {% load static %} {% block content %}
-    <main>
-        <h1>Leave A Review</h1>
+<main>
+  <h1>
+    {% if review %}
+      Edit review
+    {% else %}
+      Leave a review
+    {% endif %}
+  </h1>
+ 
+  <form method="POST" class="form" {% if review %} action="{% url 'edit_review' review.id %}" {% else %} action="{% url 'submit_review' %}" {% endif %}>
+    {% csrf_token %}
 
-        <form method="POST" class="form" action="{% url 'submit_review' %}">
-            {% csrf_token %}
+    <label for="professor">Select a professor:</label>
+    <select name="professor" id="professor" {% if review %} selected="{{ review.professor.id }}" disabled {% endif %}>
+      {% for professor in professors %}
+        <option value="{{ professor.id }}">{{ professor.name }}</option>
+      {% endfor %}
+      {% if review %}
+        <option value="{{ review.professor.id }}" selected>{{ review.professor.name }}</option>
+      {% endif %}
+    </select>
+    <label for="course">Select the course</label>
+    <select name="course" id="course" {% if review %} selected="{{ review.course.id }}" disabled {% endif %}>
+      {% if review %}
+        <option value="{{ review.course.id }}" selected>{{ review.course.name }}</option>
+      {% endif %}
+    </select>
 
-            <label for="professor">Select a professor:</label>
-            <select name="professor" id="professor">
-                {% for professor in professors %}
-                    <option value="{{ professor.id }}">{{ professor.name }}</option>
-                {% endfor %}
-            </select>
-            <label for="course">Select the course</label>
-            <select name="course" id="course"></select>
+    <label for="rating">Rate your professor:</label>
+    <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5" {% if review and review.rating == 5 %} checked {% endif %}/><label for="star5">5 stars</label>
+        <input type="radio" id="star4" name="rating" value="4" {% if review and review.rating == 4 %} checked {% endif %}/><label for="star4">4 stars</label>
+        <input type="radio" id="star3" name="rating" value="3" {% if review and review.rating == 3 %} checked {% endif %}/><label for="star3">3 stars</label>
+        <input type="radio" id="star2" name="rating" value="2" {% if review and review.rating == 2 %} checked {% endif %}/><label for="star2">2 stars</label>
+        <input type="radio" id="star1" name="rating" value="1" {% if review and review.rating == 1 %} checked {% endif %}/><label for="star1">1 star</label>
+    </div>
 
-            <label for="rating">Rate your professor:</label>
-            <div class="rating">
-                <input type="radio" id="star5" name="rating" value="5"/><label for="star5">5 stars</label>
-                <input type="radio" id="star4" name="rating" value="4"/><label for="star4">4 stars</label>
-                <input type="radio" id="star3" name="rating" value="3"/><label for="star3">3 stars</label>
-                <input type="radio" id="star2" name="rating" value="2"/><label for="star2">2 stars</label>
-                <input type="radio" id="star1" name="rating" value="1"/><label for="star1">1 star</label>
-            </div>
+    <label for="review">Write your review:</label>
+    <textarea rows="5" cols="50" placeholder="Write your review here..." name="review" id="review">{% if review %}{{ review.review }}{% endif %}</textarea>
 
-            <label for="review">Write your review:</label>
-            <textarea
-                    rows="5"
-                    cols="50"
-                    placeholder="Write your review here..."
-                    name="review"
-                    id="review"
-            ></textarea>
-
-            <input type="submit" value="Submit" class="primary-button"/>
-        </form>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const courseSelect = document.getElementById('course');
-            const professorSelect = document.getElementById('professor');
-            const options = [
-                {% for course in courses %}
-                    {
-                        id: "{{ course.id }}",
-                        name: "{{ course.name }}",
-                        professor: "{{ course.professor.id }}"
-                    }{% if not forloop.last %},{% endif %}
-                {% endfor %}
-            ];
-            const filterCourses = (selectedProfessor) => {
-                courseSelect.innerHTML = '';
-                options.forEach((opt) => {
-                    if (opt.professor === selectedProfessor) {
-                        const option = document.createElement('option');
-                        option.value = opt.id;
-                        option.textContent = opt.name;
-                        option.dataset.professor = opt.professor;
-                        courseSelect.append(option);
-                    }
-                });
-                // this basically like gives a default n/a option if the professor doesn't have any assigned classes
-                if (courseSelect.options.length === 0) {
-                    const option = document.createElement('option');
-                    option.text = 'No Courses';
-                    option.value = 'N/A';
-                    option.disabled = true;
-                    option.selected = true;
-                    courseSelect.append(option);
-                }
-            }
-            filterCourses(professorSelect.value);
-            professorSelect.addEventListener('change', () => {
-                filterCourses(professorSelect.value);
-                console.log(Array.from(courseSelect.options).map((val) => `${val.textContent}`));
-                console.log(Array.from(professorSelect.options).map((val) => `${val.textContent}`))
-            });
-        });
-
-
-    </script>
+    <input type="submit" value="Submit" class="primary-button"/>
+  </form>
+</main>
+  <script>
+    const options = [
+      {% for course in courses %}
+        {
+          id: "{{ course.id }}",
+          name: "{{ course.name }}",
+          professor: "{{ course.professor.id }}"
+        }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ];
+  </script>
+  <script src="{% static 'scripts/review.js' %}"></script>
 {% endblock content %}

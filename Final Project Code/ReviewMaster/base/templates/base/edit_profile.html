@@ -2,17 +2,10 @@
 <main>
   <div class="button-title">
     <a href="{{ request.META.HTTP_REFERER }}" class="svg-button">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 448 512"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
         Go back
         <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-        <path
-          d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
-        />
+        <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
       </svg>
     </a>
     <h2>Edit your profile</h2>
@@ -22,11 +15,10 @@
   <div>
     <form class="form form-left user" action="" method="POST">
       {% csrf_token %}
+      
       <label for="username">{{userForm.username.label}}:</label>
       {{userForm.username}}
-      <span class="help-text"
-        >Username may contain alphanumeric characters or @/./+/-/_.</span
-      >
+      <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
       {{userForm.username.errors}}
 
       <input type="hidden" name="option" value="{{ option }}" />
@@ -36,19 +28,15 @@
         <span class="help-text">Enter your old password</span>
         {{passwordForm.old_password.errors}}
 
-        <label for="new_password1"
-          >{{ passwordForm.new_password1.label}}:</label
-        >
+        <label for="new_password1">{{ passwordForm.new_password1.label}}:</label>
         {{passwordForm.new_password1}}
-        <span class="help-text"
-          >Password can't be only numeric and should have at least 8
+        <span class="help-text">
+          Password can't be only numeric and should have at least 8
           alphanumeric characters with a special character or at least 10
-          characters with no numbers.</span
-        >
+          characters with no numbers.
+        </span>
 
-        <label for="new_password2"
-          >{{ passwordForm.new_password2.label}}:</label
-        >
+        <label for="new_password2">{{ passwordForm.new_password2.label}}:</label>
         {{passwordForm.new_password2}}
         <span class="help-text">{{passwordForm.new_password2.help_text}}</span>
       </div>
@@ -62,13 +50,15 @@
 
   <div>
     <h2>Edit courses</h2>
-    {% if courses %} {% for course in courses %}
-    <div>
-      <p>{{ course }}</p>
-      <a href="{% url 'remove-course' course %}">Remove</a>
-    </div>
-    {% endfor %} {% else %}
-    <p>No courses added.</p>
+    {% if courses %}
+      {% for course in courses %}
+      <div>
+        <p>{{ course }}</p>
+        <a href="{% url 'remove-course' course %}">Remove</a>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>No courses added.</p>
     {% endif %}
   </div>
 </main>
