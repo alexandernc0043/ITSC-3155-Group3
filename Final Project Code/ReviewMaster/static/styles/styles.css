@@ -127,6 +127,10 @@ a:hover {
   display: block;
 }
 
+.subheader-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 1200px) {
   .header {
     padding: 1rem;
@@ -146,20 +150,26 @@ a:hover {
     gap: 1rem;
   }
 
-  .header > .container form {
-    max-width: 200px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .header {
-    padding: 1rem;
-  }
-
   .header .header__search {
     display: none;
   }
 
+  .container .header_links {
+    display: none;
+  }
+
+  .container {
+    padding-bottom: 1rem;
+  }
+
+  .subheader-mobile {
+    display: block;
+    border-top: 1px solid var(--light-color);
+    padding-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
   .header__search > label {
     border: 1px solid var(--primary-color);
   }
@@ -251,7 +261,7 @@ a:hover {
   margin-bottom: 3rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .mobile-menu {
     display: none;
   }
@@ -312,6 +322,16 @@ ul.errorlist li:last-child::after {
   background-color: rgba(0, 0, 0, 0.7);
   color: var(--light-color);
   text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .home, .home section {
+    height: 60vh;
+  }
+
+  .home article {
+    width: 80%;
+  }
 }
 
 .home h1 {
@@ -692,6 +712,18 @@ textarea:focus {
   width: 30%;
 }
 
+@media screen and (max-width: 1200px) {
+  .user.form {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .user.form {
+    width: 80%;
+  }
+}
+
 .form input,
 .form select,
 .form textarea {
@@ -752,6 +784,7 @@ footer {
   justify-content: center;
   align-items: flex-start;
   padding: 1rem 2rem 3rem 2rem;
+  gap: 2rem;
 }
 
 footer section {
@@ -765,4 +798,10 @@ footer section h4 {
 footer section ul {
   list-style-type: none;
   padding: 0;
+}
+
+@media screen and (max-width: 600px) {
+  footer section {
+    width: 50%;
+  }
 }

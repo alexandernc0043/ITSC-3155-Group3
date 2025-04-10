@@ -27,7 +27,14 @@
                         <div class="container-rating">
                             <span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span>
                         </div>
-                        Course: {% if review.course %} {{ review.course.name }} {% else %} N/A {% endif %}
+                    </div>
+                    <div class="review-course">
+                        <strong>Course:</strong> 
+                        {% if review.course %}
+                            {{ review.course.name }}
+                        {% else %}
+                            N/A
+                        {% endif %}
                     </div>
                     <div class="review-content">
                         <strong>Review:</strong>
