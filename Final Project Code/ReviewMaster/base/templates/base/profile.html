@@ -22,26 +22,28 @@
     <!-- Shows every review user has made -->
     <h2>Reviews</h2>
     {% if reviews %}
-      <table>
-        <thead>
-          <tr>
-            <th>Professor</th>
-            <th>Rating</th>
-            <th>Review</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for review in reviews %}
+      <div class="table-container">
+        <table>
+          <thead>
             <tr>
-              <td><a href="{% url 'professor-reviews' review.professor.name %}">{{ review.professor }}</a></td>
-              <td><div class="container-rating"><span class="star-rating star-rating-{{ review.rating }}"></span></div></td>
-              <td>{{ review.review }}</td>
-              <td><a href="{% url 'edit_review' review.id %}">Edit</a></td>
+              <th>Professor</th>
+              <th>Rating</th>
+              <th>Review</th>
+              <th>Action</th>
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for review in reviews %}
+              <tr>
+                <td><a href="{% url 'professor-reviews' review.professor.name %}">{{ review.professor }}</a></td>
+                <td><div class="container-rating"><span class="star-rating star-rating-{{ review.rating }}"></span></div></td>
+                <td>{{ review.review }}</td>
+                <td><a href="{% url 'edit_review' review.id %}">Edit</a></td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     {% else %}
       <p>No reviews yet.</p>
     {% endif %}

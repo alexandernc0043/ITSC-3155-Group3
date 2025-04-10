@@ -750,6 +750,10 @@ textarea:focus {
 /*==============================
 =>  Table Section
 ================================*/
+.table-container {
+  overflow-x: auto;
+}
+
 table {
   width: 100%;
   max-width: 100%;
