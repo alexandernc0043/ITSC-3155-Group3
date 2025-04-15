@@ -261,6 +261,13 @@ a:hover {
   margin-bottom: 3rem;
 }
 
+.header__user img {
+  height: 57px;
+  width: 57px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
 @media screen and (min-width: 800px) {
   .mobile-menu {
     display: none;
@@ -450,6 +457,7 @@ ul.errorlist {
   border-radius: 100%;
   width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 
 .review-title {
@@ -475,6 +483,16 @@ select {
   width: 100%;
   padding: 1rem;
   outline: none;
+}
+
+input[type="checkbox"] {
+  width: auto;
+  padding: 0;
+  outline: auto;
+}
+
+input[type="file"] {
+  padding: 0;
 }
 
 input[type="text"],
@@ -745,6 +763,10 @@ textarea:focus {
   color: var(--dark-gray);
   font-size: 0.75rem;
   display: block;
+}
+
+.file-upload {
+  margin-top: .5rem;
 }
 
 /*==============================

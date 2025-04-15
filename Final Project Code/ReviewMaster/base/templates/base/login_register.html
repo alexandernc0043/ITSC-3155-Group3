@@ -13,9 +13,10 @@
                         <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
                         <label for="password">{{ form.password1.label }}:</label>
                         {{ form.password1 }}
-                        <span class="help-text">Password can't be only numeric and should have at least 8 alphanumeric characters with a special character or at least 10 characters with no numbers.</span>
+                        <span class="help-text">Password can't be only numeric and should have at least 8 alphanumeric characters with a special character and not be a common password.</span>
                         <label for="password-confirmation">{{ form.password2.label }}:</label>
                         {{ form.password2 }}
+                        <input type="checkbox" name="professor" id="professor" {% if professor %} checked {% endif %}> <label for="professor">I am a professor</label>
                         <input type="submit" value="Register" class="primary-button">
                     </form>
                     <p>Already signed up? <a href="{% url 'login' %}">Login!</a></p>

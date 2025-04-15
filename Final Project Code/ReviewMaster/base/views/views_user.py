@@ -3,7 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib import messages
-from ..utils import checkUsername, checkPassword
+from ..models import Professor
+from ..utils import check_username, check_password
 
 def logout_user(request):
     logout(request)
@@ -44,20 +45,24 @@ def register_user(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
+            professor = request.POST.get('professor')
+            if professor:
+                user_professor = Professor.objects.create(name=user.username, username=user, verified=False)
+                user_professor.save()
             login(request, user)
             return redirect('home')
         else:
             # Error handling for registration
             username = request.POST.get('username')
             # Username validation
-            username_error_message = checkUsername(username, False)
+            username_error_message = check_username(username, False)
             if username_error_message != '':
                 messages.error(request, username_error_message)
 
             password1 = request.POST.get('password1')
             password2 = request.POST.get('password2')
             # Password validation
-            password_error_message = checkPassword(password1, password2)
+            password_error_message = check_password(password1, password2)
             if password_error_message != '':
                 messages.error(request, password_error_message)
             
@@ -65,6 +70,7 @@ def register_user(request):
     context = {
         'form': form,
         'page': page,
-        'username': request.POST.get('username')  # Keeps username in form even if there's an error
+        'username': request.POST.get('username'),  # Keeps username in form even if there's an error
+        'professor': request.POST.get('professor')
     }
     return render(request, 'base/login_register.html', context=context)

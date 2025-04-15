@@ -1,7 +1,11 @@
+import os
 from django.contrib.auth.models import User
+from django.conf import settings
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 import re
 
-def checkUsername(username, edit):
+def check_username(username, edit):
     message = ''
     pattern = r"^\w*(@|-|\.|\+|_)*\w*$"  # Regex to check that username only contains certain valid characters
     
@@ -12,7 +16,7 @@ def checkUsername(username, edit):
 
     return message
 
-def checkPassword(password1, password2):
+def check_password(password1, password2):
     message = ''
     if len(password1) < 8:
         message = 'Password is too short'
@@ -24,3 +28,16 @@ def checkPassword(password1, password2):
         message = 'The password is too common, try another one'
 
     return message
+
+def handle_uploaded_file(file):
+    upload_dir = 'uploads/'
+    file_path = os.path.join(upload_dir, file.name)  
+
+    # Ensure the upload directory exists
+    full_path = os.path.join(settings.MEDIA_ROOT, file_path)
+    os.makedirs(os.path.dirname(full_path), exist_ok=True)
+
+    # Save the file to the media directory
+    default_storage.save(file_path, ContentFile(file.read()))
+
+    return file_path
