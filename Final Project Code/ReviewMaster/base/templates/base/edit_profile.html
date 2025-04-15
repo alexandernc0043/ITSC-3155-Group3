@@ -13,13 +13,21 @@
   <!-- Allows user to edit their profile through userForm and passwordForm -->
   <!-- Addition? add reset form button using js !confirm, have pop up message -->
   <div>
-    <form class="form form-left user" action="" method="POST">
+    <form class="form form-left user" action="" method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       
       <label for="username">{{userForm.username.label}}:</label>
       {{userForm.username}}
       <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
       {{userForm.username.errors}}
+
+      {% if professor %}
+        <label for="avatar">Avatar:</label>
+        <div class="file-upload">
+          {% if professor.avatar.url %}<p>Current avatar: <a href="{{ professor.avatar.url }}">{{ professor.avatar.url }}</a></p>{% endif %}
+          <input type="file" name="avatar" id="avatar">
+        </div>
+      {% endif %}
 
       <input type="hidden" name="option" value="{{ option }}" />
       <div id="container" class="password-profile">

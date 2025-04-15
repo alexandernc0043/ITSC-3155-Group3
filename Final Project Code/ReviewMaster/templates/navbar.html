@@ -27,8 +27,8 @@
       <div class="header__user">
         <a href="{% url 'profile' request.user %}">
           <div class="avatar avatar--medium active">
-            {% if request.user.avatar %}
-              <img src="{{ request.user.avatar.url }}" />
+            {% if request.user.professor.avatar %}
+              <img src="{{ request.user.professor.avatar.url }}" />
             {% else %}
               <img src="{% static 'images/avatar.svg' %}" />
             {% endif %}
@@ -73,7 +73,7 @@
   <div class="subheader-mobile">
     <ul class="header_links">
       <li><a href="{% url 'courses' %}">Course Catalog</a></li>
-      <li><a href="{% url 'professor-list' %}">Browse Professors</a></li>
+      <li><a href="{% url 'professor-list' %}">Browse Tutors</a></li>
       {% if request.user.is_authenticated %}
         <li><a href="{% url 'review' %}">Write a Review</a></li>
       {% endif %}
