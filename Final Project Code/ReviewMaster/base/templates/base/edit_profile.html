@@ -20,6 +20,13 @@
       {{userForm.username}}
       <span class="help-text">Username may contain alphanumeric characters or @/./+/-/_.</span>
       {{userForm.username.errors}}
+      {% if professor %}
+        <label for="first_name">{{userForm.first_name.label}}:</label>
+        {{userForm.first_name}}
+        {{userForm.first_name.errors}}
+        <label for="last_name">{{userForm.last_name.label}}:</label>
+        {{userForm.last_name}}
+      {% endif %}
 
       {% if professor %}
         <label for="avatar">Avatar:</label>
