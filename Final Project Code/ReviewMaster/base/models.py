@@ -13,7 +13,12 @@ class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)  # If the professor is verified by email
-    username = models.OneToOneField(User, on_delete=models.SET_NULL, null=True, default=None)
+    username = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
     
     def rating(self):
         total = 0
