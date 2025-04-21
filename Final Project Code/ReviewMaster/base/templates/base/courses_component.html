@@ -4,7 +4,6 @@
             <tr>
                 <th>Name</th>
                 <th>Course ID</th>
-                <th>Section Number</th>
                 <th>Professor</th>
                 <th>Rating</th>
                 {% if request.user.is_authenticated %}
@@ -14,18 +13,19 @@
         </thead>
         <tbody>
             {% for course in courses %}
-                <tr>
+                {% for professor in course.professor.all %}
+                    <tr>
                     <td>{{ course.name }}</td>
                     <td>{{ course }}</td>
                     <td>{{ course.section_number }}</td>
                     <td>
-                        <a href="{% url 'professor-reviews' course.professor.name %}">
-                            {% if course.professor.username.first_name and course.professor.username.last_name %}
-                                {{ course.professor.username.first_name }} {{ course.professor.username.last_name }}
-                            {% elif course.professor.username.first_name %}
-                                {{ course.professor.username.first_name }}
+                        <a href="{% url 'professor-reviews' professor.name %}">
+                            {% if professor.username.first_name and professor.username.last_name %}
+                                {{ professor.username.first_name }} {{ professor.username.last_name }}
+                            {% elif professor.username.first_name %}
+                                {{ professor.username.first_name }}
                             {% else %}
-                                {{ course.professor }}
+                                {{ professor }}
                             {% endif %}
                         </a>
                     </td>
@@ -40,6 +40,7 @@
                         </td>
                     {% endif %}
                 </tr>
+                    {% endfor %}
             {% endfor %}
         </tbody>
     </table>

@@ -36,15 +36,14 @@ class Course(models.Model):
     department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
     number = models.IntegerField(null=False)  # Ex: 3155
     students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
-    professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, null=True)  # The professor who teach the course
-    section_number = models.IntegerField() # EX: 100
+    professor = models.ManyToManyField(Professor, related_name='professor')  # The professor who teach the course
     credit_hours = models.IntegerField() # EX: 3
 
     class Meta:
-        ordering = ['department', 'number', 'section_number']  # Order by department, number, and section number.
+        ordering = ['department', 'number']  # Order by department, number, and section number.
 
     def __str__(self):
-        return f'{self.department}-{self.number}-{self.section_number}'  # Calling will return DEPT-####-###
+        return f'{self.department}-{self.number}'  # Calling will return DEPT-####
 
 
 class Review(models.Model):
