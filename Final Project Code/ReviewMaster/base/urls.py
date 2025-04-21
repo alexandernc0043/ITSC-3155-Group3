@@ -21,7 +21,10 @@ urlpatterns = [
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('profile/<str:pk>', profile, name='profile'),
     path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile'),
-    path('profile/edit-review/<int:pk>', edit_review, name= "edit_review" )
+    path('profile/edit-review/<int:pk>', edit_review, name= "edit_review" ),
+    path('about/', about, name='about'),
+    path('how/', how, name='how'),
+    path('contact/', contact, name='contact')
     
    # path('review/<str:pk>/', review, name='review')
 ]

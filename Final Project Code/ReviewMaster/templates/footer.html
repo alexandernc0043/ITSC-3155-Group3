@@ -2,10 +2,15 @@
   <section class="explore">
     <h4>Explore</h4>
     <ul>
-      <li><a href="#">Course Catalog</a></li>
-      <li><a href="#">Browse Professors</a></li>
+      <li><a href="{% url 'courses' %}">Course Catalog</a></li>
+      <li><a href="{% url 'professor-list' %}">Browse Professors</a></li>
       <!-- (write a review will redirect user or be hidden when not logged in) -->
-      <li><a href="#">Write a Review</a></li>
+
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'review' %}">Write a Review</a></li>
+      {% else %}
+      <li><a href="{% url 'login' %}">Login</a></li>
+      {% endif %}
 
       <!-- {% if user.is_authenticated %}
       <li><a href="{% url 'login' %}">Write A Review</a></li>
@@ -15,10 +20,12 @@
   <section class="explore">
     <h4>Resources</h4>
     <ul>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Copyright</a></li>
-      <li><a href="#">How we did it</a></li>
+      <!-- About project -->
+      <li><a href="{% url 'about' %}">About Us</a></li>
+      <!-- People in group -->
+      <li><a href="{% url 'contact' %}">Contact</a></li>
+      <!-- Resources -->
+      <li><a href="{% url 'how' %}">Resources</a></li>
     </ul>
   </section>
 </footer>
