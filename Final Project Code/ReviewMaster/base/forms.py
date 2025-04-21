@@ -7,7 +7,7 @@ from .models import User
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["username"]
+        fields = ["username", "first_name", "last_name"]
 
 class PasswordChange(PasswordChangeForm):
     class Meta:

@@ -30,7 +30,10 @@ def edit_profile(request, pk):
     user = User.objects.get(username=pk)
     userForm = UserForm(instance=user)
     passwordForm = PasswordChange(user)
-    professor = Professor.objects.get(username=user)
+    try:
+        professor = Professor.objects.get(username=user)
+    except Professor.DoesNotExist:
+        professor = None
     option = request.POST.get('option') if request.POST.get('option') != None else 'no'
 
     if request.method == 'POST':
@@ -74,7 +77,7 @@ def edit_profile(request, pk):
         'reviews': user.review_set.all(),
         'option': option,
         'professor': professor,
-        'avatar': professor.avatar.url if professor.avatar else None
+        'avatar': professor.avatar.url if professor and professor.avatar else None
     }
 
     return render(request, 'base/edit_profile.html', context)
