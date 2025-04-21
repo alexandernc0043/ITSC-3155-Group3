@@ -18,7 +18,7 @@
                     <td>{{ course.name }}</td>
                     <td>{{ course }}</td>
                     <td><a href="{% url 'professor-reviews' professor.name %}">{{ professor }}</a></td>
-                    <td><div class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></div></td>
+                    <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
                     {% if request.user.is_authenticated %}
                         <td>
                             {% if request.user in course.students.all %}
