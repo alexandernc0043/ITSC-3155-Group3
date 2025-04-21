@@ -4,7 +4,6 @@
             <tr>
                 <th>Name</th>
                 <th>Course ID</th>
-                <th>Section Number</th>
                 <th>Professor</th>
                 <th>Rating</th>
                 {% if request.user.is_authenticated %}
@@ -14,12 +13,12 @@
         </thead>
         <tbody>
             {% for course in courses %}
-                <tr>
+                {% for professor in course.professor.all %}
+                    <tr>
                     <td>{{ course.name }}</td>
                     <td>{{ course }}</td>
-                    <td>{{ course.section_number }}</td>
-                    <td><a href="{% url 'professor-reviews' course.professor.name %}">{{ course.professor }}</a></td>
-                    <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
+                    <td><a href="{% url 'professor-reviews' professor.name %}">{{ professor }}</a></td>
+                    <td><div class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></div></td>
                     {% if request.user.is_authenticated %}
                         <td>
                             {% if request.user in course.students.all %}
@@ -30,6 +29,7 @@
                         </td>
                     {% endif %}
                 </tr>
+                    {% endfor %}
             {% endfor %}
         </tbody>
     </table>

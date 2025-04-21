@@ -7,8 +7,8 @@ def update_course(request, pk, action):
     split = pk.split('-')
     dept = split[0]
     course_number = split[1]
-    course = Course.objects.filter(department__name=dept,
-                                   number=course_number).get()  # filters courses to only get ones the user is in
+    # filters courses to only get ones the user is in
+    course = Course.objects.filter(department__name=dept, number=course_number).get()
     session_data = request.session.get('referer', {}) # Gets referal page if exists
     
     if request.method == 'POST':
@@ -60,3 +60,7 @@ def pick_courses(request):
     }
 
     return render(request, 'base/courses.html', context)
+
+def course_page(request,pk):
+    # courses = Course
+    return None
