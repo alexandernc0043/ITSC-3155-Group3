@@ -17,18 +17,7 @@
                     <tr>
                     <td>{{ course.name }}</td>
                     <td>{{ course }}</td>
-                    <td>{{ course.section_number }}</td>
-                    <td>
-                        <a href="{% url 'professor-reviews' professor.name %}">
-                            {% if professor.username.first_name and professor.username.last_name %}
-                                {{ professor.username.first_name }} {{ professor.username.last_name }}
-                            {% elif professor.username.first_name %}
-                                {{ professor.username.first_name }}
-                            {% else %}
-                                {{ professor }}
-                            {% endif %}
-                        </a>
-                    </td>
+                    <td><a href="{% url 'professor-reviews' professor.name %}">{{ professor }}</a></td>
                     <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
                     {% if request.user.is_authenticated %}
                         <td>

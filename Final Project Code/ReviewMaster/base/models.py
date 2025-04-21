@@ -28,7 +28,12 @@ class Professor(models.Model):
             return 'N/A'
         return f'{round(total / self.review_set.all().count(), 1)} / 5' # Rounds to tens place.
     def __str__(self):
-        return self.name  # Calling Professor will return name
+        if self.username and self.username.first_name and self.username.last_name:
+            return f'{self.username.first_name} {self.username.last_name}'
+        elif self.username and self.username.first_name:
+            return f'{self.username.first_name}'
+        else: 
+            return self.name
 
 
 class Course(models.Model):

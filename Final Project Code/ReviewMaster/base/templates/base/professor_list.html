@@ -7,15 +7,7 @@
     <div class="professor-list">
         {% for professor in professors %}
             <div class="professor-item">
-                <p class="professor-name">
-                    {% if professor.username.first_name and professor.username.last_name %}
-                        {{ professor.username.first_name }} {{ professor.username.last_name }}
-                    {% elif professor.username.first_name %}
-                        {{ professor.username.first_name }}
-                    {% else %}
-                        {{ professor.name }}
-                    {% endif %}
-                </p>
+                <p class="professor-name">{{ professor }}</p>
                 <p class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></p>
                 <a class="secondary-button" href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
             </div>
