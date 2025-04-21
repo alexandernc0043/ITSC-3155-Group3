@@ -14,10 +14,26 @@
     <label for="professor">Select a professor:</label>
     <select name="professor" id="professor" {% if review %} selected="{{ review.professor.id }}" disabled {% endif %}>
       {% for professor in professors %}
-        <option value="{{ professor.id }}">{{ professor.name }}</option>
+        <option value="{{ professor.id }}">
+          {% if professor.username.first_name and professor.username.last_name %}
+            {{ professor.username.first_name }} {{ professor.username.last_name }}
+          {% elif professor.username.first_name %}
+            {{ professor.username.first_name }}
+          {% else %}
+            {{ professor.name }}
+          {% endif %}
+        </option>
       {% endfor %}
       {% if review %}
-        <option value="{{ review.professor.id }}" selected>{{ review.professor.name }}</option>
+        <option value="{{ review.professor.id }}" selected>
+          {% if review.professor.username.first_name and review.professor.username.last_name %}
+            {{ review.professor.username.first_name }} {{ review.professor.username.last_name }}
+          {% elif review.professor.username.first_name %}
+            {{ review.professor.username.first_name }}
+          {% else %}
+            {{ review.professor.name }}
+          {% endif %}
+        </option>
       {% endif %}
     </select>
     <label for="course">Select the course</label>
