@@ -24,7 +24,8 @@ urlpatterns = [
     path('profile/edit-review/<int:pk>', edit_review, name= "edit_review" ),
     path('about/', about, name='about'),
     path('how/', how, name='how'),
-    path('contact/', contact, name='contact')
+    path('contact/', contact, name='contact'),
+    path('flag/<int:pk>', flag_review, name='flag')
     
    # path('review/<str:pk>/', review, name='review')
 ]
