@@ -70,7 +70,7 @@ a:hover {
 
 .header > .container {
   display: flex;
-  gap: 5rem;
+  gap: 4rem;
   align-items: center;
 }
 
@@ -138,6 +138,16 @@ a:hover {
 
   .header > .container {
     gap: 3rem;
+  }
+
+  .container .header_links {
+    display: none;
+  }
+
+  .subheader-mobile {
+    display: block;
+    border-top: 1px solid var(--light-color);
+    padding-top: 1rem;
   }
 }
 
@@ -406,9 +416,9 @@ ul.errorlist {
 }
 
 /*==============================
-=>  Professor List Section
+=>  Professor/Tutor List Section
 ================================*/
-.professor-page h1 {
+.professor-page, .tutor-page h1 {
   text-align: center;
 }
 

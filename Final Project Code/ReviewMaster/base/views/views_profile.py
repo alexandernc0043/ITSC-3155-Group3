@@ -31,7 +31,7 @@ def edit_profile(request, pk):
     userForm = UserForm(instance=user)
     passwordForm = PasswordChange(user)
     try:
-        professor = Professor.objects.get(username=user)
+        professor = Professor.objects.get(user_account=user)
     except Professor.DoesNotExist:
         professor = None
     option = request.POST.get('option') if request.POST.get('option') != None else 'no'

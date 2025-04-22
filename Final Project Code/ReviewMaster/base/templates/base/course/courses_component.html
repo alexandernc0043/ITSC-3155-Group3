@@ -6,8 +6,9 @@
                 <th>Course ID</th>
                 <th>Professor</th>
                 <th>Rating</th>
-                {% if request.user.is_authenticated %}
-                    <th>Action</th>
+                {% if request.user.is_authenticated and actions %}
+                    <th>Add/remove course</th>
+                    <th>Tutor</th>
                 {% endif %}
             </tr>
         </thead>
