@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to flag this review?</p>
+        {{ review.review }}
+        <button class="primary-button" type="submit">Confirm</button>
+        <a href="{% url 'professor-reviews' professor_name=review.professor.name  %}">Cancel</a>
+    </form>
+{% endblock content %}

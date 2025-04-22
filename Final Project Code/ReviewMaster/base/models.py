@@ -13,7 +13,7 @@ class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)  # If the professor is verified by email
-    username = models.OneToOneField(
+    user_account = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         null=True,
@@ -54,6 +54,7 @@ class Course(models.Model):
 class Review(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
+    flagged = models.BooleanField(default=False)
     rating = models.IntegerField()
     course = models.ForeignKey(Course, related_name='course', on_delete=models.SET_NULL, null=True)
     review = models.TextField(null=True, blank=True)

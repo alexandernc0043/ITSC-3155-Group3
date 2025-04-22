@@ -50,6 +50,9 @@
                                 </a>
                             </div>
                         {% endif %}
+                    {% if user.is_superuser or professor.user_account.id == user.id %}
+                        <a href="{% url 'flag' review.id %}">Flag Review</a>
+                    {% endif %}
                     </div>
                 </div>
             {% endfor %}

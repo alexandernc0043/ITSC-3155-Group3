@@ -8,7 +8,7 @@ def professor_list(request):
         'reviews': Review.objects.filter()
     }
 
-    return render(request, 'base/professor_list.html', context)
+    return render(request, 'base/professor/professor_list.html', context)
 
 
 def professor_reviews(request, professor_name):
@@ -16,4 +16,4 @@ def professor_reviews(request, professor_name):
     professor = professors.first()
     reviews = Review.objects.filter(professor=professor)
 
-    return render(request, 'base/professor_reviews.html', {'professor': professor, 'reviews': reviews})
+    return render(request, 'base/professor/professor_reviews.html', {'professor': professor, 'reviews': reviews})
