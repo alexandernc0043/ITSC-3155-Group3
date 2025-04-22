@@ -1,5 +1,3 @@
-from django.contrib.auth.models import User
-
 from base.models import Professor, Review, Course
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required

@@ -1,18 +1,17 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<main class="professor-page">
-    <h1>Professors:</h1>
+    <main class="professor-page">
+        <h1>Professors:</h1>
 
-    <div class="professor-list">
-        {% for professor in professors %}
-            <div class="professor-item">
-                <p class="professor-name">{{ professor }}</p>
-                <p class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></p>
-                <a class="secondary-button" href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
-            </div>
-        {% endfor %}
-    </div>
-</main>
-
+        <div class="professor-list">
+            {% for professor in professors %}
+                <div class="professor-item">
+                    <p class="professor-name">{{ professor }}</p>
+                    <p class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></p>
+                    <a class="secondary-button" href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
 {% endblock content %}
