@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="tutor-page">
+    <h1>Tutors:</h1>
+
+    <div class="professor-list">
+        {% for tutor in tutors %}
+            <div class="professor-item">
+                <p class="professor-name">{{ tutor }}</p>
+                {% for course in tutor.course.all %}
+                    <p class="class-name">{{ course }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        {% if tutors.count == 0 %}
+            <p>No tutors available.</p>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock content %}

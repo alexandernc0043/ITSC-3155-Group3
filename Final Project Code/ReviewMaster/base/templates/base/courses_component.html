@@ -6,8 +6,9 @@
                 <th>Course ID</th>
                 <th>Professor</th>
                 <th>Rating</th>
-                {% if request.user.is_authenticated %}
-                    <th>Action</th>
+                {% if request.user.is_authenticated and actions %}
+                    <th>Add/remove course</th>
+                    <th>Tutor</th>
                 {% endif %}
             </tr>
         </thead>
@@ -15,21 +16,30 @@
             {% for course in courses %}
                 {% for professor in course.professor.all %}
                     <tr>
-                    <td>{{ course.name }}</td>
-                    <td>{{ course }}</td>
-                    <td><a href="{% url 'professor-reviews' professor.name %}">{{ professor }}</a></td>
-                    <td><div class="container-rating"><span class="star-rating star-rating-{{ course.professor.rating|slice:":1" }}"></span></div></td>
-                    {% if request.user.is_authenticated %}
-                        <td>
-                            {% if request.user in course.students.all %}
-                                <a href="{% url 'remove-course' course %}">Remove Course</a>
-                            {% else %}
-                                <a href="{% url 'add-course' course %}">Add Course</a>
-                            {% endif %}
-                        </td>
-                    {% endif %}
-                </tr>
-                    {% endfor %}
+                        <td>{{ course.name }}</td>
+                        <td>{{ course }}</td>
+                        <td><a href="{% url 'professor-reviews' professor.name %}">{{ professor }}</a></td>
+                        <td><div class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></div></td>
+                        {% if request.user.is_authenticated and actions %}
+                            <td>
+                                {% if request.user in course.students.all %}
+                                    <a href="{% url 'remove-course' course %}">Remove Course</a>
+                                {% else %}
+                                    <a href="{% url 'add-course' course %}">Add Course</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if tutor in course.tutor.all and tutor.verified %}
+                                    <a href="{% url 'remove-tutor' course %}">Cancel tutoring</a>
+                                {% elif tutor in course.tutor.all %}
+                                    <a href="{% url 'remove-tutor' course %}">Cancel application</a>
+                                {% else %}
+                                    <a href="{% url 'add-tutor' course %}">Apply as tutor</a>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
             {% endfor %}
         </tbody>
     </table>

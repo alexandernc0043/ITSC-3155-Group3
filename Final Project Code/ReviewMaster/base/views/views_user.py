@@ -47,7 +47,7 @@ def register_user(request):
             user.save()
             professor = request.POST.get('professor')
             if professor:
-                user_professor = Professor.objects.create(name=user.username, username=user, verified=False)
+                user_professor = Professor.objects.create(name=user.username, user_account=user, verified=False)
                 user_professor.save()
             login(request, user)
             return redirect('home')
