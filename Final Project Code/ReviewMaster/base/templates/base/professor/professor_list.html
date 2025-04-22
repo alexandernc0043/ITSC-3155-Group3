@@ -9,7 +9,7 @@
             <div class="professor-item">
                 <p class="professor-name">{{ professor }}</p>
                 <p class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></p>
-                <a class="secondary-button" href="{% url 'professor-reviews' professor.name %}">View Reviews</a>
+                <a class="secondary-button" href="{% url 'professor-reviews' professor.id %}">View Reviews</a>
             </div>
         {% endfor %}
     </div>

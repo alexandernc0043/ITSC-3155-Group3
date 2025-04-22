@@ -19,30 +19,34 @@ class Professor(models.Model):
         null=True,
         blank=True
     )
-    
+
     def rating(self):
-        total = 0
-        for review in self.review_set.all():
-            total += review.rating
-        if total == 0: # If no ratings we return 0
+        unflagged = self.review_set.filter(flagged=False)
+        count = unflagged.count()
+        if count == 0:
             return 'N/A'
-        return f'{round(total / self.review_set.all().count(), 1)} / 5' # Rounds to tens place.
+        total = sum(review.rating for review in unflagged)
+        average = round(total / count, 1)
+        return f'{average} / 5'
+
     def __str__(self):
         if self.user_account and self.user_account.first_name and self.user_account.last_name:
             return f'{self.user_account.first_name} {self.user_account.last_name}'
         elif self.user_account and self.user_account.first_name:
             return f'{self.user_account.first_name}'
-        else: 
+        else:
             return self.name
 
 
 class Course(models.Model):
     name = models.CharField(max_length=200)  # Ex: Software Engineering
-    department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
+    department = models.ForeignKey(Department, null=True,
+                                   on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
     number = models.IntegerField(null=False)  # Ex: 3155
-    students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
+    students = models.ManyToManyField(User, related_name='students',
+                                      blank=True)  # The students who are taking the course
     professor = models.ManyToManyField(Professor, related_name='professor')  # The professor who teach the course
-    credit_hours = models.IntegerField() # EX: 3
+    credit_hours = models.IntegerField()  # EX: 3
 
     class Meta:
         ordering = ['department', 'number']  # Order by department, number, and section number.

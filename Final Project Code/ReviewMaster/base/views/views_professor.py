@@ -11,9 +11,8 @@ def professor_list(request):
     return render(request, 'base/professor/professor_list.html', context)
 
 
-def professor_reviews(request, professor_name):
-    professors = Professor.objects.filter(name=professor_name)
-    professor = professors.first()
+def professor_reviews(request, pk):
+    professor = Professor.objects.get(id=pk)
     reviews = Review.objects.filter(professor=professor, flagged=False)
 
     return render(request, 'base/professor/professor_reviews.html', {'professor': professor, 'reviews': reviews})

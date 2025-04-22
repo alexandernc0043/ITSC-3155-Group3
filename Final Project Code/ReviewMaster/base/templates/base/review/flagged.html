@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+    <a href="{% url 'professor-reviews' professor.id%}">Go Back</a>
+    {% if reviews %}
+        {% for review in reviews %}
+            <div class="card">
+                <div class="review-title">
+                    <a href="{% url 'profile' review.student %}">{{ review.student }}</a>
+                    <div class="container-rating">
+                        <span class="star-rating star-rating-{{ review.rating|slice:":1" }}"></span>
+                    </div>
+                </div>
+                <div class="review-course">
+                    <strong>Course:</strong>
+                    {% if review.course %}
+                        {{ review.course.name }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </div>
+                <div class="review-content">
+                    <strong>Review:</strong>
+                    <div>{{ review.review }}</div>
+                    {% if user.is_superuser or professor.user_account.id == user.id %}
+                        <a href="{% url 'flag' review.id %}">Restore Review</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No flagged reviews</p>
+    {% endif %}
+
+
+{% endblock content %}

@@ -76,7 +76,30 @@ def edit_review(request, pk):
 
 @login_required
 def flag_review(request, pk):
+    review = Review.objects.get(id = pk)
+    if request.method == 'POST':
+        flagged = request.POST.get('flagged')
+        review.flagged = not flagged
+        review.save()
+        if flagged:
+            body = "Review Restored!"
+        else:
+            body = "Review Flagged!"
+        messages.success(request, body)
+        return redirect('professor-reviews', review.professor.id)
+    professor = review.professor
     context = {
-        review: Review.objects.filter(id = pk),
+        'review': review,
+        'professor': professor
     }
     return render(request, 'base/review/flag_review.html', context)
+
+@login_required
+def flagged(request,pk):
+    professor = Professor.objects.get(id=pk)
+    reviews = professor.review_set.filter(flagged=True)
+    context = {
+        'professor': professor,
+        'reviews': reviews
+    }
+    return render(request, 'base/review/flagged.html', context)

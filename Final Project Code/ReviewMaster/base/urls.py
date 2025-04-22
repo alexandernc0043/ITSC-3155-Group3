@@ -17,7 +17,7 @@ urlpatterns = [
     path('review/', review, name='review'),
     path('submit-review/', submit_review, name='submit_review'),
     path('professor-list/', professor_list, name = "professor-list"),
-    path('professor-reviews/<str:professor_name>/', professor_reviews, name='professor-reviews'),
+    path('professor-reviews/<int:pk>/', professor_reviews, name='professor-reviews'),
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('profile/<str:pk>', profile, name='profile'),
     path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile'),
@@ -25,7 +25,8 @@ urlpatterns = [
     path('about/', about, name='about'),
     path('how/', how, name='how'),
     path('contact/', contact, name='contact'),
-    path('flag/<int:pk>', flag_review, name='flag')
+    path('flag/<int:pk>', flag_review, name='flag'),
+    path('flagged/<int:pk>', flagged, name='flagged')
     
    # path('review/<str:pk>/', review, name='review')
 ]
