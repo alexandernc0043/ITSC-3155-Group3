@@ -14,7 +14,7 @@ def profile(request, pk):
     context = {
         'courses': user.students.all(),
         'user': user,
-        'reviews' : user.review_set.all()
+        'reviews' : user.review_set.filter(flagged=False)
     }
     return render(request, 'base/profile/profile.html', context)
 
