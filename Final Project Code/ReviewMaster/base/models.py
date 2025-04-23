@@ -18,14 +18,14 @@ class Tutor(models.Model):
             return f'{self.user_account.first_name} {self.user_account.last_name}'
         elif self.user_account and self.user_account.first_name:
             return f'{self.user_account.first_name}'
-        elif self.user_account:
+        else:
             return f'{self.user_account}'
 
 class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)  # If the professor is verified by email
-    user_account = models.OneToOneField(
+    username = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
         null=True,
