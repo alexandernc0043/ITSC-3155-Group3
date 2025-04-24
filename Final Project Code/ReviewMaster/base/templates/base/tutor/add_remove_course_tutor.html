@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <main>
+        <form action="" method="post" class="form box">
+            {% csrf_token %}
+            {% if remove_application %}
+                <p>Do you want to remove your tutor application for "{{ course.name }} | {{ course }}"?</p>
+            {% elif remove %}
+                <p>Do you want to stop being a tutor for "{{ course.name }} | {{ course }}"?</p>
+            {% else %}
+                <p>Do you want to apply to tutor "{{ course.name }} | {{ course }}"?</p>
+            {% endif %}
+            <div class="action-buttons">
+                <button class="primary-button" type="submit">Confirm</button>
+                <a class="secondary-button" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+            </div>
+        </form>
+    </main>
+{% endblock content %}

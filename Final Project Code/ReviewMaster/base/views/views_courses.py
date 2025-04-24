@@ -53,10 +53,13 @@ def update_course_tutor(request, pk, action):
             tutor = Tutor.objects.create(user_account=request.user, verified=False)
         if action == 'remove':
             course.tutor.remove(tutor)
-            messages.success(request, 'Course tutor removed successfully!')
+            messages.success(request, f'You have being deleted as tutor for {course.name} successfully!')
+        if action == 'remove-application':
+            course.tutor.remove(tutor)
+            messages.success(request, f'Course tutor application deleted successfully!')
         elif action == 'add':
             course.tutor.add(tutor)
-            messages.success(request, 'Course tutor added successfully!')
+            messages.success(request, f'You have applied to tutor {course.name} successfully!')
         course.save()
         return redirect(session_data)
     
@@ -67,12 +70,14 @@ def update_course_tutor(request, pk, action):
         'course': course,
         'remove': action == 'remove'
     }
-    return render(request, 'base/course/add_remove_course.html', context)
+    return render(request, 'base/tutor/add_remove_course_tutor.html', context)
 
 
 def remove_tutor(request, pk):
     return update_course_tutor(request, pk, 'remove')
 
+def remove_application(request, pk):
+    return update_course_tutor(request, pk, 'remove-application')
 
 def add_tutor(request, pk):
     return update_course_tutor(request, pk, 'add')
