@@ -1,3 +1,5 @@
+{% load custom_filters %}
+
 <div class="table-container">
     <table>
         <thead>
@@ -19,7 +21,7 @@
                         <td>{{ course.name }}</td>
                         <td>{{ course }}</td>
                         <td><a href="{% url 'professor-reviews' professor.id %}">{{ professor }}</a></td>
-                        <td><div class="container-rating"><span class="star-rating star-rating-{{ professor.rating|slice:":1" }}"></span></div></td>
+                        <td><div class="container-rating"><span class="star-rating star-rating-{{ professor|course_rating:course }}"></span></div></td>
                         {% if request.user.is_authenticated and actions %}
                             <td>
                                 {% if request.user in course.students.all %}
