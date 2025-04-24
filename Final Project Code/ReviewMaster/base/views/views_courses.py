@@ -91,7 +91,10 @@ def pick_courses(request):
     else:
         courses = Course.objects.all()
 
-    tutor = Tutor.objects.filter(user_account=request.user).first()
+    try:
+        tutor = Tutor.objects.filter(user_account=request.user).first()
+    except:
+        tutor = None
 
     context = {
         'departments': Department.objects.all(),
