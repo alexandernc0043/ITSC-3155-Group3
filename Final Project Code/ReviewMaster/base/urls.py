@@ -23,6 +23,7 @@ urlpatterns = [
     path('professor-reviews/<int:pk>/', professor_reviews, name='professor-reviews'),
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('remove-tutor/<str:pk>', remove_tutor, name='remove-tutor'),
+    path('remove-application/<str:pk>', remove_application, name='remove-application'),
     path('profile/<str:pk>', profile, name='profile'),
     path('profile/<str:pk>/edit-profile', edit_profile, name='edit-profile'),
     path('profile/edit-review/<int:pk>', edit_review, name= "edit_review" ),

@@ -7,4 +7,4 @@ def tutor_list(request):
         'tutors': tutors
     }
 
-    return render(request, 'base/tutor_list.html', context)
+    return render(request, 'base/tutor/tutor_list.html', context)

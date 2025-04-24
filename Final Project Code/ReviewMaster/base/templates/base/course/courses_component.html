@@ -34,7 +34,7 @@
                                 {% if tutor in course.tutor.all and tutor.verified %}
                                     <a href="{% url 'remove-tutor' course %}">Cancel tutoring</a>
                                 {% elif tutor in course.tutor.all %}
-                                    <a href="{% url 'remove-tutor' course %}">Cancel application</a>
+                                    <a href="{% url 'remove-application' course %}">Cancel application</a>
                                 {% else %}
                                     <a href="{% url 'add-tutor' course %}">Apply as tutor</a>
                                 {% endif %}
