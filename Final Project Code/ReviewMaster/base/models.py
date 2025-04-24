@@ -25,12 +25,7 @@ class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)  # If the professor is verified by email
-    username = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
+    user_account = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def rating(self):
         unflagged = self.review_set.filter(flagged=False)
@@ -41,11 +36,22 @@ class Professor(models.Model):
         average = round(total / count, 1)
         return f'{average} / 5'
 
+    def rating_course(self, course):
+        total = 0
+        count = 0
+        for review in self.review_set.all():
+            if review.course == course:
+                total += review.rating
+                count += 1
+        if total == 0:
+            return 'N/A'
+        return f'{int(round(total / count, 1))}'
+    
     def __str__(self):
-        if self.username and self.username.first_name and self.username.last_name:
-            return f'{self.username.first_name} {self.username.last_name}'
-        elif self.username and self.username.first_name:
-            return f'{self.username.first_name}'
+        if self.user_account and self.user_account.first_name and self.user_account.last_name:
+            return f'{self.user_account.first_name} {self.user_account.last_name}'
+        elif self.user_account and self.user_account.first_name:
+            return f'{self.user_account.first_name}'
         else:
             return self.name
 
