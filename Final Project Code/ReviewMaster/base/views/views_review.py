@@ -10,7 +10,7 @@ def review(request):
         'professors': professors,
         'courses': Course.objects.all()
     }
-    return render(request, 'base/review.html', context)
+    return render(request, 'base/review/review.html', context)
 
 
 @login_required
@@ -24,8 +24,10 @@ def submit_review(request):
         professor = Professor.objects.get(id=professor_id)
 
         rating = request.POST.get("rating")
-
-        course = Course.objects.get(id=request.POST.get('course'))
+        if request.POST.get('course'):
+            course = Course.objects.get(id=request.POST.get('course'))
+        else:
+            course = None
 
         review = request.POST.get("review")
 
@@ -65,7 +67,37 @@ def edit_review(request, pk):
                 'review': review
             }
 
-            return render(request, 'base/review.html', context)
+            return render(request, 'base/review/review.html', context)
     else:
         messages.error(request, 'This page does not exist!')
         return redirect('profile', request.user)
+
+@login_required
+def flag_review(request, pk):
+    review = Review.objects.get(id = pk)
+    if request.method == 'POST':
+        flagged = request.POST.get('flagged')
+        review.flagged = not flagged
+        review.save()
+        if flagged:
+            body = "Review Restored!"
+        else:
+            body = "Review Flagged!"
+        messages.success(request, body)
+        return redirect('professor-reviews', review.professor.id)
+    professor = review.professor
+    context = {
+        'review': review,
+        'professor': professor
+    }
+    return render(request, 'base/review/flag_review.html', context)
+
+@login_required
+def flagged(request,pk):
+    professor = Professor.objects.get(id=pk)
+    reviews = professor.review_set.filter(flagged=True)
+    context = {
+        'professor': professor,
+        'reviews': reviews
+    }
+    return render(request, 'base/review/flagged.html', context)

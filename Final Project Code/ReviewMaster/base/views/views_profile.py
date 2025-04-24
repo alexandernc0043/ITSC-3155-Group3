@@ -14,9 +14,9 @@ def profile(request, pk):
     context = {
         'courses': user.students.all(),
         'user': user,
-        'reviews' : user.review_set.all()
+        'reviews' : user.review_set.filter(flagged=False)
     }
-    return render(request, 'base/profile.html', context)
+    return render(request, 'base/profile/profile.html', context)
 
 def save_image(request, professor):
     if professor and request.FILES.get('avatar'):
@@ -80,7 +80,7 @@ def edit_profile(request, pk):
         'avatar': professor.avatar.url if professor and professor.avatar else None
     }
 
-    return render(request, 'base/edit_profile.html', context)
+    return render(request, 'base/profile/edit_profile.html', context)
 
 # @login_required(login_url='login')
 # def editReview():

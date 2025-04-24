@@ -13,7 +13,7 @@
   </div>
 
   <h2>Courses</h2>
-  {% if courses %} {% include 'base/courses_component.html' %} {% else %}
+  {% if courses %} {% include 'base/course/courses_component.html' %} {% else %}
   <p>No courses added.</p>
   {% endif %}
 
@@ -35,7 +35,7 @@
           <tbody>
             {% for review in reviews %}
               <tr>
-                <td><a href="{% url 'professor-reviews' review.professor.name %}">{{ review.professor }}</a></td>
+                <td><a href="{% url 'professor-reviews' review.professor.id %}">{{ review.professor }}</a></td>
                 <td><div class="container-rating"><span class="star-rating star-rating-{{ review.rating }}"></span></div></td>
                 <td>{{ review.review }}</td>
                 <td><a href="{% url 'edit_review' review.id %}">Edit</a></td>

@@ -28,7 +28,7 @@ def update_course(request, pk, action):
         'course': course,
         'remove': action == 'remove'
     }
-    return render(request, 'base/add_remove_course.html', context)
+    return render(request, 'base/course/add_remove_course.html', context)
 
 
 def remove_course(request, pk):
@@ -67,7 +67,7 @@ def update_course_tutor(request, pk, action):
         'course': course,
         'remove': action == 'remove'
     }
-    return render(request, 'base/add_remove_course.html', context)
+    return render(request, 'base/course/add_remove_course.html', context)
 
 
 def remove_tutor(request, pk):
@@ -104,7 +104,7 @@ def pick_courses(request):
         'actions': True
     }
 
-    return render(request, 'base/courses.html', context)
+    return render(request, 'base/course/courses.html', context)
 
 def course_page(request,pk):
     # courses = Course

@@ -20,7 +20,7 @@ urlpatterns = [
     path('submit-review/', submit_review, name='submit_review'),
     path('professor-list/', professor_list, name = "professor-list"),
     path('tutor-list/', tutor_list, name = "tutor-list"),
-    path('professor-reviews/<str:professor_name>/', professor_reviews, name='professor-reviews'),
+    path('professor-reviews/<int:pk>/', professor_reviews, name='professor-reviews'),
     path('remove-course/<str:pk>', remove_course, name='remove-course'),
     path('remove-tutor/<str:pk>', remove_tutor, name='remove-tutor'),
     path('profile/<str:pk>', profile, name='profile'),
@@ -28,7 +28,9 @@ urlpatterns = [
     path('profile/edit-review/<int:pk>', edit_review, name= "edit_review" ),
     path('about/', about, name='about'),
     path('how/', how, name='how'),
-    path('contact/', contact, name='contact')
+    path('contact/', contact, name='contact'),
+    path('flag/<int:pk>', flag_review, name='flag'),
+    path('flagged/<int:pk>', flagged, name='flagged')
     
    # path('review/<str:pk>/', review, name='review')
 ]

@@ -18,36 +18,44 @@ class Tutor(models.Model):
             return f'{self.user_account.first_name} {self.user_account.last_name}'
         elif self.user_account and self.user_account.first_name:
             return f'{self.user_account.first_name}'
-        elif self.user_account:
+        else:
             return f'{self.user_account}'
 
 class Professor(models.Model):
     name = models.CharField(max_length=100)  # First & Last Name (John Doe)
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)  # If the professor is verified by email
-    user_account = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    
+    username = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
     def rating(self):
-        total = 0
-        for review in self.review_set.all():
-            total += review.rating
-        if total == 0: # If no ratings we return 0
+        unflagged = self.review_set.filter(flagged=False)
+        count = unflagged.count()
+        if count == 0:
             return 'N/A'
-        return f'{round(total / self.review_set.all().count(), 1)} / 5' # Rounds to tens place.
-    
+        total = sum(review.rating for review in unflagged)
+        average = round(total / count, 1)
+        return f'{average} / 5'
+
     def __str__(self):
-        if self.user_account and self.user_account.first_name and self.user_account.last_name:
-            return f'{self.user_account.first_name} {self.user_account.last_name}'
-        elif self.user_account and self.user_account.first_name:
-            return f'{self.user_account.first_name}'
-        else: 
+        if self.username and self.username.first_name and self.username.last_name:
+            return f'{self.username.first_name} {self.username.last_name}'
+        elif self.username and self.username.first_name:
+            return f'{self.username.first_name}'
+        else:
             return self.name
 
 class Course(models.Model):
     name = models.CharField(max_length=200)  # Ex: Software Engineering
-    department = models.ForeignKey(Department, null=True,  on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
+    department = models.ForeignKey(Department, null=True,
+                                   on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
     number = models.IntegerField(null=False)  # Ex: 3155
-    students = models.ManyToManyField(User, related_name='students', blank=True)  # The students who are taking the course
+    students = models.ManyToManyField(User, related_name='students',
+                                      blank=True)  # The students who are taking the course
     professor = models.ManyToManyField(Professor, related_name='professor')  # The professor who teach the course
     tutor = models.ManyToManyField(Tutor, related_name='course', blank=True)
     credit_hours = models.IntegerField() # EX: 3
@@ -61,6 +69,7 @@ class Course(models.Model):
 class Review(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
+    flagged = models.BooleanField(default=False)
     rating = models.IntegerField()
     course = models.ForeignKey(Course, related_name='course', on_delete=models.SET_NULL, null=True)
     review = models.TextField(null=True, blank=True)

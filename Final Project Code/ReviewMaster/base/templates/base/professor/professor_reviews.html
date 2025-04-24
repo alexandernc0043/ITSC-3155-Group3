@@ -11,8 +11,11 @@
                         <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
                     </svg>
                 </a>
-                <h2>{{ professor }} | Rating: {{ professor.rating }}
-                </h2>
+                <h2>{{ professor }} | Rating: {{ professor.rating }}</h2>
+                {% if request.user.is_superuser or professor.user_account.id == request.user.id %}
+                    <a href="{% url 'flagged' professor.id %}">Flagged Reviews</a>
+                {% endif %}
+
             </div>
             <img src="{{ professor.avatar.url }}" alt="Profile image" width="100">
         </div>
@@ -30,7 +33,7 @@
                         </div>
                     </div>
                     <div class="review-course">
-                        <strong>Course:</strong> 
+                        <strong>Course:</strong>
                         {% if review.course %}
                             {{ review.course.name }}
                         {% else %}
@@ -43,12 +46,16 @@
                         {% if review.student == user %}
                             <div class="review-actions">
                                 <a href="{% url 'edit_review' review.id %}" class="primary-button icon-button">
-                                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24"
+                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z"/>
                                     </svg>
                                     Edit
                                 </a>
                             </div>
+                        {% endif %}
+                        {% if user.is_superuser or professor.user_account.id == user.id %}
+                            <a href="{% url 'flag' review.id %}">Flag Review</a>
                         {% endif %}
                     </div>
                 </div>
