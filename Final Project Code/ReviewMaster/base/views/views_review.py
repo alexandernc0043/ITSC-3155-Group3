@@ -76,8 +76,7 @@ def edit_review(request, pk):
 def flag_review(request, pk):
     review = Review.objects.get(id = pk)
     if request.method == 'POST':
-        flagged = request.POST.get('flagged')
-        review.flagged = not flagged
+        review.flagged = not review.flagged
         review.save()
         if flagged:
             body = "Review Restored!"
