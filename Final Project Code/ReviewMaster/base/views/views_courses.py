@@ -67,7 +67,7 @@ def update_course_tutor(request, pk, action):
         'course': course,
         'remove': action == 'remove'
     }
-    return render(request, 'base/add_remove_course.html', context)
+    return render(request, 'base/course/add_remove_course.html', context)
 
 
 def remove_tutor(request, pk):
