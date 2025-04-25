@@ -21,6 +21,9 @@
       {% if request.user.is_authenticated %}
         <li><a href="{% url 'review' %}">Write a Review</a></li>
       {% endif %}
+    {% if request.user.is_superuser %}
+    	<li><a href="{% url 'tutor_apps' %}">Tutor Applications</a></li>
+    {% endif %}
     </ul>
     <nav class="header__menu">
       <!-- Logged In -->

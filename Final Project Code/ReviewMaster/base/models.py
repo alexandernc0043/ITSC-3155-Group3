@@ -12,7 +12,7 @@ class Tutor(models.Model):
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)
     user_account = models.OneToOneField(User, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         if self.user_account and self.user_account.first_name and self.user_account.last_name:
             return f'{self.user_account.first_name} {self.user_account.last_name}'
@@ -46,7 +46,7 @@ class Professor(models.Model):
         if total == 0:
             return 'N/A'
         return f'{int(round(total / count, 1))}'
-    
+
     def __str__(self):
         if self.user_account and self.user_account.first_name and self.user_account.last_name:
             return f'{self.user_account.first_name} {self.user_account.last_name}'
@@ -57,14 +57,18 @@ class Professor(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=200)  # Ex: Software Engineering
-    department = models.ForeignKey(Department, null=True,
-                                   on_delete=models.SET_NULL)  # NOT SURE IF SET NULL IS GOOD HERE
-    number = models.IntegerField(null=False)  # Ex: 3155
-    students = models.ManyToManyField(User, related_name='students',
-                                      blank=True)  # The students who are taking the course
-    professor = models.ManyToManyField(Professor, related_name='professor')  # The professor who teach the course
+    # NOT SURE IF SET NULL IS GOOD HERE
+    department = models.ForeignKey(Department, null=True, on_delete=models.SET_NULL)
+    # Ex: 3155
+    number = models.IntegerField(null=False)
+    # The students who are taking the course
+    students = models.ManyToManyField(User, related_name='students', blank=True)
+    # The professor who teach the course
+    professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, default=None, null=True)
+    section_number = models.IntegerField(null=True)
     tutor = models.ManyToManyField(Tutor, related_name='course', blank=True)
-    credit_hours = models.IntegerField() # EX: 3
+    # EX: 3
+    credit_hours = models.IntegerField()
 
     class Meta:
         ordering = ['department', 'number']  # Order by department, number, and section number.

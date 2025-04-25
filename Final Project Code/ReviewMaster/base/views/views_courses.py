@@ -39,11 +39,8 @@ def add_course(request, pk):
     return update_course(request, pk, 'add')
 
 def update_course_tutor(request, pk, action):
-    split = pk.split('-')
-    dept = split[0]
-    course_number = split[1]
     # filters courses to only get ones the user is in
-    course = Course.objects.filter(department__name=dept, number=course_number).get()
+    course = Course.objects.get(id=pk)
     session_data = request.session.get('referer', {}) # Gets referal page if exists
     
     if request.method == 'POST':

@@ -1,0 +1,35 @@
+{% extends 'main.html' %}{% load static %}{% block content %}
+    <main>
+
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Course
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+            <tr>
+                {% for tutor in tutors %}
+                    <td>{{ tutor.user_account.username }}</td>
+                    <td>
+                        {% for course in tutor.course.all %}
+                            {{ course }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'update_tutor' tutor.id %}">Accept Tutor</a>
+                        <br>
+                        <a href="">Deny Tutor</a>
+                    </td>
+                    </tr>
+                {% endfor %}
+        </table>
+
+    </main>
+
+{% endblock content %}

@@ -31,7 +31,9 @@ urlpatterns = [
     path('how/', how, name='how'),
     path('contact/', contact, name='contact'),
     path('flag/<int:pk>', flag_review, name='flag'),
-    path('flagged/<int:pk>', flagged, name='flagged')
+    path('flagged/<int:pk>', flagged, name='flagged'),
+    path('tutor-applications/', tutor_applications, name="tutor_apps"),
+    path('update-tutor/<int:pk>', add_tutor, name='update_tutor')
     
    # path('review/<str:pk>/', review, name='review')
 ]
