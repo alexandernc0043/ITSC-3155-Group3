@@ -66,7 +66,8 @@ class Course(models.Model):
     # The professor who teach the course
     professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, default=None, null=True)
     section_number = models.IntegerField(null=True)
-    tutor = models.ManyToManyField(Tutor, related_name='course', blank=True)
+    tutor = models.ManyToManyField(Tutor, related_name='course', blank=True, null=True)
+    pending_tutor = models.ManyToManyField(Tutor, related_name='courses', blank=True, null=True)
     # EX: 3
     credit_hours = models.IntegerField()
 

@@ -35,9 +35,9 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if tutor in course.tutor.all and tutor.verified %}
-                            <a href="{% url 'remove-tutor' course %}">Cancel tutoring</a>
-                        {% elif tutor in course.tutor.all %}
+                        {% if tutor in course.tutor.all  %}
+                            <a href="{% url 'remove-tutor' course.id %}">Cancel tutoring</a>
+                        {% elif tutor in course.pending_tutor.all %}
                             <a href="{% url 'remove-application' course.id %}">Cancel application</a>
                         {% else %}
                             <a href="{% url 'add-tutor' course.id %}">Apply as tutor</a>
