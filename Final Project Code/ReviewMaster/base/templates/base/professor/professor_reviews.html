@@ -44,6 +44,7 @@
                     <div class="review-content">
                         <strong>Review:</strong>
                         <div>{{ review.review }}</div>
+                    <div>Professor Reply: {{ review.reply }}</div>
                         <div class="review-actions">
                             {% if review.student == user %}
                                 <a href="{% url 'edit_review' review.id %}" class="primary-button icon-button">
@@ -56,6 +57,13 @@
                             {% endif %}
                             {% if request.user.is_authenticated %}
                                 {% if request.user.is_superuser or professor.user_account.id == request.user.id %}
+                                <form action="{% url 'reply' %}" method="POST">
+                                    {% csrf_token %}
+                                        <p>reply</p>
+                                        <input type="text" name="reply">
+                                        <input type="hidden" name="review-id" value="{{ review.id }}">
+                                        <button type="submit">Submit reply</button>
+                                    </form>
                                     <a href="{% url 'flag' review.id %}" class="primary-button icon-button">
                                         <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                         <svg width="20px" height="20px" viewBox="0 0 24 24" fill="#000000"

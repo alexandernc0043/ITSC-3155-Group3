@@ -85,6 +85,7 @@ class Review(models.Model):
     rating = models.IntegerField()
     course = models.ForeignKey(Course, related_name='course', on_delete=models.SET_NULL, null=True)
     review = models.TextField(null=True, blank=True)
+    reply = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f'Review by {self.student.username} for {self.professor.name}'

@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-@login_required
+@login_required(login_url='/login')
 def review(request):
     professors = Professor.objects.all()
     context = {
@@ -13,7 +13,7 @@ def review(request):
     return render(request, 'base/review/review.html', context)
 
 
-@login_required
+@login_required(login_url='/login')
 def submit_review(request):
     
     if request.method == 'POST':
@@ -39,8 +39,18 @@ def submit_review(request):
         messages.error(request, 'An error has occurred, please try again!')
     return redirect('review')
 
+@login_required(login_url='/login')
+def reply_review(request):
+    if request.method == 'POST':
 
-@login_required
+        content = request.POST.get("reply")
+        review_id = request.POST.get("review-id")
+        review = Review.objects.get(id=review_id)
+        review.reply = content
+        review.save()
+    return redirect(f'professor-reviews/{review.professor.id}')
+
+@login_required(login_url='/login')
 def edit_review(request, pk):
     user = request.user
     user_reviews = Review.objects.filter(student=user)
@@ -72,7 +82,7 @@ def edit_review(request, pk):
         messages.error(request, 'This page does not exist!')
         return redirect('profile', request.user)
 
-@login_required
+@login_required(login_url='/login')
 def flag_review(request, pk):
     review = Review.objects.get(id = pk)
     if request.method == 'POST':
@@ -91,7 +101,7 @@ def flag_review(request, pk):
     }
     return render(request, 'base/review/flag_review.html', context)
 
-@login_required
+@login_required(login_url='/login')
 def flagged(request,pk):
     professor = Professor.objects.get(id=pk)
     reviews = professor.review_set.filter(flagged=True)
