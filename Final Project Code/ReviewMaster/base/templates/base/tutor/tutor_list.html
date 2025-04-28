@@ -10,6 +10,7 @@
                 <p class="card-name">{{ tutor }}</p>
                 {% for course in tutor.course.all %}
                     <p class="class-name">{{ course }}</p>
+                    <p>{{ tutor.available }}</p>
                 {% endfor %}
             </div>
         {% endfor %}

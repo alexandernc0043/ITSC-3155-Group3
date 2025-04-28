@@ -23,6 +23,8 @@ def update_course_tutor(request, pk, action):
             tutor = Tutor.objects.get(user_account=request.user)
         except Tutor.DoesNotExist:
             tutor = Tutor.objects.create(user_account=request.user, verified=False)
+        tutor.available = request.POST.get("time")
+        tutor.save()
         if action == 'remove':
             course.tutor.remove(tutor)
             if not tutor.course.exists():

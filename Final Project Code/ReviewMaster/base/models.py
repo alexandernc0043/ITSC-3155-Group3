@@ -11,6 +11,7 @@ class Department(models.Model):
 class Tutor(models.Model):
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)
+    available = models.TextField(default=False)
     user_account = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
