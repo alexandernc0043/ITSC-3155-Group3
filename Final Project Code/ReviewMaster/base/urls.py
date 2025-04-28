@@ -31,7 +31,8 @@ urlpatterns = [
     path('how/', how, name='how'),
     path('contact/', contact, name='contact'),
     path('flag/<int:pk>', flag_review, name='flag'),
-    path('flagged/<int:pk>', flagged, name='flagged')
+    path('flagged/<int:pk>', flagged, name='flagged'),
+    path('reply-review', reply_review, name="reply")
     
    # path('review/<str:pk>/', review, name='review')
 ]
