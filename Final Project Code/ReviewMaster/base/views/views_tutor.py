@@ -16,10 +16,10 @@ def tutor_applications(request):
     }
     return render(request, 'base/tutor/tutor_applications.html', context)
 
-def update_tutor(request, pk, accept):
+def update_tutor(request, pk, action):
     tutor = Tutor.objects.get(id=pk)
     context = {
         'tutor': tutor,
-        'accept': accept
+        'accept': action == 'accept'
     }
     return render(request, 'base/tutor/accept_deny_tutor.html', context)

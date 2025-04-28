@@ -72,6 +72,7 @@ class Course(models.Model):
 
     class Meta:
         ordering = ['department', 'number']  # Order by department, number, and section number.
+        unique_together = ('department', 'number', 'section_number')
 
     def __str__(self):
         return f'{self.department}-{self.number}'  # Calling will return DEPT-####

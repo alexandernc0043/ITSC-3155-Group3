@@ -33,7 +33,7 @@ urlpatterns = [
     path('flag/<int:pk>', flag_review, name='flag'),
     path('flagged/<int:pk>', flagged, name='flagged'),
     path('tutor-applications/', tutor_applications, name="tutor_apps"),
-    path('update-tutor/<int:pk>/<str:accept>/', update_tutor, name='update_tutor')
+    path('update-tutor/<int:pk>/<str:action>/', update_tutor, name='update_tutor')
     
    # path('review/<str:pk>/', review, name='review')
 ]
