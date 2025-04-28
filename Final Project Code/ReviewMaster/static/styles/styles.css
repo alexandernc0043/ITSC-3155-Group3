@@ -25,6 +25,10 @@ main:not(.home) {
   margin: 4rem auto;
 }
 
+.hidden {
+  display: none;
+}
+
 .box {
   display: flex;
   flex-direction: column;
@@ -732,6 +736,10 @@ textarea:focus {
   margin: 0 auto;
   text-align: left;
   gap: 1rem;
+}
+
+.form-90 {
+  width: 90%;
 }
 
 .form-left {
