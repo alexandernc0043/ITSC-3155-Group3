@@ -1,7 +1,5 @@
 {% extends 'main.html' %}{% load static %}{% block content %}
-
-    {% if tutor.verified %}
-    <p>Would you like to accept this tutor</p>
-    {% endif %}
-
+    <p>Would you like to {% if accept == 'accept' %}accept{% else %}deny{% endif %} this tutor</p>
+    <a href="">Confirm</a>
+    <a href="{% url 'tutor_apps' %}">Go back</a>
 {% endblock content %}

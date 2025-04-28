@@ -22,9 +22,9 @@
                         {% endfor %}
                     </td>
                     <td>
-                        <a href="{% url 'update_tutor' tutor.id %}">Accept Tutor</a>
+                        <a href="{% url 'update_tutor' tutor.id 'accept'%}">Accept Tutor</a>
                         <br>
-                        <a href="">Deny Tutor</a>
+                        <a href="{% url 'update_tutor' tutor.id 'deny'%}">Deny Tutor</a>
                     </td>
                     </tr>
                 {% endfor %}
