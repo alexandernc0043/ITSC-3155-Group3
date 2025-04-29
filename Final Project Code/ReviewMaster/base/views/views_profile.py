@@ -51,7 +51,7 @@ def edit_profile(request, pk):
         passwordForm = PasswordChange(user, request.POST)
 
         #Only changing username
-        if option == 'no' and userForm.is_valid():
+        if option == "no" and userForm.is_valid():
             if professor and request.FILES.get('avatar'):
                 save_image(request, professor)
             userForm.save()
@@ -90,6 +90,7 @@ def edit_profile(request, pk):
         'avatar': professor.avatar.url if professor and professor.avatar else None
     }
 
+    print("POST option:", request.POST.get('option'))
     return render(request, 'base/profile/edit_profile.html', context)
 
 # @login_required(login_url='login')
