@@ -10,5 +10,3 @@ def about(request):
 def how(request):
     return render(request, 'base/how.html')
 
-def contact(request):
-    return render(request, 'base/contact.html')

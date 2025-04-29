@@ -1,5 +1,58 @@
-{% extends 'main.html' %}
+<style>
+  .about-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 
-{% block content %}
-    <p>About</p>
+    gap: 30px;
+  }
+
+  .member {
+    width: 60%;
+    background-color: lightgrey;
+    border-radius: 4px;
+    text-align: center;
+  }
+</style>
+{% extends 'main.html' %} {% block content %}
+<h1>Meet the Team</h1>
+<div class="about-box">
+  <div class="member">
+    <p>Eric M. Carter-Barkman</p>
+    <a href="#">LinkedIn</a>
+  </div>
+
+  <div class="member">
+    <p>Trace Capel</p>
+    <a href="#">LinkedIn</a>
+  </div>
+
+  <div class="member">
+    <p>Diana Barrio Gonslave</p>
+    <a href="#">LinkedIn</a>
+  </div>
+
+  <div class="member">
+    <p>Christian Bego</p>
+    <a href="#">LinkedIn</a>
+  </div>
+
+  <div class="member">
+    <p>Alex Prechtel</p>
+    <a href="#">LinkedIn</a>
+  </div>
+</div>
+
+<p>
+  Consisting of only 5 students, ReviewMaster was created out of a need for a
+  simpler way to view crucial information for the everyday graduate student. As
+  college students ourselves, we constantly found ourselves drowning in scattered
+  resources, conflicting reviews, and overwhelming choices. So, we decided to
+  build a tool that cuts through the noise. ReviewMaster is designed to
+  centralize the insights that matter most—whether it’s feedback on courses,
+  professors, or avaliable course tutors. Our goal
+  is to empower students to make informed decisions quickly, without the stress.
+  We may be a small team, but we’re passionate, driven, and deeply connected to
+  the struggles of student life. ReviewMaster isn’t just a project—it’s a
+  solution we wish we had from day one, and now we’re sharing it with you.
+</p>
 {% endblock content %}
