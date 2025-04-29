@@ -23,8 +23,7 @@ def update_course_tutor(request, pk, action):
             tutor = Tutor.objects.get(user_account=request.user)
         except Tutor.DoesNotExist:
             tutor = Tutor.objects.create(user_account=request.user, verified=False)
-        tutor.available = request.POST.get("time")
-        tutor.save()
+        
         if action == 'remove':
             course.tutor.remove(tutor)
             if not tutor.course.exists():
@@ -35,6 +34,8 @@ def update_course_tutor(request, pk, action):
             course.pending_tutor.remove(tutor)
             messages.success(request, f'Course tutor application deleted successfully!')
         elif action == 'add':
+            tutor.available = request.POST.get("time")
+            tutor.save()
             course.pending_tutor.add(tutor)
             messages.success(request, f'You have applied to tutor {course.name} successfully!')
         course.save()
@@ -45,7 +46,8 @@ def update_course_tutor(request, pk, action):
 
     context = {
         'course': course,
-        'remove': action == 'remove'
+        'remove': action == 'remove',
+        'remove_application': action == 'remove-application'
     }
     return render(request, 'base/tutor/add_remove_course_tutor.html', context)
 

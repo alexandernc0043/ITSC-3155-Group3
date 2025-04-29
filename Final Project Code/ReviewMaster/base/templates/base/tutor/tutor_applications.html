@@ -3,18 +3,10 @@
         {% if courses %}
             <table>
                 <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Course
-                    </th>
-                    <th>
-                        Action
-                    </th>
-                    <th>
-                        Availability
-                    </th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Availability</th>
+                    <th>Action</th>
                 </tr>
                 {% for course in courses %}
                     {% for tutor in course.pending_tutor.all %}
