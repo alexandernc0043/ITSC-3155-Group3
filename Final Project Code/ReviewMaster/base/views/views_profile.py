@@ -4,17 +4,27 @@ from django.contrib.auth.models import User
 from base.forms import UserForm, PasswordChange
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
-from ..models import Professor
+from ..models import Professor, Tutor
 from ..utils import check_username, check_password, handle_uploaded_file
-
-from base.models import Review
 
 def profile(request, pk):
     user = User.objects.get(username=pk)
+    try:
+        tutor = user.tutor
+        courses_pending = tutor.courses.all()
+        courses_tutor = tutor.course.all()
+    except Tutor.DoesNotExist:
+        tutor = None
+        courses_pending = None
+        courses_tutor = None
+
     context = {
         'courses': user.students.all(),
         'user': user,
-        'reviews' : user.review_set.filter(flagged=False)
+        'reviews' : user.review_set.filter(flagged=False),
+        'courses_pending': courses_pending,
+        'courses_tutor': courses_tutor,
+        'tutor': True if tutor else False
     }
     return render(request, 'base/profile/profile.html', context)
 
