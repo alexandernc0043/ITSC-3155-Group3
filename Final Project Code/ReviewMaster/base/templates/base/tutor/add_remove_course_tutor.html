@@ -10,6 +10,7 @@
                 <p>Do you want to stop being a tutor for "{{ course.name }} | {{ course }}"?</p>
             {% else %}
                 <p>Do you want to apply to tutor "{{ course.name }} | {{ course }}"?</p>
+                <input type="text" name="time" placeholder="Enter your availability here...">
             {% endif %}
             <div class="action-buttons">
                 <button class="primary-button" type="submit">Confirm</button>

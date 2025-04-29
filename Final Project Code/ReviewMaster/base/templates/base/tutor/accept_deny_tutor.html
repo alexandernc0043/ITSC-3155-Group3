@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<main>
+    <form action="" method="post" class="form box">
+        {% csrf_token %}
+        <p>Would you like to {% if accept %}accept{% else %}deny{% endif %} this tutor?</p>
+        <div class="action-buttons">
+            <button class="primary-button" type="submit">Confirm</button>
+            <a class="secondary-button" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+        </div>
+    </form>
+</main>
+{% endblock content %}

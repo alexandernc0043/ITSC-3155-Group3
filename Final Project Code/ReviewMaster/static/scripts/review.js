@@ -1,7 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const courseSelect = document.getElementById('course');
-    const professorSelect = document.getElementById('professor');
-    if (options.length > 0) {
+const courseSelect = document.getElementById('course');
+        const professorSelect = document.getElementById('professor');
         const filterCourses = (selectedProfessor) => {
             courseSelect.innerHTML = '';
             options.forEach((opt) => {
@@ -23,9 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 courseSelect.append(option);
             }
         }
-        filterCourses(professorSelect.value);
-        professorSelect.addEventListener('change', () => {
-            filterCourses(professorSelect.value);
+        document.addEventListener('DOMContentLoaded', () => {
+            if (options.length > 0) {
+                filterCourses(professorSelect.value);
+                professorSelect.addEventListener('change', () => {
+                    filterCourses(professorSelect.value);
+                });
+            }
         });
-    }
-});

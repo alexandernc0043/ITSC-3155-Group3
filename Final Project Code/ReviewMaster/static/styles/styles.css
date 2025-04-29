@@ -818,6 +818,7 @@ table td {
   text-align: left;
   vertical-align: bottom;
   border-bottom: 2px solid var(--light-grey);
+  vertical-align: middle;
 }
 
 /*==============================

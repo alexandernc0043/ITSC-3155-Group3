@@ -1,0 +1,31 @@
+{% extends 'main.html' %}{% load static %}{% block content %}
+    <main>
+        {% if courses %}
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Availability</th>
+                    <th>Action</th>
+                </tr>
+                {% for course in courses %}
+                    {% for tutor in course.pending_tutor.all %}
+                        <tr>
+                            <td>{{ tutor.user_account.username }}</td>
+                            <td>{{ course }}</td>
+                            <td>{{ tutor.available }}</td>
+                            <td>
+                                <a href="{% url 'update_tutor' course.id tutor.id 'accept'%}">Accept Tutor</a>
+                                <br>
+                                <a href="{% url 'update_tutor' course.id tutor.id 'deny'%}">Deny Tutor</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No tutor applications available.</p>
+        {% endif %}
+    </main>
+
+{% endblock content %}

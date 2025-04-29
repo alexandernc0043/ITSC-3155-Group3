@@ -1,0 +1,20 @@
+<h2>Tutor courses</h2>
+
+{% if courses_tutor %}
+    <table>
+        <tr>
+            <th>Course</th>
+            <th>Availability</th>
+        </tr>
+        {% for course in courses_tutor %}
+            {% for tutor in course.tutor.all %}
+                <tr>
+                    <td>{{ course }}</td>
+                    <td>{{ tutor.available }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No tutor applications pending.</p>
+{% endif %}
