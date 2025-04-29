@@ -25,6 +25,10 @@ main:not(.home) {
   margin: 4rem auto;
 }
 
+.hidden {
+  display: none;
+}
+
 .box {
   display: flex;
   flex-direction: column;
@@ -444,6 +448,15 @@ ul.errorlist {
   transition: transform 0.3s ease;
 }
 
+.team-card{
+  margin-bottom: 1.5rem;
+}
+
+.team-card .card-item {
+  min-width: auto;
+  width: calc((90% - 1.5rem) / 5)
+}
+
 .card-name {
   font-size: 1.4rem;
   font-weight: bold;
@@ -732,6 +745,10 @@ textarea:focus {
   margin: 0 auto;
   text-align: left;
   gap: 1rem;
+}
+
+.form-90 {
+  width: 90%;
 }
 
 .form-left {
