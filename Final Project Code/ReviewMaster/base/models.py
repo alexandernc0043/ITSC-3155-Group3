@@ -11,7 +11,7 @@ class Department(models.Model):
 class Tutor(models.Model):
     avatar = models.ImageField(null=True, default='avatar.svg')
     verified = models.BooleanField(default=False)
-    available = models.TextField(default=False)
+    available = models.TextField(default=False, null=True)
     user_account = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -40,7 +40,7 @@ class Professor(models.Model):
     def rating_course(self, course):
         total = 0
         count = 0
-        for review in self.review_set.all():
+        for review in self.review_set.filter(flagged=False):
             if review.course == course:
                 total += review.rating
                 count += 1
@@ -67,8 +67,8 @@ class Course(models.Model):
     # The professor who teach the course
     professor = models.ForeignKey(Professor, related_name='professor', on_delete=models.SET_NULL, default=None, null=True)
     section_number = models.IntegerField(null=True)
-    tutor = models.ManyToManyField(Tutor, related_name='course', blank=True, null=True)
-    pending_tutor = models.ManyToManyField(Tutor, related_name='courses', blank=True, null=True)
+    tutor = models.ManyToManyField(Tutor, related_name='course', blank=True)
+    pending_tutor = models.ManyToManyField(Tutor, related_name='courses', blank=True)
     # EX: 3
     credit_hours = models.IntegerField()
 

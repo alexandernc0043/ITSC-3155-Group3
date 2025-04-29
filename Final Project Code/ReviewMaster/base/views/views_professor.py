@@ -5,7 +5,7 @@ def professor_list(request):
     professors = Professor.objects.all()
     context = {
         'professors': professors,
-        'reviews': Review.objects.filter()
+        'reviews': Review.objects.filter(flagged=False)
     }
 
     return render(request, 'base/professor/professor_list.html', context)

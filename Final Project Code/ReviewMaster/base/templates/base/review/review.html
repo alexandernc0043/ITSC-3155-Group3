@@ -2,61 +2,68 @@
 {% load static %}
 
 {% block content %}
-  <main>
-    <h1>
-      {% if review %}
-        Edit review
-      {% else %}
-        Leave a review
-      {% endif %}
-    </h1>
-  
-    <form method="POST" class="form" {% if review %} action="{% url 'edit_review' review.id %}" {% else %} action="{% url 'submit_review' %}" {% endif %}>
-      {% csrf_token %}
+    <main>
+        <h1>
+            {% if review %}
+                Edit review
+            {% else %}
+                Leave a review
+            {% endif %}
+        </h1>
 
-      <label for="professor">Select a professor:</label>
-      <select name="professor" id="professor" {% if review %} selected="{{ review.professor.id }}" disabled {% endif %}>
-        {% for professor in professors %}
-          <option value="{{ professor.id }}">{{ professor }}</option>
-        {% endfor %}
-        {% if review %}
-          <option value="{{ review.professor.id }}" selected>{{ review.professor }}</option>
-        {% endif %}
-      </select>
-      <label for="course">Select the course:</label>
-      <select name="course" id="course" {% if review %} selected="{{ review.course.id }}" disabled {% endif %}>
-        {% if review %}
-          <option value="{{ review.course.id }}" selected>{{ review.course.name }}</option>
-        {% endif %}
-      </select>
+        <form method="POST" class="form" {% if review %} action="{% url 'edit_review' review.id %}" {% else %}
+              action="{% url 'submit_review' %}" {% endif %}>
+            {% csrf_token %}
 
-      <label for="rating">Rate your professor:</label>
-      <div class="rating">
-          <input type="radio" id="star5" name="rating" value="5" {% if review and review.rating == 5 %} checked {% endif %}/><label for="star5">5 stars</label>
-          <input type="radio" id="star4" name="rating" value="4" {% if review and review.rating == 4 %} checked {% endif %}/><label for="star4">4 stars</label>
-          <input type="radio" id="star3" name="rating" value="3" {% if review and review.rating == 3 %} checked {% endif %}/><label for="star3">3 stars</label>
-          <input type="radio" id="star2" name="rating" value="2" {% if review and review.rating == 2 %} checked {% endif %}/><label for="star2">2 stars</label>
-          <input type="radio" id="star1" name="rating" value="1" {% if review and review.rating == 1 %} checked {% endif %}/><label for="star1">1 star</label>
-      </div>
+            <label for="professor">Select a professor:</label>
+            <select name="professor" id="professor" {% if review %} selected="{{ review.professor.id }}"
+                    disabled {% endif %}>
+                {% for professor in professors %}
+                    <option value="{{ professor.id }}">{{ professor }}</option>
+                {% endfor %}
+                {% if review %}
+                    <option value="{{ review.professor.id }}" selected>{{ review.professor }}</option>
+                {% endif %}
+            </select>
+            <label for="course">Select the course:</label>
+            <select name="course" id="course" {% if review %} selected="{{ review.course.id }}" disabled {% endif %}>
+                {% if review %}
+                    <option value="{{ review.course.id }}" selected>{{ review.course.name }}</option>
+                {% endif %}
+            </select>
 
-      <label for="review">Write your review:</label>
-      <textarea rows="5" cols="50" placeholder="Write your review here..." name="review" id="review">{% if review %}{{ review.review }}{% endif %}</textarea>
+            <label for="rating">Rate your professor:</label>
+            <div class="rating">
+                <input type="radio" id="star5" name="rating" value="5" {% if review and review.rating == 5 %}
+                       checked {% endif %}/><label for="star5">5 stars</label>
+                <input type="radio" id="star4" name="rating" value="4" {% if review and review.rating == 4 %}
+                       checked {% endif %}/><label for="star4">4 stars</label>
+                <input type="radio" id="star3" name="rating" value="3" {% if review and review.rating == 3 %}
+                       checked {% endif %}/><label for="star3">3 stars</label>
+                <input type="radio" id="star2" name="rating" value="2" {% if review and review.rating == 2 %}
+                       checked {% endif %}/><label for="star2">2 stars</label>
+                <input type="radio" id="star1" name="rating" value="1" {% if review and review.rating == 1 %}
+                       checked {% endif %}/><label for="star1">1 star</label>
+            </div>
 
-      <input type="submit" value="Submit" class="primary-button"/>
-    </form>
-  </main>
-  <script>
-    const options = [
-      {% for course in courses %}
-        {% for professor in course.professor.all %}
-          {
-            id: "{{ course.id }}",
-            name: "{{ course.name }}",
-            professor: "{{ professor.id }}"
-          }{% if not forloop.last %},{% endif %}
-        {% endfor %}{% if not forloop.last %},{% endif %}
-      {% endfor %}
-    ];
-  </script>
-  <script src="{% static 'scripts/review.js' %}"></script>
+            <label for="review">Write your review:</label>
+            <textarea rows="5" cols="50" placeholder="Write your review here..." name="review"
+                      id="review">{% if review %}{{ review.review }}{% endif %}</textarea>
+
+            <input type="submit" value="Submit" class="primary-button"/>
+        </form>
+    </main>
+    <script>
+        const options = [
+            {% for course in courses %}
+                {
+                    id: "{{ course.id }}",
+                    name: "{{ course.name }}",
+                    professor: "{{ course.professor.id }}"
+                }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ];
+
+    </script>
+      <script src="{% static 'scripts/review.js' %}"></script>
 {% endblock content %}

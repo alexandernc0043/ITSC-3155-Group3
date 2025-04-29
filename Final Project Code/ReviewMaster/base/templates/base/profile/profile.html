@@ -1,34 +1,40 @@
 {% extends 'main.html' %}
 {% load static %}
 {% block content %}
-  <main class="user-profile">
-    <div class="button-title">
-      <h1>{{ user.username }}'s profile</h1>
-      {% if request.user == user %}
-        <a href="{% url 'edit-profile' user %}">
-          Edit Profile
-          <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z"/>
-          </svg>
-        </a>
-      {% endif %}
+    <main class="user-profile">
+        <div class="button-title">
+            <h1>{{ user.username }}'s profile</h1>
+            {% if request.user == user %}
+                <a href="{% url 'edit-profile' user %}">
+                    Edit Profile
+                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z"/>
+                    </svg>
+                </a>
+            {% endif %}
+        </div>
+    <div>
+        <p>How to export a profile, click the print page button and change destination to "Save as PDF" and pick the
+                desired location.</p>
+            <a href="javascript:window.print();">Print Page</a>
     </div>
 
-    <h2>Courses</h2>
-    {% if courses %}
-      {% include 'base/course/courses_component.html' %}
-    {% else %}
-      <p>No courses added.</p>
-    {% endif %}
+        <h2>Courses</h2>
+        {% if courses %}
+            {% include 'base/course/courses_component.html' %}
+        {% else %}
+            <p>No courses added.</p>
+        {% endif %}
 
-    <!-- Only shows to account owner -->
-    {% if request.user == user %}
-      {% if tutor %}
-        {% include 'base/tutor/tutor_pending_list.html' %}
-        {% include 'base/tutor/user_tutor_list.html' %}
-      {% endif %}
-      <!-- Shows every review user has made -->
-      {% include 'base/review/user_review_list.html' %}
-    {% endif %}
-  </main>
+        <!-- Only shows to account owner -->
+        {% if request.user == user %}
+            {% if tutor %}
+                {% include 'base/tutor/tutor_pending_list.html' %}
+                {% include 'base/tutor/user_tutor_list.html' %}
+            {% endif %}
+            <!-- Shows every review user has made -->
+            {% include 'base/review/user_review_list.html' %}
+        {% endif %}
+    </main>
 {% endblock content %}
