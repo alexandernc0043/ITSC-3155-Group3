@@ -21,10 +21,21 @@
                 <td>{{ course.name }}</td>
                 <td>{{ course }}</td>
                 <td>{{ course.section_number }}</td>
-                <td><a href="{% url 'professor-reviews' course.professor.id %}">{{ course.professor }}</a></td>
                 <td>
-                    <div class="container-rating"><span
-                            class="star-rating star-rating-{{ course.professor|course_rating:course }}"></span></div>
+                    {% if course.professor %}
+                        <a href="{% url 'professor-reviews' course.professor.id %}">{{ course.professor }}</a>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    <div class="container-rating">
+                        {% if course.professor %}
+                            <span class="star-rating star-rating-{{ course.professor|course_rating:course }}"></span>
+                        {% else %}
+                            <span class="star-rating">N/A</span>
+                        {% endif %}
+                    </div>
                 </td>
                 {% if request.user.is_authenticated and actions %}
                     <td>
@@ -35,7 +46,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        {% if tutor in course.tutor.all  %}
+                        {% if tutor in course.tutor.all %}
                             <a href="{% url 'remove-tutor' course.id %}">Cancel tutoring</a>
                         {% elif tutor in course.pending_tutor.all %}
                             <a href="{% url 'remove-application' course.id %}">Cancel application</a>

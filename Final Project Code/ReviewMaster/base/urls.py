@@ -6,6 +6,7 @@ from .views.views_review import *
 from .views.views_professor import *
 from .views.views_profile import *
 from .views.views_tutor import *
+from .views.views_ai import *
 
 
 urlpatterns = [
@@ -33,7 +34,8 @@ urlpatterns = [
     path('flagged/<int:pk>', flagged, name='flagged'),
     path('tutor-applications/', tutor_applications, name="tutor_apps"),
     path('update-tutor/<int:course_pk>/<int:tutor_pk>/<str:action>/', update_tutor, name='update_tutor'),
-    path('reply-review', reply_review, name="reply")
+    path('reply-review', reply_review, name="reply"),
+     path('generate-summary/', generate_summary, name='generate_summary')
     
    # path('review/<str:pk>/', review, name='review')
 ]
