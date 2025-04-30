@@ -3,7 +3,10 @@
 
 Spring 2025 ITSC-3155 @ UNCC
 
-
+## Dependencies
+- Pillow (pip install pillow)
+- OpenAI (pip install openai)
+- Django (pip install django)
 
 
 ## Group Members
