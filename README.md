@@ -6,6 +6,7 @@ Spring 2025 ITSC-3155 @ UNCC
 ## Dependencies
 - Pillow (pip install pillow)
 - OpenAI (pip install openai)
+- Dotenv (pip install dotenv)
 - Django (pip install django)
 
 
