@@ -6,7 +6,7 @@
         
         <div class="review-image">
             <div class="button-title">
-                <a href="{{ request.META.HTTP_REFERER }}" class="svg-button">
+                <a href="{% url 'professor-list' %}" class="svg-button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512">
                         Go back
                         <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -26,7 +26,8 @@
         <form method="POST" action="{% url 'generate_summary' %}">
             {% csrf_token %}
             <input type="hidden" name="professor_id" value="{{ professor.id }}">
-            <input type="submit" value="Generate AI Summary" name="generateSummary">
+            <br>
+            <input type="submit" value="Generate AI Summary" name="generateSummary" class="secondary-button">
         </form>
         {% if reviews.count == 0 %}
             <div>
