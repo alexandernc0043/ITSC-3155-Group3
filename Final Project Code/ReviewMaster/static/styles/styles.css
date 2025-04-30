@@ -861,3 +861,22 @@ footer section ul {
     width: 50%;
   }
 }
+
+.summary-container {
+  background-color: var(--light-grey);
+  padding: 2rem;
+  border-left: 6px solid var(--primary-color);
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--dark-gray); 
+}
+
+.summary-container p {
+  margin: 0;
+  white-space: pre-wrap;
+  color: #000000;          
+         
+}
